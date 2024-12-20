@@ -1,0 +1,35 @@
+{
+    "categoryList": [
+        {
+            "id": 1,
+            "label": "Bmw",
+            "icon": "Computer",
+            "categoryChar": [
+                {
+                    "id": 1,
+                    "label": "Брюке тд"
+                },
+                {
+                    "id": 2,
+                    "label": "Брюке тд 2"
+                }
+            ]
+        },
+
+        {
+            "id": 2,
+            "label": "Mersedes Bnz",
+            "icon": "Home",
+            "categoryChar": [
+                {
+                    "id": 1,
+                    "label": "Брюке тд"
+                },
+                {
+                    "id": 2,
+                    "label": "Брюке тд 2"
+                }
+            ]
+        }
+    ]
+}

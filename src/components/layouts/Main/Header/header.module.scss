@@ -1,0 +1,21 @@
+@import '../../../../app/styles/color';
+
+.header {
+    position: absolute;
+    z-index: 1000;
+    height: 70px;
+    left: 0;
+    top: 0;
+    width: 100%;
+
+    .headerContainer {
+        height: 100%;
+    }
+}
+
+.navbarHeader {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+}

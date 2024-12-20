@@ -1,0 +1,97 @@
+// @import './styles/mixins.scss';
+// @include spacing-utilities;
+@import './styles/utils';
+@import './styles/color';
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+li {list-style: none;}
+
+a,
+img,
+span,
+input,
+select,
+button {display: block;}
+
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input,
+button,
+select {
+    background: none;
+    border: none;
+    font: inherit;
+}
+
+button {cursor: pointer;}
+
+input,
+select {
+    width: 100%;
+    outline: none;
+}
+
+address {font-style: normal;}
+
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+html {
+    font-family: 'Kanit', sans-serif;
+    font-size: 18px;
+}
+
+
+body {
+    background: $neutral-98-default;
+    scroll-behavior: smooth;
+    /* color: var(--neutral-primary); */
+}
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li { display: inline-block; }
+
+  a {
+    display: block;
+    padding: 6px 12px;
+    text-decoration: none;
+  }
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nav a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+}

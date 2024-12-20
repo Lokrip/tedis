@@ -1,0 +1,16 @@
+.buttonVersion4 {
+    display: flex;
+    place-items: center;
+    max-width: max-content;
+    height: 40px;
+    background: rgba(218, 218, 218, 0.451);
+    gap: 12px;
+    border-radius: 100px;
+    padding: 0px 15px 0px 15px;
+    transition: all .14s linear;
+
+
+    &:hover {
+        background: rgb(218, 218, 218);
+    }
+}
