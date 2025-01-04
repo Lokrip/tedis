@@ -1,6 +1,6 @@
 import { ClassNameType } from "@/types/react.type";
 import { correctClass } from "@/utils/utils";
-import { FC, PropsWithChildren, ReactNode } from "react";
+import { FC, PropsWithChildren } from "react";
 
 
 export const ItemContainer: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {

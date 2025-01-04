@@ -3,9 +3,11 @@ import {FC} from 'react';
 import styles from './cardTopWrap.module.scss';
 import ImageR from '@/components/ui/assets/image/Image';
 
-interface CardTopWrapProps {}
+interface CardTopWrapProps {
+    src?: string;
+}
 
-const CardTopWrap: FC<CardTopWrapProps> = () => {
+const CardTopWrap: FC<CardTopWrapProps> = ({src}) => {
     return (
         <div className={styles.cardTopWrap}>
             <ImageR 

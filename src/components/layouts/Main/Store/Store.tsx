@@ -3,7 +3,7 @@ import { MainStore } from "./MainStore/MainStore"
 import Banner from "./Banner/Banner"
 import ContentWrapper from "./ContentWrapper/ContentWrapper"
 
-export default function Store<P extends {}>() {
+export default function Store(): JSX.Element {
     return (
         <MainStore>
             <Container>

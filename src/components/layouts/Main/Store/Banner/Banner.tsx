@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 
 import styles from './banner.module.scss'
 import clsx from "clsx"
-import { FC, memo, useCallback, useEffect, useRef, useState } from "react"
+import { FC, memo, useCallback, useEffect, useRef } from "react"
 import ButtonSet from "@/components/ui/elements/button/ButtonSet"
 import { useActions, useAppSelector } from "@/hooks/useHooks"
 import { List } from "@/components/ui/list/List"
@@ -13,9 +13,7 @@ import { bannerApi } from "@/redux/services/BannerService"
 import SkeletonBanner from "@/components/ui/elements/skeleton/SkeletonBanner"
 import ImageR from "@/components/ui/assets/image/Image"
 
-interface BannerProps {}
-
-const Banner: FC<BannerProps> = () => {
+const Banner: FC = () => {
     const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10,{
         skip: false
     });
@@ -58,7 +56,7 @@ const Banner: FC<BannerProps> = () => {
                 clearTimeout(timeout);
             }
         }
-    }, [currentMove])
+    }, [currentMove, stopStartScrolling, setNull])
 
     useEffect(() => {
         console.log(images)

@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-export default function SkeletonMenuHeader<P extends {}>({...props}) {
+export default function SkeletonMenuHeader({...props}): JSX.Element {
     return (
     <ContentLoader
         speed={2}

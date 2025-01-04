@@ -25,7 +25,7 @@ const MainContentWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({cla
     )
 }
 
-const MainStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, ...props}) => {
+const MainStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children}) => {
     return (
         <div className={styles.mainStore} id="body-layout-store">
             {children}

@@ -9,7 +9,7 @@ export default function GoogleButton<P extends PropsWithChildren>({children}: P)
     console.log(searchParams)
 
     const onSignIn = () => {
-        signIn('google', {callbackUrl: '/profile/'})
+        signIn('google', {callbackUrl: 'account/profile/'})
     }
 
     return (

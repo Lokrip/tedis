@@ -2,8 +2,10 @@ import { ClassNameType } from "@/types/react.type";
 import { attachSubComponents, correctClass } from "@/utils/utils";
 import { FC, PropsWithChildren } from "react";
 
+import styles from "./productCardWrapper.module.scss"
+
 const MainCardTopWrap: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
-    const classNameValid = correctClass('card__top-wrap', className!)
+    const classNameValid = correctClass(styles.cardTopWrapContainer, className!)
 
     return (
         <div className={classNameValid} {...props}>
@@ -13,7 +15,7 @@ const MainCardTopWrap: FC<PropsWithChildren & ClassNameType> = ({className, chil
 }
 
 const MainCardMiddleWrap: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
-    const classNameValid = correctClass('card__middle-wrap', className!)
+    const classNameValid = correctClass(styles.cardMiddleWrapContainer, className!)
 
     return (
         <div className={classNameValid} {...props}>
@@ -24,7 +26,7 @@ const MainCardMiddleWrap: FC<PropsWithChildren & ClassNameType> = ({className, c
 
 
 const MainCardBottomWrap: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
-    const classNameValid = correctClass('card__bottom-wrap', className!)
+    const classNameValid = correctClass('card__bottom-wrap-container', className!)
 
     return (
         <div className={classNameValid} {...props}>
@@ -33,9 +35,9 @@ const MainCardBottomWrap: FC<PropsWithChildren & ClassNameType> = ({className, c
     )
 }
 
-const ProductCardWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({children, ...props}) => {
+const ProductCardWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({children}) => {
     return (
-        <div id="product-card-wrapper">
+        <div className="product-card-wrapper-container">
             {children}
         </div>
     )

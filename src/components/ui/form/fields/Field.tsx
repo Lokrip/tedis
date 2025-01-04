@@ -21,4 +21,6 @@ const Field = forwardRef<HTMLInputElement, TypeInputProps>(
     }
 );
 
+Field.displayName = "Field"
+
 export default Field;

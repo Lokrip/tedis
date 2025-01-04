@@ -36,7 +36,11 @@
 }
 
 .flex-row-center {
-    @include flex-container(row, nowrap, flex-start, center, 0.5rem)
+  @include flex-container(row, nowrap, flex-start, center, 0.5rem)
+}
+
+.flex-center {
+  @include flex-container(row, nowrap, flex-start, center, 0.5rem)
 }
 
 

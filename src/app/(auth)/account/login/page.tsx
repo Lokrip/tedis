@@ -20,7 +20,7 @@ export default function LoginPage() {
         })
 
         if(res && !res.error) {
-            push('/profile/')
+            push('account/profile/')
         } else {
             console.log(res?.error)
         }

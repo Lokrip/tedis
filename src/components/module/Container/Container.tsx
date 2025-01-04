@@ -19,3 +19,5 @@ export const Container: FC<
       </div>
     );
 });
+
+Container.displayName = "Container"

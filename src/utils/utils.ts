@@ -5,6 +5,12 @@ export const correctClass = (primary: string, className: string) => {
     return className ? `${primary} ${className}` : primary
 }
 
+export const correctUrl = (primaryUrl: string, path: string) => {
+  const trimmedUrlHost = primaryUrl.endsWith('/') ? primaryUrl.slice(0, -1) : primaryUrl;
+  const trimmedUrlData = path.startsWith('/') ? path.slice(1) : path;
+  return `${trimmedUrlHost}/${trimmedUrlData}`
+}
+
 export const getIconComponent = (iconName: string): ElementType => {
     const IconComponent = LucideIcons[iconName as keyof typeof LucideIcons] as ElementType;
     return IconComponent || LucideIcons.HelpCircle;

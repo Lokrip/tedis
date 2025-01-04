@@ -1,4 +1,3 @@
-import IBanner from "@/types/app/models/banner/IBanner.type";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type nextSlidType = 'next'

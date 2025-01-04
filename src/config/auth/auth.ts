@@ -51,7 +51,7 @@ export const authConfig: AuthOptions = {
         })
 
     ],
-
+    
     callbacks: {
         async jwt({token, user}) {
             if(user) {

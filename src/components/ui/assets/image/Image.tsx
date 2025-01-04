@@ -41,5 +41,6 @@ const ImageR = forwardRef<HTMLImageElement, ImageProps>(
     }
 );
 
+ImageR.displayName = "ImageR"
 
 export default ImageR;
