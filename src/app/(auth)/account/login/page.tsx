@@ -1,34 +1,61 @@
 "use client"
-import Auth from "@/components/screens/auth/Auth";
-import GoogleButton from "@/components/screens/auth/button/GoogleButton";
+import { useActions, useAppSelector } from "@/hooks";
+import Auth from "../../../../components/screens/auth/Auth";
+import GoogleButton from "../../../../components/screens/auth/button/GoogleButton";
+import { ChangeEvent, FormEvent } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { FormEvent } from "react";
 
 export default function LoginPage() {
-    const {push} = useRouter();
+    const {saveEmailInFields, savePasswordInFields, savingErrors} = useActions()
+    const {email, password, errorMessage, isError} = useAppSelector(state => state.signInReduser)
 
-    const handlerSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
+    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        if(email && password) {
+            const result = await signIn("credentials", {
+                redirect: false, 
+                email: email,
+                password: password,
+            })
 
-        const formData = new FormData(event.currentTarget)
+            if(result?.error) {
+                savingErrors({
+                    isError: true,
+                    errorMessage: result.error
+                })
+            } else {
+                console.log(result)
+            }
 
-        const res = await signIn('credentials', {
-            username: formData.get('username'),
-            password: formData.get('password'),
-            redirect: false,
-        })
-
-        if(res && !res.error) {
-            push('account/profile/')
         } else {
-            console.log(res?.error)
+            savingErrors({
+                isError: true,
+                errorMessage: "Enter email or password!"
+            })
         }
+    }
+
+    const onChangeEmailHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        saveEmailInFields(event.target.value)
+    }
+
+    const onChangePasswordHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        savePasswordInFields(event.target.value)
     }
 
     return (
         <div>
-            <Auth onSubmit={handlerSubmit} type="Login" />
+            <Auth 
+                onSubmit={onSubmit} 
+                onChangeEmail={onChangeEmailHandler}
+                onChangePassword={onChangePasswordHandler}
+                type="Login" 
+            />
+            {isError && (
+                <div className="error__container-message error__container--form">
+                    <p className="error__message">{errorMessage}</p>
+                </div>
+            )}
 
             <div className="social-auth">
                 <GoogleButton>

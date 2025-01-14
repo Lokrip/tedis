@@ -1,5 +1,4 @@
-import Store from "@/components/layouts/Main/Store/Store";
-
+import Store from "../../components/layouts/Main/Store/Store";
 
 export const revalidate = 1
 
@@ -13,6 +12,13 @@ export const revalidate = 1
 //Это хорошо для статичных сайтов, где маршруты определены заранее и их полный список известен.
 export const dynamicParams = true
 
-export default function Home() {
-  return (<Store/>);
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const param = await searchParams;
+  return (<Store param={param}/>);
 }
+

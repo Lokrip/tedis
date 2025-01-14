@@ -4,7 +4,7 @@ import styles from './cardMiddleWrap.module.scss';
 import Price from './Price/Price';
 import TitleCard from './TitleCard/TitleCard';
 import RatingCard from './RatingCard/RatingCard';
-import { IParamPrimaryType } from '@/types/react.type';
+import { IParamPrimaryType } from '../../../../../../types/react.type';
 
 interface CardMiddleWrapProps extends IParamPrimaryType {
     price: number | string;

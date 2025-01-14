@@ -1,9 +1,11 @@
-import { Container } from "@/components/module/Container/Container"
+import { Container } from "../../../module/Container/Container"
 import { MainStore } from "./MainStore/MainStore"
 import Banner from "./Banner/Banner"
 import ContentWrapper from "./ContentWrapper/ContentWrapper"
 
-export default function Store(): JSX.Element {
+interface StoreProps {param: any}
+
+export default function Store<P extends StoreProps>({param}: P): JSX.Element {
     return (
         <MainStore>
             <Container>
@@ -12,7 +14,7 @@ export default function Store(): JSX.Element {
                 </MainStore.Banner>
 
                 <MainStore.ContentWrapper>
-                    <ContentWrapper />
+                    <ContentWrapper param={param} />
                 </MainStore.ContentWrapper>
             </Container>
         </MainStore>

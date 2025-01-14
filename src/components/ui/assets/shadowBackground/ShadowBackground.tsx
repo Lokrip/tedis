@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import styles from './shadowBackground.module.scss'
-import { ClassNameType } from '@/types/react.type';
-import { correctClass } from '@/utils/utils';
+import { ClassNameType } from '../../../../types/react.type';
+import { correctClass } from '../../../../utils';
 
 interface ShadowBackgroundTypes extends ClassNameType {
     onClick: () => void;

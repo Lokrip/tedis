@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren } from "react";
 
 import styles from './navbar.module.scss'
-import { attachSubComponents, correctClass } from "@/utils/utils";
-import { ClassNameType } from "@/types/react.type";
+import { attachSubComponents, correctClass } from "../../../../utils";
+import { ClassNameType } from "../../../../types/react.type";
 
 const NavbarLeftComponets: FC<PropsWithChildren> = ({children}) => <nav className="nav navbarLeft headerNavbarItem">{children}</nav>
 const NavbarRightComponets: FC<PropsWithChildren> = ({children}) => <nav className="nav navbarRight headerNavbarItem">{children}</nav>

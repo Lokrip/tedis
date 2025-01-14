@@ -1,5 +1,5 @@
-import { ClassNameType } from "@/types/react.type";
-import { correctClass } from "@/utils/utils";
+import { ClassNameType } from "../../../types/react.type";
+import { correctClass } from "../../../utils";
 import { FC, memo, PropsWithChildren } from "react"
 
 import styles from './container.module.scss'

@@ -1,4 +1,4 @@
-import IBanner from "@/types/app/models/IBanner.type";
+import IBanner from "../../types/app/models/IBanner.type";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 const API_URL = process.env.JSONPLACEHOLDER_API_URL

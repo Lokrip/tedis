@@ -1,9 +1,9 @@
-import { IPost } from "@/types/app/models/IPost.type";
+import { IPost } from "../../types/app/models/IPost.type";
 import { axios } from "../axios"
 
-async function getProductsData() {
+async function getProductsData(search: string | null) {
     try {
-        const data = await axios.get<IPost[]>("/api/v1/product/")
+        const data = await axios.get<IPost[]>(`/api/v1/product/${search ? `?q=${search}` : ""}`)
         return data;
     } catch(error) {
         console.error(error)

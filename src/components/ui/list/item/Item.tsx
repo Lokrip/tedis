@@ -1,5 +1,5 @@
-import { ClassNameType } from "@/types/react.type";
-import { correctClass } from "@/utils/utils";
+import { ClassNameType } from "../../../../types/react.type";
+import { correctClass } from "../../../../utils";
 import { FC, PropsWithChildren } from "react";
 
 

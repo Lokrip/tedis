@@ -1,12 +1,12 @@
 import {FC} from 'react';
 
 import styles from './characteristics.module.scss';
-import { HeadingH } from '@/components/plagins/H.number';
-import RatingCard from '@/components/ui/elements/card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
-import Price from '@/components/ui/elements/card/CardElements/CardMiddleWrap/Price/Price';
-import { List } from '@/components/ui/list/List';
-import { Item } from '@/components/ui/list/item/Item';
-import { IPost } from '@/types/app/models/IPost.type';
+import { HeadingH } from '../../../../../plagins/H.number';
+import RatingCard from '../../../../../ui/elements/card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
+import Price from '../../../../../ui/elements/card/CardElements/CardMiddleWrap/Price/Price';
+import { List } from '../../../../../ui/list/List';
+import { Item } from '../../../../../ui/list/item/Item';
+import { IPost } from '../../../../../../types/app/models/IPost.type';
 
 interface СharacteristicsProps {
     product: IPost

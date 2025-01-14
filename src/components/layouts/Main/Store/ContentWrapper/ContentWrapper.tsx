@@ -1,16 +1,18 @@
 import {FC} from 'react';
-
 import styles from './contentWrapper.module.scss';
-import PCard from '@/components/ui/elements/card/PrimaryCard/PrimaryCard';
-import { getProductsData } from '@/service/api/product.api';
+import PCard from '../../../../ui/elements/card/PrimaryCard/PrimaryCard';
+import { getProductsData } from '../../../../../service/api/product.api';
 
+interface ContentWrapperProps {
+    param?: any;
+}
 
-const ContentWrapper: FC = async () => {
+const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
+    const searchQuery = param.q ?? param.searchQuery;
     let content;
-
+    
     try {
-        const data = await getProductsData();
-        console.log(data)
+        const data = await getProductsData(searchQuery);
         content = <>{(data as any).map((item: any) => (
             <PCard key={item.slug} item={item} />
         ))}</>

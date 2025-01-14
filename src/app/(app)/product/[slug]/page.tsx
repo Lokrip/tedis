@@ -1,4 +1,4 @@
-import DetailStore from "@/components/layouts/Main/DetailStore/DetailStore"
+import DetailStore from "../../../../components/layouts/Main/DetailStore/DetailStore"
 
 export default async function ProductDynamicPage({
   params

@@ -1,9 +1,9 @@
 import {FC} from 'react';
 
 import styles from "./price.module.scss"
-import { HeadingH } from '@/components/plagins/H.number';
+import { HeadingH } from '../../../../../../plagins/H.number';
 import { CircleDollarSign } from 'lucide-react';
-import TextPl from '@/components/plagins/P.number';
+import TextPl from '../../../../../../plagins/P.number';
 import clsx from 'clsx';
 
 interface PriceProps {

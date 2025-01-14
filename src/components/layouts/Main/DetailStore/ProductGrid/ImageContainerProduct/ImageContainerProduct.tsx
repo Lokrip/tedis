@@ -1,10 +1,10 @@
 import {FC} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
-import { Item } from '@/components/ui/list/item/Item';
-import ImageR from '@/components/ui/assets/image/Image';
-import { List } from '@/components/ui/list/List';
-import { IPost } from '@/types/app/models/IPost.type';
+import { Item } from '../../../../../ui/list/item/Item';
+import ImageR from '../../../../../ui/assets/image/Image';
+import { List } from '../../../../../ui/list/List';
+import { IPost } from '../../../../../../types/app/models/IPost.type';
 
 interface ImageContainerProductProps {
     product: IPost

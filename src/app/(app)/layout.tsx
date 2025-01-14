@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import {Roboto} from "next/font/google";
-import Layout from "@/components/layouts/Layout";
+import Layout from "../../components/layouts/Layout";
 
 import "../globals.scss";
-import Providers from "@/config/providers/Providers";
+import Providers from "../../config/providers/Providers";
 
 const geistSans = Roboto({
   variable: "--font-geist-sans",

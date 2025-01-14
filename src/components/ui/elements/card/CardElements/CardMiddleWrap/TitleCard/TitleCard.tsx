@@ -2,10 +2,10 @@ import {FC} from 'react';
 
 import styles from './titleCard.module.scss';
 import clsx from 'clsx';
-import { HeadingH } from '@/components/plagins/H.number';
+import { HeadingH } from '../../../../../../plagins/H.number';
 import Link from 'next/link';
-import pages from '@/service/route';
-import { IParamPrimaryType } from '@/types/react.type';
+import pages from '../../../../../../../service/route';
+import { IParamPrimaryType } from '../../../../../../../types/react.type';
 
 
 interface TitleCard extends IParamPrimaryType {

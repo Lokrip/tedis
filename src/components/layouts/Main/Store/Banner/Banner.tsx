@@ -4,14 +4,14 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import styles from './banner.module.scss'
 import clsx from "clsx"
 import { FC, memo, useCallback, useEffect, useRef } from "react"
-import ButtonSet from "@/components/ui/elements/button/ButtonSet"
-import { useActions, useAppSelector } from "@/hooks/useHooks"
-import { List } from "@/components/ui/list/List"
-import { Item } from "@/components/ui/list/item/Item"
-import { bannerApi } from "@/redux/services/BannerService"
+import ButtonSet from "../../../../ui/elements/button/ButtonSet"
+import { useActions, useAppSelector } from "../../../../../hooks"
+import { List } from "../../../../ui/list/List"
+import { Item } from "../../../../ui/list/item/Item"
+import { bannerApi } from "../../../../../redux/services/BannerService"
 
-import SkeletonBanner from "@/components/ui/elements/skeleton/SkeletonBanner"
-import ImageR from "@/components/ui/assets/image/Image"
+import SkeletonBanner from "../../../../ui/elements/skeleton/SkeletonBanner"
+import ImageR from "../../../../ui/assets/image/Image"
 
 const Banner: FC = () => {
     const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10,{

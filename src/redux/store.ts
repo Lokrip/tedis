@@ -1,14 +1,8 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import headerReduser from './reducers/header/HeaderSlice'
-import bannerReduser from './reducers/banner/BannerSlice'
+import { configureStore } from '@reduxjs/toolkit'
+
 import { bannerApi } from './services/BannerService'
+import rootReducer from './reducers/reducer'
 
-
-const rootReducer = combineReducers({
-    headerReduser,
-    bannerReduser,
-    [bannerApi.reducerPath]: bannerApi.reducer,
-})
 
 export const setupStore = () => {
     return configureStore({
@@ -18,7 +12,6 @@ export const setupStore = () => {
         
     })
 }
-
 
 export type RootState = ReturnType<typeof rootReducer>
 export type AppStore = ReturnType<typeof setupStore>

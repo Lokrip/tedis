@@ -1,4 +1,4 @@
-import { Container } from "@/components/module/Container/Container";
+import { Container } from "../../../module/Container/Container";
 import { FC, PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
 import { Logo } from "./Logo/Logo";

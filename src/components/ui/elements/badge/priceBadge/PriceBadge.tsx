@@ -2,8 +2,8 @@ import {FC} from 'react';
 
 import styles from './priceBadge.module.scss';
 import ButtonSet from '../../button/ButtonSet';
-import { ClassNameType } from '@/types/react.type';
-import { correctClass } from '@/utils/utils';
+import { ClassNameType } from '../../../../../types/react.type';
+import { correctClass } from '../../../../../utils';
 
 interface PriceBadgeProps extends ClassNameType {
     content: React.ReactNode,

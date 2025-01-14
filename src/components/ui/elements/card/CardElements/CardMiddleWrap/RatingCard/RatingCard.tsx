@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import styles from './ratingCard.module.scss';
 import { Star } from 'lucide-react';
-import TextPl from '@/components/plagins/P.number';
+import TextPl from '../../../../../../plagins/P.number';
 
 const AssessmentsCard: FC = () => {
     return (

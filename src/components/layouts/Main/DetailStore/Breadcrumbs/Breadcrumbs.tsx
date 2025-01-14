@@ -1,8 +1,8 @@
 import {FC} from 'react';
 
-import ButtonSet from '@/components/ui/elements/button/ButtonSet';
-import { List } from "@/components/ui/list/List"
-import { Item } from "@/components/ui/list/item/Item"
+import ButtonSet from '../../../../ui/elements/button/ButtonSet';
+import { List } from "../../../../ui/list/List"
+import { Item } from "../../../../ui/list/item/Item"
 import { ArrowLeft } from 'lucide-react';
 
 import styles from './breadcrumbs.module.scss';

@@ -1,4 +1,4 @@
-import { ClassNameType } from "@/types/react.type";
+import { ClassNameType } from "../../types/react.type";
 import { FC, PropsWithChildren } from "react";
 
 type LevelHeading = 1 | 2 | 3 | 4 | 5 | 6

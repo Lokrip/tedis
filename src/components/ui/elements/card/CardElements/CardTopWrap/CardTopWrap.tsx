@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
 import styles from './cardTopWrap.module.scss';
-import ImageR from '@/components/ui/assets/image/Image';
+import ImageR from '../../../../assets/image/Image';
 
 interface CardTopWrapProps {
     src?: string;

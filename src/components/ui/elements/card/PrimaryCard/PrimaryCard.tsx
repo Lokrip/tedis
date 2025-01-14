@@ -4,7 +4,7 @@ import { ProductCardWrapper } from '../ProductCardWrapper/ProductCardWrapper';
 import CardTopWrap from '../CardElements/CardTopWrap/CardTopWrap';
 import CardMiddleWrap from '../CardElements/CardMiddleWrap/CardMiddleWrap';
 import CardBottomWrap from '../CardElements/CardBottomWrap/CardBottomWrap';
-import { IPost } from '@/types/app/models/IPost.type';
+import { IPost } from '../../../../../types/app/models/IPost.type';
 
 interface PCardProps {
     item: IPost

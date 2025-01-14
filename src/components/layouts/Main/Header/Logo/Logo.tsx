@@ -1,8 +1,8 @@
 "use client"
 import { FC } from "react"
-import { ClassNameType } from "@/types/react.type"
-import { correctClass } from "@/utils/utils"
-import ImageR from "@/components/ui/assets/image/Image"
+import { ClassNameType } from "../../../../../types/react.type"
+import { correctClass } from "../../../../../utils"
+import ImageR from "../../../../ui/assets/image/Image"
 
 import styles from './logo.module.scss'
 

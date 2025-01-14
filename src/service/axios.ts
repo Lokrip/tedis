@@ -1,4 +1,4 @@
-import { correctUrl } from "@/utils/utils";
+import { correctUrl } from "../utils";
 
 class AxiosClient {
     private API_URL = process.env.PRODUCT_API_URL as string

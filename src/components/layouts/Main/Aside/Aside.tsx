@@ -2,12 +2,12 @@ import {FC, useCallback, useEffect, useState} from 'react';
 
 import clsx from 'clsx'
 
-import { List } from "@/components/ui/list/List"
-import { Item } from "@/components/ui/list/item/Item"
+import { List } from "../../../ui/list/List"
+import { Item } from "../../../ui/list/item/Item"
 
-import { getIconComponent } from "@/utils/utils"
-import { HeadingH } from "@/components/plagins/H.number"
-import ShadowBackground from "@/components/ui/assets/shadowBackground/ShadowBackground"
+import { getIconComponent } from "../../../../utils"
+import { HeadingH } from "../../../plagins/H.number"
+import ShadowBackground from "../../../ui/assets/shadowBackground/ShadowBackground"
 
 import styles from './aside.module.scss';
 

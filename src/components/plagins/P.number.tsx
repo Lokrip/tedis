@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
 
 import styles from './text.module.scss';
-import { ClassNameType } from '@/types/react.type';
+import { ClassNameType } from '../../types/react.type';
 
 interface PTextProps extends PropsWithChildren, ClassNameType {
     as?: 'p' | 'span';

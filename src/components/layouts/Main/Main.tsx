@@ -1,5 +1,5 @@
 
-import { attachSubComponents } from "@/utils/utils";
+import { attachSubComponents } from "../../../utils";
 import { FC, PropsWithChildren } from "react";
 
 const MainHeaderComponets: FC<PropsWithChildren> = ({children}) => <>{children}</>
