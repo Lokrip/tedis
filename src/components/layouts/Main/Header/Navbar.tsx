@@ -3,6 +3,7 @@ import { FC, PropsWithChildren } from "react";
 import styles from './navbar.module.scss'
 import { attachSubComponents, correctClass } from "../../../../utils";
 import { ClassNameType } from "../../../../types/react.type";
+import clsx from "clsx";
 
 const NavbarLeftComponets: FC<PropsWithChildren> = ({children}) => <nav className="nav navbarLeft headerNavbarItem">{children}</nav>
 const NavbarRightComponets: FC<PropsWithChildren> = ({children}) => <nav className="nav navbarRight headerNavbarItem">{children}</nav>
@@ -18,7 +19,7 @@ const SearchComponets: FC<PropsWithChildren> = ({children}) => <div className="s
 
 
 const NavbarCenterSettingsComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
-    const classNameValid = correctClass('nav navbarCenter headerNavbarItem', className!)
+    const classNameValid = correctClass(clsx('nav', styles.navbarCenter, styles.headerNavbarItem), className!)
     
     return <nav className={classNameValid}>{children}</nav>
 }

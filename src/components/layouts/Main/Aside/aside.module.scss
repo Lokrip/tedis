@@ -1,6 +1,7 @@
 .modelMenu {
     height: 100vh;
     width: 100%;
+    z-index: 1001;
     visibility: hidden;
 
     &.active {
@@ -15,10 +16,10 @@
 
     .modelMenuItemsHeader {
         position: relative;
+        z-index: 1003;
         background: white;
         height: 100vh;
         width: 0px;
-        z-index: 1003;
         opacity: 0;
         transform: translateX(-100%);
         transition: 0.1s linear;

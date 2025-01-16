@@ -6,7 +6,7 @@ import navigationNavbarReduser from './header/NavigationNavbarSlice'
 import bannerReduser from './banner/BannerSlice'
 import signInReduser from './account/signInSlice'
 
-import { bannerApi } from '../services/BannerService'
+import { bannerApi } from '../services/banner/BannerService'
 
 const rootReducer = combineReducers({
     headerReduser,

@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { bannerApi } from './services/BannerService'
+import { bannerApi } from './services/banner/BannerService'
 import rootReducer from './reducers/reducer'
 
 

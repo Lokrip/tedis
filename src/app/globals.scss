@@ -51,19 +51,6 @@ select {
     -moz-appearance: none;
 }
 
-
-html {
-    font-family: 'Kanit', sans-serif;
-    font-size: 18px;
-}
-
-
-body {
-    background: $neutral-98-default;
-    scroll-behavior: smooth;
-    /* color: var(--neutral-primary); */
-}
-
 nav {
   ul {
     margin: 0;
@@ -94,4 +81,18 @@ nav a {
   display: block;
   padding: 6px 12px;
   text-decoration: none;
+}
+
+
+html {
+  font-family: 'Kanit', sans-serif;
+  font-size: 18px;
+}
+
+
+body {
+  background: $white;
+  scroll-behavior: smooth;
+  /* color: var(--neutral-primary); */
+  height: 2000px;
 }

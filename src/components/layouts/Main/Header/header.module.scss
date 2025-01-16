@@ -1,12 +1,16 @@
 @import '../../../../app/styles/color';
 
 .header {
-    position: absolute;
+    position: fixed;
     z-index: 1000;
     height: 70px;
     left: 0;
     top: 0;
     width: 100%;
+    background-color: $primary-100-white-new;
+    -webkit-box-shadow: 0px 57px 64px -22px rgba(135,135,135,0.51);
+    -moz-box-shadow: 0px 57px 64px -22px rgba(135,135,135,0.51);
+    box-shadow: 0px 57px 64px -22px rgba(135,135,135,0.51);
 
     .headerContainer {
         height: 100%;

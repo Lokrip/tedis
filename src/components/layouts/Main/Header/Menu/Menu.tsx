@@ -2,15 +2,14 @@
 
 import { useQuery } from "@tanstack/react-query"
 
-import styles from "./menu.module.scss"
 import axios from 'axios'
-import clsx from 'clsx'
 
-import {FC, memo, PropsWithChildren, useEffect } from "react"
+import {PropsWithChildren, useEffect } from "react"
 
 import { Menu } from 'lucide-react';
 import { useActions, useAppSelector } from "../../../../../hooks"
 import Aside from "../../Aside/Aside"
+import ButtonSet from "@/components/ui/elements/button/ButtonSet"
 
 
 interface CategoryCharType {
@@ -44,18 +43,6 @@ export function MenuHeader<P extends PropsWithChildren>({children}: P) {
     )
 }
 
-const MenuButton: FC<{onOpenMunu: () => void}> = memo(({onOpenMunu}) => (
-    <div onClick={onOpenMunu} className={clsx(styles.menuButton, 'menu-button-icon')}>
-        <div className="icon">
-            <Menu/>
-        </div>
-        <div>
-            Каталог
-        </div>
-    </div>
-))
-
-MenuButton.displayName = "MenuButton";
 
 export default function MenuH(): JSX.Element {
     const { data, isError, error } = useQuery({
@@ -79,7 +66,14 @@ export default function MenuH(): JSX.Element {
 
     return (
         <MenuHeader>
-            <MenuButton onOpenMunu={onOpenMunu} />
+            <ButtonSet onClick={onOpenMunu} buttonType="primary">
+                <div className="icon">
+                    <Menu/>
+                </div>
+                <div>
+                    Каталог
+                </div>
+            </ButtonSet>
 
             {openMenu && (
                 <Aside 

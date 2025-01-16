@@ -1,0 +1,28 @@
+@import '../../../../../app/styles/color';
+
+.button {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+    max-width: max-content;
+    height: 40px;
+    place-items: center;
+    padding-inline: 40px;
+    background-color: $primary-80;
+    border-radius: 5px;
+    cursor: pointer;
+    
+
+    svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    color: white;
+
+
+    &:hover {
+        background-color: $primary-70;
+    }
+}

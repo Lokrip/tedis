@@ -1,0 +1,11 @@
+.primaryLogo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+
+    img {
+        object-fit: cover;
+        border-radius: 50%;
+    }
+}

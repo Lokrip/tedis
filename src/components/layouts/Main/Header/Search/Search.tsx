@@ -2,17 +2,18 @@
 import Form from "../../../../ui/form/Form";
 import styles from "./search.module.scss"
 import { ChangeEvent, FormEvent, useCallback } from "react";
-import Field from "../../../../ui/form/fields/Field";
 
 import { useActions, useAppSelector, useDebounce } from "../../../../../hooks";
 import { useRouter } from 'next/navigation'
+import SearchMenu from "./SearchMenu";
+import SearchSystem from "./SearchSystem";
 
 
 export default function Search(): JSX.Element {
     const router = useRouter()
 
-    const {saveDataInSearch} = useActions()
-    const {search} = useAppSelector(state => state.searchReduser)
+    const { saveDataInSearch } = useActions()
+    const { search } = useAppSelector(state => state.searchReduser)
 
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -37,11 +38,8 @@ export default function Search(): JSX.Element {
 
     return (
         <Form className={styles.formSearch} onSubmit={onSubmit}>
-            <Field onChange={onChange} type="text" placeholder="Search..." />
-            <div className="button-container__search">
-                <button type="submit">Отправить</button>
-            </div>
-            
+            <SearchSystem onChange={onChange} />
+            <SearchMenu searchParam={search} />
         </Form>
     )
 }
