@@ -1,36 +1,33 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SaaS Project
 
-## Getting Started
+This project is a custom-built SaaS solution. It is **not open-source** and is intended for further development and improvement, not for direct copying.
 
-First, run the development server:
+## Project Structure
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The project follows a typical structure for React applications with server-side components and modular organization. Key directories and their purposes are as follows:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **src**: The core application code, including components and pages.
+  - **app**: Main pages and components of the application.
+  - **components**: Reusable components used across different parts of the app, such as navigation, menus, header, and footer.
+  - **styles**: All the styles for the app, including global and component-specific styles.
+  - **api**: Server communication and API handling for data processing.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **public**: Public files such as icons, fonts, and other resources accessible by the application.
+- **docker**: Docker configuration for deployment.
+- **node_modules**: Project dependencies installed via npm.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Important Notes
 
-## Learn More
+- **Not Open Source**: This project is not provided for public use or modification without permission. It is intended for personal use or by a team of developers.
 
-To learn more about Next.js, take a look at the following resources:
+- **Not for Direct Copying**: This project was developed from scratch and requires significant customization and personalization to be used successfully. It provides basic functionality that needs to be set up and adapted to specific needs.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Requirements for Further Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To get started with the project, you need to:
+1. Clone the project into your environment.
+2. Install all dependencies by running `npm install`.
+3. Set up the server-side communication and databases according to your project requirements.
+4. Customize the functionality by adding the features and improvements you need.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The project is intended for further development and adaptation to specific tasks. It is not a ready-to-use solution without modifications.
