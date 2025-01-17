@@ -3,9 +3,12 @@ import { serviceApi } from "../service";
 
 export const searchParamApi = serviceApi.injectEndpoints({
     endpoints: (builder) => ({
-        fetchAllSearchParam: builder.query<ISearchParam, string>({
+        fetchAllSearchParam: builder.query<ISearchParam[], string>({
             query: (param) => ({
-                url: ""
+                url: "/comments",
+                params: {
+                    _limit: 8
+                }
             })
         })
     })

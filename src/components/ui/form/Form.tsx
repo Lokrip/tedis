@@ -1,4 +1,4 @@
-import {FC, FormEvent, memo, PropsWithChildren} from 'react';
+import {FormEvent, forwardRef, memo, PropsWithChildren} from 'react';
 
 import styles from './form.module.scss';
 import { correctClass } from '../../../utils';
@@ -8,13 +8,15 @@ interface FormProps extends PropsWithChildren {
     className?: string;
 }
 
-const Form: FC<FormProps> = ({children, className, onSubmit}) => {
+const Form = forwardRef<HTMLFormElement, FormProps>(({children, className, onSubmit}, ref) => {
     const classNameValid = correctClass(styles.form, className!);
     return (
-        <form onSubmit={onSubmit} className={classNameValid}>
+        <form ref={ref} onSubmit={onSubmit} className={classNameValid}>
             {children}
         </form>
     );
-};
+});
+
+Form.displayName = 'Form';
 
 export default memo(Form);
