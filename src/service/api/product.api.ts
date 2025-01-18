@@ -1,7 +1,13 @@
 import { IPost } from "../../types/app/models/IPost.type";
 import { axios } from "../axios"
 
-async function getProductsData(search: string | null) {
+async function getProductsData(search: string | null, {
+    isPagination = false,
+    currentPage = null
+}: {
+    isPagination?: boolean;
+    currentPage?: null | number
+}) {
     try {
         const data = await axios.get<IPost[]>(`/api/v1/product/${search ? `?q=${search}` : ""}`)
         return data;

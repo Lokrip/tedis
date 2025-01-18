@@ -7,6 +7,7 @@ import { useActions, useAppSelector, useDebounce } from "../../../../../hooks";
 import { useRouter } from 'next/navigation'
 import SearchMenu from "./SearchMenu";
 import SearchSystem from "./SearchSystem";
+import pages from "@/service/route";
 
 
 export default function Search(): JSX.Element {
@@ -20,10 +21,14 @@ export default function Search(): JSX.Element {
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
+
         if(search) {
-            router.push(`/?q=${search}`)
+            const urlWithParams = pages.addSearchParam(pages.home,  {
+                q: search
+            })
+            router.push(urlWithParams)
         } else {
-            router.push(`/`) 
+            router.push(pages.home) 
         }
 
     }, [router, search]);

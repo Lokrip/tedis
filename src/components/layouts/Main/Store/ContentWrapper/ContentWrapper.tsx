@@ -9,10 +9,15 @@ interface ContentWrapperProps {
 
 const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
     const searchQuery = param.q ?? param.searchQuery;
+    const currentPage = Number(param?.page) || 1;
+
     let content;
     
     try {
-        const data = await getProductsData(searchQuery);
+        const data = await getProductsData(searchQuery, {
+            isPagination: true,
+            currentPage,
+        });
         content = <>{(data as any).map((item: any) => (
             <PCard key={item.slug} item={item} />
         ))}</>
