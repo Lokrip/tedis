@@ -13,7 +13,7 @@ const MainBannerComponets: FC<PropsWithChildren & ClassNameType> = ({className, 
             {children}
         </div>
     )
-}   
+}
 
 const MainContentWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
     const classNameValid = correctClass('main-page-content-wrapper', className!)
@@ -25,9 +25,11 @@ const MainContentWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({cla
     )
 }
 
-const MainStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children}) => {
+const MainStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+    const classNameValid = correctClass(styles.mainStore, className!)
+
     return (
-        <div className={styles.mainStore} id="body-layout-store">
+        <div className={classNameValid} id="body-layout-store">
             {children}
         </div>
     )

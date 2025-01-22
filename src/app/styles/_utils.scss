@@ -17,6 +17,7 @@
   height: 100vh;
 }
 
+.main-indent-block {margin: calc(75px + 25px) 0px 0px 0px;}
 
 // -------------------------FLEX----------------------------------
 
@@ -33,6 +34,10 @@
     justify-content: $justify;
     align-items: $align;
     gap: $gap;
+}
+
+.flex {
+    @include flex-container(row, nowrap, flex-start, start, 0.5rem)
 }
 
 .flex-row-center {

@@ -7,7 +7,7 @@ interface StoreProps {param: any}
 
 export default function Store<P extends StoreProps>({param}: P): JSX.Element {
     return (
-        <MainStore>
+        <MainStore className="main-indent-block">
             <Container>
                 <MainStore.Banner>
                     <Banner />

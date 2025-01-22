@@ -1,32 +1,47 @@
-import {FC} from 'react';
+"use client"
+
+import {FC, useState} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
 import { Item } from '../../../../../ui/list/item/Item';
 import ImageR from '../../../../../ui/assets/image/Image';
 import { List } from '../../../../../ui/list/List';
 import { IPost } from '../../../../../../types/app/models/IPost.type';
+import clsx from 'clsx';
 
 interface ImageContainerProductProps {
     product: IPost
 }
 
 const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
+    const [currentImage, setCurrentImage] = useState(product.image);
+
+
+
     return (
-        <div className="image__container">
-            <div className="image__slider-container">
+        <div className={styles.imageContainer}>
+            <div className={styles.imagSliderContainer}>
                 <List
                     items={[
                         {id: 1, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
                         {id: 2, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
                         {id: 3, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
                         {id: 4, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 5, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 6, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 7, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 8, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 9, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 10, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 11, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
+                        {id: 12, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"},
                     ]}
-                    className="image__slider-list"
+                    className={clsx(styles.imageSliderList, "flex")}
                     mapItems={(item) => (
                         <Item>
-                            <ImageR 
-                                src={item.image} 
-                                alt={item.image}  
+                            <ImageR
+                                src={item.image}
+                                alt={item.image}
                                 width={50}
                                 height={50}
                             />
@@ -34,10 +49,10 @@ const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
                     )}
                 />
             </div>
-            <div className="main__image-zoom-container">
-                <ImageR 
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"} 
-                    alt={"image"}  
+            <div className={styles.mainImageZoomContainer}>
+                <ImageR
+                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"}
+                    alt={"image"}
                     width={500}
                     height={500}
                 />

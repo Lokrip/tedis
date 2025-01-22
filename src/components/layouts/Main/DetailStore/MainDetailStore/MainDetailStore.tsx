@@ -3,7 +3,7 @@ import { attachSubComponents, correctClass } from "../../../../../utils";
 import { FC, PropsWithChildren } from "react";
 
 import styles from '../detailStore.module.scss'
-import clsx from "clsx";
+
 
 const BreadcrumbsComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
     const classNameValid = correctClass("", className!)
@@ -13,22 +13,24 @@ const BreadcrumbsComponets: FC<PropsWithChildren & ClassNameType> = ({className,
             {children}
         </div>
     )
-}   
+}
 
 const ProductGridComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
-    const classNameValid = correctClass("", className!)
+    const classNameValid = correctClass(styles.productGridContainer, className!)
 
     return (
         <div className={classNameValid} {...props}>
             {children}
         </div>
     )
-}   
+}
 
 
-const MainDetailStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children}) => {
+const MainDetailStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+    const classNameValid = correctClass(styles.detailStore, className!)
+
     return (
-        <div className={styles.detailStore} id="body-layout-detail-store">
+        <div className={classNameValid} id="body-layout-detail-store">
             {children}
         </div>
     )

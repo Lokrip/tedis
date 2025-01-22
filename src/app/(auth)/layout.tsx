@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import {Roboto} from "next/font/google";
-
-import "../globals.scss";
-import Providers from "../../config/providers/Providers";
+import MainHtml from "../html";
 
 const geistSans = Roboto({
   variable: "--font-geist-sans",
@@ -22,12 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable}`}>
-        <Providers>
-          {children}
-        </Providers>
-      </body>
-    </html>
+    <MainHtml className={`${geistSans.variable}`}>
+        {children}
+    </MainHtml>
   );
 }
