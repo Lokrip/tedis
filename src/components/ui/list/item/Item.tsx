@@ -1,21 +1,22 @@
 import { ClassNameType } from "../../../../types/react.type";
 import { correctClass } from "../../../../utils";
-import { FC, PropsWithChildren } from "react";
+import { DOMAttributes, FC, PropsWithChildren } from "react";
 
+interface ItemProps extends PropsWithChildren, ClassNameType, DOMAttributes<HTMLElement> {}
 
-export const ItemContainer: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+export const ItemContainer: FC<ItemProps> = ({children, className, ...props}) => {
     const classCorrect = correctClass('item', className!);
-    
+
     return (
-        <li className={classCorrect}>
+        <li {...props} className={classCorrect}>
             {children}
         </li>
     )
 }
 
-export const Item: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+export const Item: FC<ItemProps> = ({children, className, ...props}) => {
     return (
-        <ItemContainer className={className}>
+        <ItemContainer {...props} className={className}>
             {children}
         </ItemContainer>
     )

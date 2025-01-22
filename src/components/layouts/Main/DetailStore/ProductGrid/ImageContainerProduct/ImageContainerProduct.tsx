@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, useState} from 'react';
+import {FC, MouseEvent, useState} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
 import { Item } from '../../../../../ui/list/item/Item';
@@ -14,9 +14,11 @@ interface ImageContainerProductProps {
 }
 
 const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
-    const [currentImage, setCurrentImage] = useState(product.image);
+    const [currentImage, setCurrentImage] = useState<string>(product.image);
 
-
+    const replacementImage = (src: string) => {
+        setCurrentImage(src);
+    }
 
     return (
         <div className={styles.imageContainer}>
@@ -38,7 +40,7 @@ const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
                     ]}
                     className={clsx(styles.imageSliderList, "flex")}
                     mapItems={(item) => (
-                        <Item>
+                        <Item onClick={() => replacementImage(item.image)}>
                             <ImageR
                                 src={item.image}
                                 alt={item.image}
@@ -51,7 +53,7 @@ const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
             </div>
             <div className={styles.mainImageZoomContainer}>
                 <ImageR
-                    src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s"}
+                    src={currentImage}
                     alt={"image"}
                     width={500}
                     height={500}
