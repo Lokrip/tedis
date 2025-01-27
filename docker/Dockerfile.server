@@ -1,24 +1,29 @@
 FROM python:3.12.2
 
-RUN apt-get update && \
-  apt-get install --no-install-suggests --no-install-recommends --yes pipx
-
-ENV PATH="/root/.local/bin:${PATH}"
-
-RUN pipx install poetry
-RUN pipx inject poetry poetry-plugin-bundle
-
 WORKDIR /web
 
-COPY . .
+ARG MODE=development
 
-ARG MODE=production
+COPY ./scripts/generate_requirements.py /web/scripts/generate_requirements.py
 
-ENV MODE=${MODE}
+# RUN pip install toml
+# RUN python /web/scripts/generate_requirements.py
+
+COPY ./docker/dev.txt docker/prod.txt /web/docker/
+COPY ./docker/mode_entrypoint.sh /web/docker/mode_entrypoint.sh
+
+ENV MODE=${MODE} \
+    DEV_REQ=/web/docker/dev.txt \
+    PROD_REQ=/web/docker/prod.txt
 
 # Делаем mode_entrypoint.sh исполняемым
-RUN chmod +x docker/docker-entrypoint.d/mode_entrypoint.sh
+RUN chmod +x docker/mode_entrypoint.sh
+RUN /web/docker/mode_entrypoint.sh
 
-ENTRYPOINT ["./docker/docker-entrypoint.d/mode_entrypoint.sh"]
+COPY . /web/
 
-CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0"]
+EXPOSE 8000
+
+RUN adduser --disabled-password tedis-user
+
+USER tedis-user

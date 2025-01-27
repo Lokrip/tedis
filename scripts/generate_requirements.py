@@ -1,5 +1,6 @@
 import toml
 
+
 from pathlib import Path
 
 
@@ -21,7 +22,9 @@ def extract_dependencies(pyproject_file, output_file):
             for dep, version in poetry_data['dependencies'].items():
 
                 if dep != 'python':
-                    dependencies.append(f"{dep}=={str(version).replace('^', "")}")
+                    dependencies.append(
+                        f"{dep.capitalize() if dep == "django" else dep}=={str(version).replace('^', "")}"
+                    )
 
     # Запись зависимостей в requirements.txt
     with open(output_path, 'w') as f:
@@ -29,11 +32,11 @@ def extract_dependencies(pyproject_file, output_file):
             f.write(dep + '\n')
 
 extract_dependencies(
-    'pyproject.toml',
-    'docker/dev.txt'
+    '/web/pyproject.toml',
+    '/web/docker/dev.txt'
 )
 
 extract_dependencies(
-    'pyproject.toml',
-    'docker/prod.txt'
+    '/web/pyproject.toml',
+    '/web/docker/prod.txt'
 )

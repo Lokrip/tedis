@@ -1,12 +1,10 @@
-#!/docker-entrypoint.d/sh
-
-
+#!/bin/sh
 if [ "$MODE" = "development" ]; then
     echo "Installing development dependencies..."
-    poetry install --no-root --with dev
+    pip install -r "$DEV_REQ"
 else
     echo "Installing production dependencies..."
-    poetry install --no-root
+    pip install -r "$PROD_REQ"
 fi
 
 exec "$@"

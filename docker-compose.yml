@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  web-app:
+    build:
+        context: .
+        dockerfile: docker/Dockerfile.server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ".:/web"
+    command: >
+        sh -c "make run-server"
