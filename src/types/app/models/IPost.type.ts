@@ -1,5 +1,6 @@
-export interface IPost {
-    id: number; // ID продукта
+import { IModelPrimary } from "./IModelPrimary.type";
+
+export interface IPost extends IModelPrimary {
     title: string; // Название продукта
     description: string; // Описание продукта
     price: string; // Цена продукта в строковом формате

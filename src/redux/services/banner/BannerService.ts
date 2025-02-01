@@ -1,4 +1,4 @@
-import IBanner from "../../../types/app/models/IBanner.type";
+import {IBanner} from "../../../types/app/models/IBanner.type";
 import { serviceApi } from "../service";
 
 export const bannerApi = serviceApi.injectEndpoints({

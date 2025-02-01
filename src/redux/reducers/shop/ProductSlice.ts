@@ -1,5 +1,7 @@
+import { PaginationError } from "@/types/app/enum/pagination.enum";
+import { ProductError } from "@/types/app/enum/product.enum";
 import { IProduct } from "@/types/app/models/IProduct.type";
-import { ProductError } from "@/types/enum.type";
+import { ProductId, ProductState } from "@/types/app/state/shop/pagination";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 //использование такой структуры состояние имеет несолько причин
@@ -8,9 +10,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 //масштабируемость и поддержка Когда проект растет, и количество данных увеличивается, важно иметь структуру, которая позволяет легко масштабировать логику работы с состоянием. Нормализованная структура в Redux позволяет добавлять новые виды данных, новые сущности и так далее без переписывания всего состояния.
 //управления зависимостями синхронизация данных между компонентами и состоянием.
 const initialState: ProductState = {
-    entitiesProduct: {},
+    entitiesData: {},
     ids: [],
-    selectedProductId: null,
+    selectedDataId: null,
+    currentPage: 1,
     isError: false,
     error: null,
 }
@@ -19,11 +22,11 @@ export const ProductSlice = createSlice({
     name: "product",
     initialState,
     reducers: {
-        setProductList(state, action: PayloadAction<{products: IProduct[]}>) {
-            const {products} = action.payload;
+        setProductList(state, action: PayloadAction<IProduct[]>) {
+            const products = action.payload;
 
             if(!products || products.length === 0) {
-                state.entitiesProduct = {}
+                state.entitiesData = {}
                 state.ids = []
                 state.isError = true
                 state.error = ProductError.ProductNotFound
@@ -31,11 +34,24 @@ export const ProductSlice = createSlice({
             }
 
 
-            state.entitiesProduct = products.reduce((acc, product) => {
+            state.entitiesData = products.reduce((acc, product) => {
                 acc[product.id] = product
                 return acc
             }, {} as Record<ProductId, IProduct>);
             state.ids = products.map<ProductId>((product) => product.id)
+        },
+
+        incrementCurrentPage(state, action: PayloadAction<number>) {
+            const page = action.payload
+
+            if(typeof page !== "number" || !page) {
+                state.currentPage = 1;
+                state.isError = true;
+                state.error = PaginationError.PageRequestError;
+                return;
+            }
+
+            state.currentPage = page
         }
     }
 })

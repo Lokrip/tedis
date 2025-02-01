@@ -1,13 +1,14 @@
+import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from "@/types/app/api/product.type";
 import { IPost } from "../../types/app/models/IPost.type";
 import { axios } from "../axios"
 
-async function getProductsData<T>(search: string | null, {
+
+async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
     isPagination = false,
     currentPage = null
-}: {
-    isPagination?: boolean;
-    currentPage?: null | number
-} = {}): Promise<T> {
+}: ProductFunApiPaginationAttributes = {}): Promise<T> {
+    "use server"
+    
     try {
         let url = "/api/v1/product/"
 
@@ -21,7 +22,7 @@ async function getProductsData<T>(search: string | null, {
 
         if (params.length > 0)
             url += `?${params.join("&")}`;
-        
+
         const data = await axios.get<T>(url);
         return data;
     } catch(error) {

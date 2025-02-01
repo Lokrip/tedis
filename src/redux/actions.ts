@@ -5,13 +5,21 @@ import { NavigationNavbarSlice } from "./reducers/header/NavigationNavbarSlice";
 import { SearchSlice } from "./reducers/header/SearchSlice";
 import { ProductSlice } from "./reducers/shop/ProductSlice";
 
-const rootActions = {
+const headerAction = {
     ...HeaderSlice.actions,
-    ...BannerSlice.actions,
     ...SearchSlice.actions,
     ...NavigationNavbarSlice.actions,
-    ...SignInSlice.actions,
+}
+const shopAction = {
+    ...BannerSlice.actions,
     ...ProductSlice.actions
+}
+const accountAction = {...SignInSlice.actions,}
+
+const rootActions = {
+    ...headerAction,
+    ...accountAction,
+    ...shopAction
 }
 
 export default rootActions;

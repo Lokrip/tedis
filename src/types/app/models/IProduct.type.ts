@@ -1,7 +1,8 @@
+import { IModelPrimary } from "./IModelPrimary.type";
 import { IPagination } from "./IPagination.type";
+import { IPaginationResponse } from "./IPaginationResponse.type";
 
-export interface IProduct {
-    id: number; // ID продукта
+export interface IProduct extends IModelPrimary {
     title: string; // Название продукта
     description: string; // Описание продукта
     price: string; // Цена продукта в строковом формате
@@ -23,6 +24,4 @@ export interface IProduct {
 }
 
 
-export interface IPaginationProduct extends IPagination {
-    results: IProduct[]
-}
+export interface IPaginationProduct extends IPaginationResponse<IProduct> {}
