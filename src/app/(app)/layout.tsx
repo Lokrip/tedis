@@ -16,13 +16,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <MainHtml className={`${geistSans.variable}`}>
         <Layout>
           {children}
+          {modal}
         </Layout>
     </MainHtml>
   );

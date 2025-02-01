@@ -1,6 +1,8 @@
 import { IModelPrimary } from "./IModelPrimary.type";
+import { IPagination } from "./IPagination.type";
+import { IPaginationResponse } from "./IPaginationResponse.type";
 
-export interface IPost extends IModelPrimary {
+export interface IProduct extends IModelPrimary {
     title: string; // Название продукта
     description: string; // Описание продукта
     price: string; // Цена продукта в строковом формате
@@ -20,3 +22,6 @@ export interface IPost extends IModelPrimary {
     update_at: string; // Дата обновления в формате ISO
     product_images: string[]; // Массив изображений продукта
 }
+
+
+export interface IPaginationProduct extends IPaginationResponse<IProduct> {}
