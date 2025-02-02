@@ -16,6 +16,7 @@ const initialState: ProductState = {
     currentPage: 1,
     isError: false,
     error: null,
+    isFetching: false
 }
 
 export const ProductSlice = createSlice({
@@ -52,6 +53,19 @@ export const ProductSlice = createSlice({
             }
 
             state.currentPage = page
+        },
+
+        changeTypeFetching(state, action: PayloadAction<boolean>) {
+            const typeFetching = action.payload
+
+            if(typeof typeFetching !== "boolean") {
+                state.currentPage = 1;
+                state.isError = true;
+                state.error = PaginationError.DataLoadError;
+                return;
+            }
+
+            state.isFetching = typeFetching ?? false;
         }
     }
 })

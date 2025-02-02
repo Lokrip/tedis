@@ -32,11 +32,11 @@ def extract_dependencies(pyproject_file, output_file):
             f.write(dep + '\n')
 
 extract_dependencies(
-    '/web/pyproject.toml',
-    '/web/docker/dev.txt'
+    'pyproject.toml',
+    'requirements/dev.txt'
 )
 
 extract_dependencies(
-    '/web/pyproject.toml',
-    '/web/docker/prod.txt'
+    'pyproject.toml',
+    'requirements/prod.txt'
 )

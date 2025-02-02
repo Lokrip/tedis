@@ -5,4 +5,5 @@ interface PaginationState<ID, IModel> {
     selectedDataId: ID | null;
     isError: boolean;
     error: string | null;
+    isFetching: boolean;
 }

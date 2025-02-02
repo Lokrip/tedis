@@ -21,7 +21,6 @@ const Pagination: FC<PaginationProps> = ({limit, currentPage, dataCount}) => {
         return recievedDataCount < dataCount
     }
 
-
     return (
         <div className={styles.pagination}>
             <div className="pagination__container">

@@ -1,12 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import (
-    AbstractUser, BaseUserManager
-)
+from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
 
-
-class User(AbstractUser):
+class Customers(AbstractUser):
     """User AbstractUser Model
 
     Args:
@@ -16,15 +14,29 @@ class User(AbstractUser):
         fields: in this model the fields of the model are stored
     """
     email = models.EmailField(_("email address"), unique=True)
+    bio = models.TextField(_("user description"), max_length=400)
+
+    first_name = models.CharField(_("first name"), max_length=45)
+    last_name = models.CharField(_("last name"), max_length=45)
+
+    city = models.CharField(_("user city"), max_length=45)
+    zip_code = models.TextField(_("zip code"), max_length=45)
+    street = models.CharField(_("user street"), max_length=45)
+    location = CountryField(
+        verbose_name=_('user country'),
+        blank=True,
+        null=True
+    )
+    house_number = models.PositiveIntegerField(
+        validators=[MinValueValidator(1)],
+        verbose_name="house number",
+        help_text="Enter a positive integer for the house number"
+    )
+
     bio = models.TextField(_("user description"))
     image = models.ImageField(
         _("user image"),
         upload_to='user/images/%Y/%m/%d/',
-        blank=True,
-        null=True
-    )
-    location = CountryField(
-        verbose_name=_('user country'),
         blank=True,
         null=True
     )
@@ -35,11 +47,12 @@ class User(AbstractUser):
         unique=True,
         null=True
     )
+
     is_author = models.BooleanField(_('author'), default=False)
     is_subscriber = models.BooleanField(_('subscriber'), default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['first_name', 'last_name']
 
     def __str__(self):
         return self.email

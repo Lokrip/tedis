@@ -6,6 +6,7 @@ import {useAppSelector } from '@/hooks';
 import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type';
 import { IModelPrimary } from '@/types/app/models/IModelPrimary.type';
 import { RootState } from '@/redux/store';
+import SkeletonProductCard from '@/components/ui/elements/skeleton/SkeletonProductCard';
 
 
 export interface PaginationInfiniteScrollingProps<
@@ -27,12 +28,16 @@ export interface PaginationInfiniteScrollingProps<
     selectors: {
         dataSelector: (state: RootState) => T[],
         currentPageSelector: (state: RootState) => number;
+        fetchingSelector: (state: RootState) => boolean;
     }
+
     actions: {
         setDataList: (data: T[]) => void;
         incrementCurrentPage: (page: number) => void;
+        changeTypeFetching: (isFetching: boolean) => void;
     }
 
+    classNameListDataContainer: string;
     mapItems: (item: T) => ReactNode;
 }
 
@@ -48,19 +53,20 @@ const PaginationInfiniteScrolling = <
     totalDataCount,
     actions,
     selectors,
-    searchQuery
+    searchQuery,
+    classNameListDataContainer
 }: PaginationInfiniteScrollingProps<
     T,
     DataFunApiSearchAttributes,
     DataFunApiPaginationAttributes
 >) => {
-    const { dataSelector, currentPageSelector } = selectors;
-    const { setDataList, incrementCurrentPage } = actions;
+    const { dataSelector, currentPageSelector, fetchingSelector } = selectors;
+    const { setDataList, incrementCurrentPage, changeTypeFetching } = actions;
 
-    const observerElem = useRef(null);
 
-    const data = useAppSelector(dataSelector)
-    const currentPage = useAppSelector(currentPageSelector)
+    const data = useAppSelector(dataSelector);
+    const currentPage = useAppSelector(currentPageSelector);
+    const fetching = useAppSelector(fetchingSelector);
 
     const hasMoreData = () => {
         const recievedCount = limit * currentPage
@@ -71,23 +77,29 @@ const PaginationInfiniteScrolling = <
         setDataList(initialData)
     }, [initialData])
 
+    const scrollHandler = (event: Event) => {
+        const action = document.documentElement;
+
+        if(action.scrollHeight - (action.scrollTop + window.innerHeight) < 100) {
+            if(!fetching && hasMoreData()) {
+                changeTypeFetching(true);
+            }
+        }
+    }
+
     useEffect(() => {
-        //window.IntersectionObserver — это встроенный в JavaScript API, который позволяет отслеживать видимость элемента относительно родительского контейнера или вьюпорта
-        //Позволяет определить, когда элемент появляется или исчезает из видимой области экрана.
-        //Работает асинхронно, что делает его эффективным для задач, связанных с производительностью (например, ленивой загрузки изображений).
-        //Может отслеживать пересечение элемента с любой другой областью, а не только с вьюпортом.
-        //если элемент выйдет из области просмотра (при прокрутке вниз/вверх), IntersectionObserver вызовет колбэк и передаст в него entries, где будет entry.isIntersecting: false.
-        if(typeof window === "undefined" || !window.IntersectionObserver) return;
-        const element = observerElem.current;
+        if(fetching && hasMoreData()) {
+            fetchMoreData();
+        }
+    }, [fetching])
 
-        //threshold = порог = 0
-        const option = { threshold: 0 };
+    useEffect(() => {
+        document.addEventListener("scroll", scrollHandler)
 
-        const observer = new IntersectionObserver(handleObserver, option)
-        if(element) observer.observe(element);
-
-        return () => {if(element) observer.unobserve(element)};
-    }, [currentPage])
+        return () => {
+            document.removeEventListener("scroll", scrollHandler)
+        }
+    }, [])
 
 
     const fetchMoreData = async () => {
@@ -99,24 +111,24 @@ const PaginationInfiniteScrolling = <
         const { results } = await getData(searchQuery, pagintaion);
         setDataList([...data, ...results]);
         incrementCurrentPage(nextPage);
-    }
 
-    const handleObserver = (entries: IntersectionObserverEntry[]) => {
-        const [target] = entries;
-        if(target.isIntersecting && hasMoreData()) {
-            fetchMoreData()
-        }
+        changeTypeFetching(false);
     }
 
     return (
-        <>{data.map(item => (
-            <Fragment key={item.id}>
-                {mapItems(item)}
-            </Fragment>
-        ))}
+        <>
+        <div className={classNameListDataContainer}>
+            {data.map(item => (
+                <Fragment key={item.id}>
+                    {mapItems(item)}
+                </Fragment>
+            ))}
+        </div>
 
         {hasMoreData() ? (
-            <span ref={observerElem} className="text-center block py-10">Loading...</span>
+            <div className='product-card-skeleton-list'>
+                <SkeletonProductCard />
+            </div>
         ) : (
             <span className="text-center block p-10">No more posts</span>
         )}

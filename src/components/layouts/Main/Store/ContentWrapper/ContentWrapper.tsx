@@ -2,7 +2,6 @@ import {FC} from 'react';
 import styles from './contentWrapper.module.scss';
 import { getProductsData } from '../../../../../service/api/product.api';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
-import PaginationInfiniteScrolling from '../../Pagination/PaginationInfiniteScrolling';
 import ProductList from './ProductList/ProductList';
 
 interface ContentWrapperProps {
@@ -20,14 +19,13 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
     )
 
     return (
-        <div className={styles.productContentWrapper}>
-            <ProductList
-                searchQuery={searchQuery}
-                totalProductCount={productCount}
-                initialProducts={products}
-                getProductsData={getProductsData}
-            />
-        </div>
+        <ProductList
+            searchQuery={searchQuery}
+            totalProductCount={productCount}
+            initialProducts={products}
+            getProductsData={getProductsData}
+            classNameListDataContainer={styles.productContentWrapper}
+        />
     )
 };
 
