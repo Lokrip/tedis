@@ -10,4 +10,9 @@ services:
     volumes:
       - ".:/web"
     command: >
-        sh -c "make run-server"
+        sh -c "
+            make makemigrations
+            make migrate
+
+            make run-server
+        "

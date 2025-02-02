@@ -30,7 +30,8 @@ class Customers(AbstractUser):
     house_number = models.PositiveIntegerField(
         validators=[MinValueValidator(1)],
         verbose_name="house number",
-        help_text="Enter a positive integer for the house number"
+        help_text="Enter a positive integer for the house number",
+        default=0
     )
 
     bio = models.TextField(_("user description"))
@@ -52,7 +53,7 @@ class Customers(AbstractUser):
     is_subscriber = models.BooleanField(_('subscriber'), default=False)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name']
+    REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.email

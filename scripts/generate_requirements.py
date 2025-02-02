@@ -1,6 +1,5 @@
 import toml
 
-
 from pathlib import Path
 
 
@@ -9,8 +8,6 @@ def extract_dependencies(pyproject_file, output_file):
 
     pyproject_path = script_dir / pyproject_file
     output_path = script_dir / output_file
-
-
     with open(pyproject_path, 'r') as f:
         pyproject_data = toml.load(f)
 

@@ -7,15 +7,21 @@ ARG MODE=development
 COPY ./scripts/generate_requirements.py /web/scripts/generate_requirements.py
 
 COPY ./requirements/dev.txt ./requirements/prod.txt /web/requirements/
-COPY ./docker/mode_entrypoint.sh /web/docker/mode_entrypoint.sh
+COPY ./scripts/mode_entrypoint.sh /web/scripts/mode_entrypoint.sh
 
 ENV MODE=${MODE} \
     DEV_REQ=/web/requirements/dev.txt \
     PROD_REQ=/web/requirements/prod.txt
 
+RUN pip install toml
+
+COPY ./pyproject.toml /web/pyproject.toml
+
+RUN python3 /web/scripts/generate_requirements.py
+
 # Делаем mode_entrypoint.sh исполняемым
-RUN chmod +x docker/mode_entrypoint.sh
-RUN /web/docker/mode_entrypoint.sh
+RUN chmod +x scripts/mode_entrypoint.sh
+RUN /web/scripts/mode_entrypoint.sh
 
 COPY . /web/
 
