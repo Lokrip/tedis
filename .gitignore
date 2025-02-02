@@ -1,5 +1,43 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Django-specific files
+*.log
+*.pot
+*.pyc
+*.pyo
+
+# Database
+*.sqlite3
+*.db
+
+# Media/uploads
+media/
+
+# Cache
+*.cache
+
+
+# IDE and Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+
+# Celery and task queue files
+celerybeat-schedule
+celerybeat.pid
+
+# pipenv / poetry
+Pipfile.lock
+poetry.lock
+
 # dependencies
 /node_modules
 /.pnp
