@@ -24,8 +24,8 @@ const authConfig = {
 
                 if (user && user.password == credentials.password) {
                     return {
-                        id: String(1), 
-                        email: 'admin@gmail.com', 
+                        id: String(1),
+                        email: 'admin@gmail.com',
                         password: 'lol1234lol1234'
                     } as User;
                 }
@@ -33,7 +33,16 @@ const authConfig = {
                 return null;
             },
         })
-    ]
+    ],
+    session: {
+        strategy: "jwt",
+    },
+    pages: {
+        signIn: "/account/login"
+    },
+    callbacks: {
+        
+    }
 }
 
 export default authConfig;
