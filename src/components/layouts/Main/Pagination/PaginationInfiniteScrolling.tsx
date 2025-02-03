@@ -125,12 +125,10 @@ const PaginationInfiniteScrolling = <
             ))}
         </div>
 
-        {hasMoreData() ? (
+        {hasMoreData() && (
             <div className='product-card-skeleton-list'>
-                <SkeletonProductCard />
+                <SkeletonProductCard row={1} />
             </div>
-        ) : (
-            <span className="text-center block p-10">No more posts</span>
         )}
         </>
     );
