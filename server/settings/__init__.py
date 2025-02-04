@@ -23,4 +23,5 @@ include(
     optional(LOCAL_SETTINGS_PATH),
     "envvars.py",
     "docker.py",
+    "rest_framework.py"
 )
