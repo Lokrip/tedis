@@ -1,4 +1,3 @@
-
 class AccountRoute {
     public login: string = "/account/login"
     public register: string = "/account/register"

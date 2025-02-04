@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import styles from './contentWrapper.module.scss';
-import { getProductsData } from '../../../../../service/api/product.api';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
 import ProductList from './ProductList/ProductList';
+import { getProductsData } from '@/core/api/product.api';
 
 interface ContentWrapperProps {
     param?: any;

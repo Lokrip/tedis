@@ -2,16 +2,29 @@ import { correctUrl } from "../utils";
 
 class AxiosClient {
     private API_URL = process.env.PRODUCT_API_URL as string
+    private defaultHeaders: Record<string, string> = {}
 
-    constructor(private defaultHeaders: Record<string, string> = {}) {
+    constructor(
+        defaultHeaders: Record<string, string> = {},
+        API_URL: string | null = null
+    ) {
+        if(API_URL) {this.API_URL = API_URL}
         this.defaultHeaders = defaultHeaders
     }
-    
+
     async get<T>(
-        path: string, 
-        headers?: Record<string, string>, 
+        path: string,
+        headers?: Record<string, string>,
     ): Promise<T> {
         return this.fetch<T>(path, "GET", undefined, headers)
+    }
+
+    async post<T, TBody>(
+        path: string,
+        body: TBody,
+        headers?: Record<string, string>,
+    ): Promise<T> {
+        return this.fetch<T>(path, "POST", body!, headers)
     }
 
     private async fetch<T>(
@@ -48,3 +61,4 @@ class AxiosClient {
 }
 
 export const axios = new AxiosClient()
+export default AxiosClient;
