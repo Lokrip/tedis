@@ -10,9 +10,5 @@ services:
     volumes:
       - ".:/web"
     command: >
-        sh -c "
-            make makemigrations
-            make migrate
+        sh /web/scripts/start.sh
 
-            make run-server
-        "
