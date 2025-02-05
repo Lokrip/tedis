@@ -1,6 +1,6 @@
 import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from "@/types/app/api/product.type";
 import { IPost } from "../../types/app/models/IPost.type";
-import { axios } from "../axios"
+import { axios } from "@/service/axios";
 
 
 async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
@@ -8,7 +8,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
     currentPage = null
 }: ProductFunApiPaginationAttributes = {}): Promise<T> {
     "use server"
-    
+
     try {
         let url = "/api/v1/product/"
 
