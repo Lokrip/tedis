@@ -1,14 +1,35 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  web-app:
-    build:
-        context: .
-        dockerfile: docker/Dockerfile.server
-    ports:
-      - "8000:8000"
-    volumes:
-      - ".:/web"
-    command: >
-        sh /web/scripts/start.sh
+    web-app:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.server
+        ports:
+          - "8000:8000"
+        volumes:
+          - ".:/web"
+        environment:
+            - DB_HOST=database
+            - DB_NAME=tedis
+            - DB_USER=dbuser
+            - DB_PASS=pass
+        command: >
+            sh /web/scripts/start.sh
 
+        depends_on:
+            - database
+    database:
+        container_name: database-1
+        image: postgres:17-alpine
+        environment:
+            - POSTGRES_DB=tedis
+            - POSTGRES_USER=dbuser
+            - POSTGRES_PASSWORD=pass
+        ports:
+            - 5432:5432
+        volumes:
+            - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
