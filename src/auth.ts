@@ -51,10 +51,12 @@ const authConfig: NextAuthOptions = {
                         {"Content-Type": "application/json"}
                     )
 
-                    const { access, refresh } = resData;
+                    const { access, refresh, id, username, email } = resData;
 
                     return {
-                        email: credentials.email,
+                        id: String(id),
+                        username: username,
+                        email: email,
                         accessToken: access,
                         refreshToken: refresh
                     } as JWTUser
