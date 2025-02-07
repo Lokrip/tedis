@@ -3,11 +3,9 @@ from django.conf import settings
 from django.utils.translation import gettext_lazy as _
 from django.utils.text import slugify
 
-from server.models import (
-    DateCreatedModel,
-    DateUpdatedModel,
-    ModelTitle
-)
+from server.models.abstract.abstract_created_at import DateCreatedModel
+from server.models.abstract.abstract_updated_at import DateUpdatedModel
+from server.models.abstract.abstract_title import ModelTitle
 
 from server.models.status.product_status import (
     ProductAccessibilityStatus,
@@ -21,7 +19,6 @@ from mptt.models import (
     MPTTModel,
     TreeForeignKey
 )
-
 
 
 class Category(MPTTModel, ModelTitle, DateCreatedModel):
@@ -61,6 +58,12 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         max_length=30,
         blank=True,
         null=True
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name=_("product category")
     )
     accessibility = models.CharField(
         _("product accessibility"),
