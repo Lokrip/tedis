@@ -42,6 +42,10 @@ INSTALLED_APPS = [
     'server',
 ]
 
+# if IS_DEV and not IS_PROD: #type: ignore
+
+#     INSTALLED_APPS.append("")
+
 
 
 MIDDLEWARE = [

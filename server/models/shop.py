@@ -25,8 +25,17 @@ class Category(MPTTModel, ModelTitle, DateCreatedModel):
     parent = TreeForeignKey(
         "self",
         on_delete=models.CASCADE,
-        verbose_name=_("parent")
+        verbose_name=_("parent"),
+        blank=True,
+        null=True
     )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
 
 
 class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):

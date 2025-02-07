@@ -18,10 +18,11 @@ if not os.path.isabs(LOCAL_SETTINGS_PATH):
 
 
 include(
-    "base.py",
     "custom.py",
+    "base.py",
     optional(LOCAL_SETTINGS_PATH),
     "envvars.py",
     "docker.py",
-    "rest_framework.py"
+    "rest_framework.py",
+    "logging.py",
 )
