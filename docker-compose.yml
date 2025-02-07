@@ -10,7 +10,7 @@ services:
         volumes:
           - ".:/web"
         environment:
-            - DB_HOST=database
+            - DB_HOST=db-54321
             - DB_NAME=tedis
             - DB_USER=dbuser
             - DB_PASS=pass
@@ -18,9 +18,9 @@ services:
             sh /web/scripts/start.sh
 
         depends_on:
-            - database
-    database:
-        container_name: database-1
+            - db-54321
+    db-54321:
+        container_name: db-54321-1
         image: postgres:17-alpine
         environment:
             - POSTGRES_DB=tedis
