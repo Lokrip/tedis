@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import sass from "sass";
 
 const nextConfig: NextConfig = {
   images: {
@@ -25,10 +26,10 @@ const nextConfig: NextConfig = {
     //она оптимизирует пакеты каторый находять внутри других пакетов
     //Опция optimizePackageImports в конфигурации, скорее всего, относится к оптимизации импорта пакетов в проекте, возможно, в контексте сборщика (например, Webpack или другой). В случае с @material-ui/core, эта настройка помогает минимизировать размер бандла, оптимизируя импорты внутри самого пакета
     //Извлекает только необходимые части: Например, вместо того чтобы импортировать весь @material-ui/core, она импортирует только те компоненты, которые реально используются, что снижает объем кода, который должен быть загружен
-    optimizePackageImports: [ 
+    optimizePackageImports: [
       "lucide-react"
     ]
-  }
+  },
 };
 
 export default nextConfig;

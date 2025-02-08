@@ -69,7 +69,7 @@ const authConfig: NextAuthOptions = {
         })
     ],
     pages: {
-        signIn: pages.login
+        signIn: "/account/login"
     },
     session: {strategy: "jwt"},
     // Обратные вызовы : callbacksраздел определяет функции для манипулирования

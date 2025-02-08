@@ -19,6 +19,19 @@ services:
 
         depends_on:
             - db-54321
+    web-app-client:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.client
+        ports:
+          - "3000:3000"
+        volumes:
+          - ".:/app"
+        command: >
+            sh -c "npm run dev"
+        depends_on:
+            - web-app
+
     db-54321:
         container_name: db-54321-1
         image: postgres:17-alpine

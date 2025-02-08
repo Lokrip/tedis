@@ -1,5 +1,6 @@
 # Ignore node_modules
 node_modules
+.next
 
 # Ignore logs
 logs
@@ -7,6 +8,8 @@ logs
 
 # Ignore environment files
 .env*
+
+
 
 # Ignore Docker-related files
 Dockerfile

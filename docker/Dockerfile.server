@@ -7,7 +7,7 @@ ARG MODE=development
 COPY ./scripts/generate_requirements.py /web/scripts/generate_requirements.py
 
 COPY ./requirements/dev.txt ./requirements/prod.txt /web/requirements/
-COPY ./scripts/mode_entrypoint.sh /web/scripts/mode_entrypoint.sh
+COPY ./scripts/setup_dependencies_server.sh /web/scripts/setup_dependencies_server.sh
 
 ENV MODE=${MODE} \
     DEV_REQ=/web/requirements/dev.txt \
@@ -19,9 +19,9 @@ COPY ./pyproject.toml /web/pyproject.toml
 
 RUN python3 /web/scripts/generate_requirements.py
 
-# Делаем mode_entrypoint.sh исполняемым
-RUN chmod +x scripts/mode_entrypoint.sh
-RUN /web/scripts/mode_entrypoint.sh
+# Делаем setup_dependencies_server.sh исполняемым
+RUN chmod +x scripts/setup_dependencies_server.sh
+RUN /web/scripts/setup_dependencies_server.sh
 
 COPY . /web/
 
