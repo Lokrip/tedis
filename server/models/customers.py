@@ -6,6 +6,7 @@ from django.core.validators import MinValueValidator
 
 from server.models.status.customers_status import Role
 
+
 class Customers(AbstractUser):
     """User AbstractUser Model
 

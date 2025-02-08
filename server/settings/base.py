@@ -4,6 +4,10 @@ from pathlib import Path
 DEBUG = False
 SECRET_KEY = NotImplemented
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 ALLOWED_HOSTS = ["*"]
 
 AUTH_USER_MODEL = "server.Customers"
@@ -37,14 +41,11 @@ INSTALLED_APPS = [
     "rest_framework",
     "rest_framework_simplejwt",
     "corsheaders",
+    "debug_toolbar",
     "mptt",
 
     'server',
 ]
-
-# if IS_DEV and not IS_PROD: #type: ignore
-
-#     INSTALLED_APPS.append("")
 
 
 
@@ -57,10 +58,14 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
 
     "server.middleware.FirstMiddleware",
     "server.middleware.SecondMiddleware",
 ]
+
+
+
 
 ROOT_URLCONF = 'server.urls'
 

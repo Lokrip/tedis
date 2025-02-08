@@ -26,6 +26,7 @@ class Category(MPTTModel, ModelTitle, DateCreatedModel):
         "self",
         on_delete=models.CASCADE,
         verbose_name=_("parent"),
+        related_name="children",
         blank=True,
         null=True
     )
