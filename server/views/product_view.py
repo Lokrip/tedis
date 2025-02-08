@@ -2,7 +2,10 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
-from server.serializers.product_serializers import ProductSerializer
+from server.serializers.product_serializers import (
+    ProductListSerializer,
+    ProductDetailSerializer
+)
 
 from server.models import Product
 
@@ -12,7 +15,6 @@ from server.exeption import (
 )
 
 class ProductViewSet(ViewSet):
-    serializer_class = ProductSerializer
     lookup_field = "slug"
 
     def list(self, request):
@@ -24,7 +26,7 @@ class ProductViewSet(ViewSet):
             "user"
         )
 
-        serializer = self.serializer_class(queryset, many=True)
+        serializer = ProductListSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, *args, **kwargs):
@@ -44,5 +46,5 @@ class ProductViewSet(ViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        serializer = ProductSerializer(product)
+        serializer = ProductDetailSerializer(product)
         return Response(serializer.data, status=status.HTTP_200_OK,)
