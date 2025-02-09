@@ -1,6 +1,10 @@
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import (
+    MinValueValidator,
+    MaxValueValidator
+)
 from django.utils.text import slugify
 
 from server.models.abstract.abstract_created_at import DateCreatedModel
@@ -105,6 +109,22 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         choices=ProductChecksStatus.choices,
         default=ProductChecksStatus.UNDER_REVIEW
     )
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name=_("product price"),
+        default=99.99
+    )
+    discount = models.PositiveSmallIntegerField(
+        validators=[
+            MinValueValidator(0),
+            MaxValueValidator(100)
+        ],
+        verbose_name=_("product discount (%)"),
+        default=0
+    )
+
 
 
     # def save(self, *args, **kwargs):
