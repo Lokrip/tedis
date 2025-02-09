@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 
 from server.serializers.product_serializers import (
@@ -14,6 +15,11 @@ from server.exeption import (
     RESOURCE_NOT_FOUND
 )
 
+class ProductResultsSetPagination(PageNumberPagination):
+    page_size = 18
+    page_size_query_param = "page_size"
+    max_page_size = 10000
+
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
 
@@ -26,8 +32,16 @@ class ProductViewSet(ViewSet):
             "user"
         )
 
-        serializer = ProductListSerializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        paginator = ProductResultsSetPagination()
+
+        paginated_product = paginator.paginate_queryset(
+            queryset,
+            request,
+            view=self
+        )
+
+        serializer = ProductListSerializer(paginated_product, many=True)
+        return paginator.get_paginated_response(serializer.data);
 
     def retrieve(self, request, *args, **kwargs):
         slug = kwargs.get("slug", None)
