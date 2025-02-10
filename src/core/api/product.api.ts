@@ -10,7 +10,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
     "use server"
 
     try {
-        let url = "/api/v1/product/"
+        let url = "/api/v1/products/"
 
         const params = [];
 

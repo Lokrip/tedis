@@ -15,23 +15,23 @@ const NavigationBar: FC = () => {
         {id: 3, navigation: "/account/login", type: "sign-in", titleNavigation: "Войти", icon: "User"},
     ])
 
-    const session = useSession()
+    // const session = useSession()
 
-    useEffect(() => {
-        if(session.status == "authenticated") {
-            setNavigation(prev => {
-                const updatedNavigations = prev.filter(navigation => navigation.type !== "sign-in")
-                return [...updatedNavigations]
-            })
-        }
-    }, [session])
+    // useEffect(() => {
+    //     if(session.status == "authenticated") {
+    //         setNavigation(prev => {
+    //             const updatedNavigations = prev.filter(navigation => navigation.type !== "sign-in")
+    //             return [...updatedNavigations]
+    //         })
+    //     }
+    // }, [session])
 
     return (
-        <List 
+        <List
             className={clsx('navigration-list', "flex-center")}
             items={navigations}
             mapItems={(item) => {
-                const IconComponent = getIconComponent(item.icon); 
+                const IconComponent = getIconComponent(item.icon);
                 return (
                     <Link href={item.navigation} className={clsx('navigration-wrapper')}>
                         <Item className={"navigration-item"}>
