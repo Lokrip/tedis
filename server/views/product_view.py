@@ -1,15 +1,12 @@
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
-from rest_framework.permissions import (
-    IsAuthenticatedOrReadOnly,
-    IsAuthenticated
-)
 from rest_framework import status
 
 from server.serializers.product_serializers import (
     ProductDetailSerializer,
     ProductCreateSerializer
 )
+from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
 from server.service.product_service import get_product_list
 from server.models import Product
 from server.exeption import (
@@ -21,7 +18,7 @@ from server.exeption import (
 
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
 
     def list(self, request):
         (serializer, paginator) = get_product_list(
