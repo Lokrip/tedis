@@ -11,6 +11,7 @@ import { useActions } from '@/hooks';
 import { RootState } from '@/redux/store';
 import { selectedProducts } from '@/redux/selectors/product';
 import PCard from '@/components/ui/elements/card/PrimaryCard/PrimaryCard';
+import { useSession } from 'next-auth/react';
 
 interface ProductListProps {
     searchQuery: string;
@@ -40,6 +41,7 @@ const ProductList: FC<ProductListProps> = ({
     const productSelector = (state: RootState) => selectedProducts(state)
     const productCurrentPageSelector = (state: RootState) => state.productReduser.currentPage
     const productFetchingSelector = (state: RootState) => state.productReduser.isFetching
+
 
     return (
         <>

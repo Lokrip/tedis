@@ -3,6 +3,13 @@ import { NextAuthOptions } from "next-auth";
 import { AuthenticatedFields, JWTUser } from "./types/app/auth.types";
 import pages from "./service/route";
 
+
+async function refreshAccessToken(token) {
+    try {
+        
+    }
+}
+
 export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({

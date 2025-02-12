@@ -1,6 +1,11 @@
-# Ошибки, связанные с отсутствием данных
+# Ошибки, с данными
 DATA_NOT_FOUND = "Data not available"  # Данные недоступны
 RESOURCE_NOT_FOUND = "Requested resource was not found"  # Запрашиваемый ресурс не найден
+CREATION_FAILED = "Failed to create resource"  # Не удалось создать ресурс
+UPDATE_FAILED = "Failed to update resource"  # Не удалось обновить ресурс
+RESOURCE_NOT_UPDATABLE = "Resource cannot be updated"  # Ресурс не подлежит обновлению
+DELETION_FAILED = "Failed to delete resource"  # Не удалось удалить ресурс
+RESOURCE_NOT_DELETABLE = "Resource cannot be deleted"  # Ресурс не подлежит удалению
 
 # Ошибки валидации данных
 INVALID_INPUT = "Invalid input provided"  # Введены неверные данные

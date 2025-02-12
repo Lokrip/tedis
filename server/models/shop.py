@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -127,9 +129,11 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
 
 
 
-    # def save(self, *args, **kwargs):
-    #     if not self.slug:
-    #         self.slug = f"{slugify(self.title)}-{}"
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = f"{slugify(self.title)}-{self.pk}-{uuid.uuid4()}"
+
+        return super().save(*args, **kwargs)
 
 
     class Meta:

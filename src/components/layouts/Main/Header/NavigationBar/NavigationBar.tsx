@@ -15,16 +15,16 @@ const NavigationBar: FC = () => {
         {id: 3, navigation: "/account/login", type: "sign-in", titleNavigation: "Войти", icon: "User"},
     ])
 
-    // const session = useSession()
+    const session = useSession()
 
-    // useEffect(() => {
-    //     if(session.status == "authenticated") {
-    //         setNavigation(prev => {
-    //             const updatedNavigations = prev.filter(navigation => navigation.type !== "sign-in")
-    //             return [...updatedNavigations]
-    //         })
-    //     }
-    // }, [session])
+    useEffect(() => {
+        if(session.status == "authenticated") {
+            setNavigation(prev => {
+                const updatedNavigations = prev.filter(navigation => navigation.type !== "sign-in")
+                return [...updatedNavigations]
+            })
+        }
+    }, [session])
 
     return (
         <List
