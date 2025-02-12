@@ -2,9 +2,6 @@ from server.models import Product
 from server.pagination import ProductResultsSetPagination
 from server.serializers.product_serializers import ProductListSerializer
 
-def validate_product(**kwargs):
-    pass
-
 def get_product_list(**kwargs):
     request = kwargs.get("request", None)
     view = kwargs.get("view")

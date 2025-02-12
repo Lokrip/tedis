@@ -7,11 +7,20 @@ class IsSubscriberOrOwnerEditOrReadOnly(BasePermission):
     Остальные могут только читать (GET, HEAD, OPTIONS).
     """
     def has_permission(self, request, view):
-        if request.user.is_user_subscriber() and request.method == "POST":
+        if (
+            request.user.is_authenticated
+            and request.user.is_user_subscriber()
+            and request.method == "POST"
+        ):
             return True
         return request.method in SAFE_METHODS
 
     def has_object_permission(self, request, view, obj):
-        if request.user == obj.user and request.method in ("PUT", "PATCH"):
+        if (
+            request.user.is_authenticated
+            and request.user == obj.user
+            and request.method
+                in ("PUT", "PATCH")
+        ):
             return True
         return False

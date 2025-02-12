@@ -63,7 +63,7 @@ class ProductViewSet(ViewSet):
                 else ""
             }'
         )
-        return ResourceWarning(
+        return Response(
             serializer.data,
             status=status.HTTP_201_CREATED,
             headers={
