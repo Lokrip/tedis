@@ -9,7 +9,8 @@ class ModelTitle(models.Model):
         _("slug"),
         blank=True,
         help_text=_('Unique tag ID for URL'),
-        unique=True
+        unique=True,
+        max_length=150
     )
 
     class Meta:

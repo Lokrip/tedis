@@ -8,16 +8,17 @@ from .category_serializers import CategorySerializer
 class ProductCreateSerializer(serializers.ModelSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
-
-
     class Meta:
         model = Product
         fields = (
-            'title', 'metaTitle', 'summary',
+            'id', 'title', 'metaTitle', 'summary',
             'accessibility', 'condition', 'warehouse',
             'promotional', 'checks', 'price', 'discount',
             'category', 'user'
         )
+        extra_kwargs = {'id': {'read_only': True}}
+
+
 
     def validate(self, attrs):
         request = self.context.get("request")

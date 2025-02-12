@@ -18,7 +18,7 @@ from server.exeption import (
 
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
-    permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
+    # permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
 
     def list(self, request):
         (serializer, paginator) = get_product_list(
@@ -54,12 +54,13 @@ class ProductViewSet(ViewSet):
                 {"message": CREATION_FAILED},
                 status=status.HTTP_404_NOT_FOUND
             )
+        print(data)
         serializer = ProductCreateSerializer(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer=serializer)
         headers = self.get_success_headers(
-            f'/api/v1/products/{request.data.get("id")
-                if (request.data.get("id", None) is not None)
+            f'/api/v1/products/{serializer.data.get("id")
+                if (serializer.data.get("id", None) is not None)
                 else ""
             }'
         )
