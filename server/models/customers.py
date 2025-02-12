@@ -60,6 +60,9 @@ class Customers(AbstractUser):
     def is_admin(self):
         return self.role == Role.ADMIN or self.is_staff
 
+    def is_user_subscriber(self):
+        return self.role == Role.SUBSCRIBER and self.is_subscriber
+
     def is_moderator(self):
         return self.role == Role.MODERATOR
 
