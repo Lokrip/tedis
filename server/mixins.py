@@ -13,16 +13,17 @@ class Mixin:
     def __init__(self, model: Type[Model]):
         self.model = model
 
-    def _find_by_field(self, field: str, value: str):
+    def _find_by_field(self, field: str, value: str, isSlugify: bool):
         if not value or not isinstance(value, str):
             raise ObjectDoesNotExist("Data not found!")
 
         SLUG_FIELDS = ("slug", "slugify", "url_slug", "seo_slug", "permalink")
 
-        if field in SLUG_FIELDS:
+        if field in SLUG_FIELDS and isSlugify:
             value = slugify(value)
 
         try:
+            print("yes mixins start", field, value)
             return self.model.objects.get(**{field: value})
         except AttributeError:
             raise CustomAttributeException(
@@ -86,8 +87,8 @@ class CrudMixin(Mixin):
     def findByTitle(self, title: str):
         return self._find_by_field("title", title)
 
-    def findBySlug(self, slug: str):
-        return self._find_by_field("slug", slug)
+    def findBySlug(self, slug: str, isSlugify: bool):
+        return self._find_by_field("slug", slug, isSlugify)
 
 
 class ProductMixin(CrudMixin):
