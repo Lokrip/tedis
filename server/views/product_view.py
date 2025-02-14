@@ -14,14 +14,16 @@ from server.exeption import (
     RESOURCE_NOT_FOUND,
     CREATION_FAILED
 )
+from server.mixins import ProductMixin
 
 
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
+    mixin = ProductMixin(Product)
     # permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
 
     def list(self, request):
-        (serializer, paginator) = get_product_list(
+        (serializer, paginator) = self.mixin.findProductAll(
             view=self,
             request=request
         )
@@ -37,7 +39,7 @@ class ProductViewSet(ViewSet):
             )
 
         try:
-            product = Product.objects.get(slug=slug)
+            product = self.mixin.findBySlug(slug=slug, isSlugify=True)
         except Product.DoesNotExist:
             return Response(
                 {"message": RESOURCE_NOT_FOUND},
@@ -54,7 +56,6 @@ class ProductViewSet(ViewSet):
                 {"message": CREATION_FAILED},
                 status=status.HTTP_404_NOT_FOUND
             )
-        print(data)
         serializer = ProductCreateSerializer(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer=serializer)
@@ -72,7 +73,7 @@ class ProductViewSet(ViewSet):
                 "Content-type": "application/json"
             }
         )
-
+    
     def perform_create(self, serializer):
         serializer.save()
 
