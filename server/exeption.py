@@ -36,3 +36,8 @@ SERVER_ERROR = "An internal server error occurred"  # Внутренняя ош�
 SERVICE_UNAVAILABLE = "Service is currently unavailable"  # Сервис временно недоступен
 DATABASE_ERROR = "Database operation failed"  # Ошибка базы данных
 TOO_MANY_REQUESTS = "Too many requests, please try again later"  # Слишком много запросов, попробуйте позже
+
+
+class CustomAttributeException(AttributeError):
+    def __init__(self, message):
+        super().__init__(message)
