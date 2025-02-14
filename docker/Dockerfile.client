@@ -3,11 +3,9 @@ FROM node:18-alpine
 RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
-COPY ./scripts/setup_dependencies_client.sh /app/scripts/setup_dependencies_client.sh
+COPY package.json package-lock.json* /app/
 
-RUN chmod +x /app/scripts/setup_dependencies_client.sh
-RUN /app/scripts/setup_dependencies_client.sh
+RUN npm install
 
 COPY . .
 
@@ -19,6 +17,3 @@ EXPOSE 3000
 
 ENV PORT 3000
 ENV HOSTNAME "0.0.0.0"
-
-RUN adduser --disabled-password nextjs
-USER nextjs
