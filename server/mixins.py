@@ -31,7 +31,12 @@ class Mixin:
             )
 
     def _object_by_id_not_found(self, id):
-        raise self._object_by_id_not_found(id=id)
+        raise ObjectDoesNotExist(
+                "%s with id %d does not exist." % (
+                    self.model.__name__,
+                    id.__int__()
+                )
+        )
 
     def findAll(self):
         return self.model.objects.all()
@@ -64,12 +69,7 @@ class Mixin:
         try:
             delete_model = self.findById(id=id)
         except self.model.DoesNotExist:
-            raise ObjectDoesNotExist(
-                "%s with id %d does not exist." % (
-                    self.model.__name__,
-                    id.__int__()
-                )
-            )
+            raise self._object_by_id_not_found(id=id)
 
         delete_model.delete()
         return True
