@@ -1,14 +1,10 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth";
-import { AuthenticatedFields, JWTUser } from "./types/app/auth.types";
+import { AuthenticatedFields, JWTUser, ReponseUserToken } from "./types/app/auth.types";
 import pages from "./service/route";
 
+import { requestTokenAuthorize, refreshAccessToken } from "./core/api/token.api";
 
-async function refreshAccessToken(token) {
-    try {
-        
-    }
-}
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -28,25 +24,17 @@ export const authOptions: NextAuthOptions = {
                     password: credentials.password
                 }
                 try {
-                    const resData = await fetch(
-                        `${process.env.PRODUCT_API_URL}/api/token/`,
-                        {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify(data)
-                        }
-                    )
+                    const resData = await requestTokenAuthorize<ReponseUserToken>(data);
 
-                    const { access, refresh, id, username, email } = await resData.json();
+                    const { access, refresh, id, username, email, accessTokenExpires  } = resData;
 
                     return {
                         id: String(id),
                         username: username,
                         email: email,
                         accessToken: access,
-                        refreshToken: refresh
+                        refreshToken: refresh,
+                        accessTokenExpires: accessTokenExpires
                     } as JWTUser
 
                 } catch(error) {
@@ -67,12 +55,21 @@ export const authOptions: NextAuthOptions = {
         async jwt({token, user}) {
             const jwtUser = user as JWTUser
 
+            console.log(token, user)
             if(user) {
-                token.accessToken = jwtUser.accessToken;
-                token.id = jwtUser.refreshToken;
+                return {
+                    user,
+                    accessToken: jwtUser.accessToken,
+                    refreshToken: jwtUser.refreshToken,
+                    accessTokenExpires: jwtUser.accessTokenExpires * 1000,
+                }
             }
 
-            return token;
+            if(Date.now() < (token.accessTokenExpires as number)) {
+                return token;
+            }
+
+            return await refreshAccessToken(token.refreshToken as string);
         },
 
         async session ({session, token}) {

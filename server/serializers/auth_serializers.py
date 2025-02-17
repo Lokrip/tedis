@@ -4,7 +4,6 @@ from rest_framework_simplejwt.serializers import (
 )
 from rest_framework_simplejwt.settings import api_settings
 
-from datetime import timedelta
 from django.utils import timezone
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):

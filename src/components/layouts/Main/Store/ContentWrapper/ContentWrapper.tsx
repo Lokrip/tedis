@@ -14,8 +14,8 @@ interface ContentWrapperProps {
 }
 
 const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
-    const session = await getServerSession(authOptions);
-    const accessToken = (session?.user as JWTUser).accessToken
+    // const session = await getServerSession(authOptions);
+    // const accessToken = (session?.user as JWTUser).accessToken
     const searchQuery = param.q ?? param.searchQuery;
     const currentPage = Number(param?.page) || 1;
 
@@ -24,7 +24,7 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
             searchQuery,
             {isPagination: true,
             currentPage: currentPage},
-            accessToken
+            // accessToken
         )
 
         return (

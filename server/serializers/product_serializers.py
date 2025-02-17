@@ -1,40 +1,60 @@
+from django.contrib.auth import get_user_model
+
 from rest_framework import serializers
 
 from server.models import Product
-
 from .category_serializers import CategorySerializer
+from server.exeption import RESOURCE_NOT_FOUND
 
+User = get_user_model()
 
-class ProductCreateSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+class ProductFieldsAllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = "__all__"
+
+class ProductBaseSerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField(required=False)
 
     class Meta:
         model = Product
         fields = (
-            'id', 'title', 'metaTitle', 'summary',
+            'id', 'slug', 'title', 'metaTitle', 'summary',
             'accessibility', 'condition', 'warehouse',
             'promotional', 'checks', 'price', 'discount',
-            'category', 'user'
+            'category', 'user_id',
         )
-        extra_kwargs = {'id': {'read_only': True}}
-
-
-
+        extra_kwargs = {
+            'id': {
+                'read_only': True
+            },
+            'slug': {
+                "read_only": True
+            },
+        }
     def validate(self, attrs):
-        request = self.context.get("request")
-        if not request or not request.user.is_authenticated:
-            raise serializers.ValidationError("User is not authenticated")
+        user_id = attrs.pop("user_id", None)
+
+        try:
+            if user_id is None and not user_id:
+                user = self.context["request"].user
+            else:
+                user = User.objects.get(pk=user_id)
+        except User.DoesNotExist:
+            raise serializers.ValidationError(RESOURCE_NOT_FOUND)
+
+        attrs['user'] = user
         return super().validate(attrs)
 
-class ProductDetailSerializer(serializers.ModelSerializer):
+class ProductCreateSerializer(ProductBaseSerializer):
+    pass
+
+class ProductUpdateSerializer(ProductBaseSerializer):
+    def validate(self, attrs):
+        return super().validate(attrs)
+
+class ProductDetailSerializer(ProductFieldsAllSerializer):
     category = CategorySerializer(read_only=True)
 
-    class Meta:
-        model = Product
-        fields = "__all__"
-
-
-class ProductListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Product
-        fields = "__all__"
+class ProductListSerializer(ProductFieldsAllSerializer):
+    pass
