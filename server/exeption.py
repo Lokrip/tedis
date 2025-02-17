@@ -41,3 +41,7 @@ TOO_MANY_REQUESTS = "Too many requests, please try again later"  # Слишко�
 class CustomAttributeException(AttributeError):
     def __init__(self, message):
         super().__init__(message)
+
+class DataNotFoundExeption(Exception):
+    def __init__(self, message):
+        super().__init__(message)
