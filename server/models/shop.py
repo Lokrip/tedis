@@ -12,6 +12,7 @@ from django.utils.text import slugify
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_updated_at import DateUpdatedModel
 from server.models.abstract.abstract_title import ModelTitle
+from server.core.utils.slug import generate_unique_slug
 
 from server.models.status.product_status import (
     ProductAccessibilityStatus,
@@ -128,12 +129,20 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
     )
 
 
-
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = f"{slugify(self.title)}-{self.pk}-{uuid.uuid4()}"
+            base_slug = slugify(self.title)
 
-        return super().save(*args, **kwargs)
+            self.slug = generate_unique_slug(self.__class__, base_slug=base_slug)
+
+            super().save(*args, **kwargs)
+
+            final_slug = generate_unique_slug(self.__class__, base_slug=base_slug, id=self.id)
+            self.slug = final_slug
+
+            super().save(update_fields=["slug"])
+        else:
+            return super().save(*args, **kwargs)
 
 
     class Meta:
