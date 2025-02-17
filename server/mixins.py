@@ -23,7 +23,6 @@ class Mixin:
             value = slugify(value)
 
         try:
-            print("yes mixins start", field, value)
             return self.model.objects.get(**{field: value})
         except AttributeError:
             raise CustomAttributeException(
