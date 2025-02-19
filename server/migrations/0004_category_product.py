@@ -3,7 +3,58 @@
 import django.db.models.deletion
 import mptt.fields
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.db import migrations, models
+
+import random
+
+
+def create_test_data(apps, schema_editor):
+    Category = apps.get_model('server', 'Category')
+    Product = apps.get_model('server', 'Product')
+    User = get_user_model()
+
+    # Проверяем, существуют ли уже категории
+    if Category.objects.exists():
+        print("Категории уже существуют. Пропускаем создание.")
+        return
+
+    # Получаем первого пользователя (или создаем, если его нет)
+    user = User.objects.first()
+    if not user:
+        user = User.objects.create(username='testuser', email='test@example.com')
+
+    # Создаем три категории
+    categories = []
+    for i in range(1, 4):
+        category, created = Category.objects.get_or_create(
+            title=f'Категория {i}',
+            metaTitle=f'Категория {i} Meta',
+            slug=f'category-{i}',
+            parent=None
+        )
+        categories.append(category)
+
+    # Проверяем, существуют ли уже продукты
+    if Product.objects.exists():
+        print("Продукты уже существуют. Пропускаем создание.")
+        return
+
+    # Создаем 100 продуктов
+    for i in range(1, 101):
+        Product.objects.create(
+            title=f'Продукт {i}',
+            metaTitle=f'Продукт {i} Meta',
+            slug=f'product-{i}',
+            summary=f'Описание продукта {i}',
+            accessibility=random.choice(['available', 'out_of_stock', 'coming_soon', 'pre_order']),
+            condition=random.choice(['new', 'used', 'refurbished', 'damaged']),
+            warehouse=random.choice(['reserved', 'in_warehouse', 'out_for_delivery']),
+            promotional=random.choice(['on_sale', 'limited_offer', 'flash_sale', 'black_friday']),
+            checks='approved',
+            category=random.choice(categories),
+            user=user
+        )
 
 
 class Migration(migrations.Migration):
@@ -49,9 +100,12 @@ class Migration(migrations.Migration):
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='server.category', verbose_name='product category')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='product user')),
             ],
+
             options={
                 'verbose_name': 'Product',
                 'verbose_name_plural': 'Products',
             },
         ),
+
+        migrations.RunPython(create_test_data)
     ]
