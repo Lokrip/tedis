@@ -1,9 +1,10 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth";
-import { AuthenticatedFields, JWTUser, ReponseUserToken } from "./types/app/auth.types";
+import { AuthenticatedFields, CustomJWTType, JWTUser, ReponseUserToken } from "./types/app/auth.types";
 import pages from "./service/route";
 
 import { requestTokenAuthorize, refreshAccessToken } from "./core/api/token.api";
+import { JWT } from "next-auth/jwt";
 
 
 export const authOptions: NextAuthOptions = {
@@ -54,22 +55,22 @@ export const authOptions: NextAuthOptions = {
     callbacks: {
         async jwt({token, user}) {
             const jwtUser = user as JWTUser
-
-            console.log(token, user)
+            const jwtToken = token as CustomJWTType
             if(user) {
                 return {
-                    user,
                     accessToken: jwtUser.accessToken,
                     refreshToken: jwtUser.refreshToken,
                     accessTokenExpires: jwtUser.accessTokenExpires * 1000,
-                }
+                    user
+                };
             }
 
-            if(Date.now() < (token.accessTokenExpires as number)) {
+            if (Date.now() < jwtToken.accessTokenExpires) {
+                console.log("Get token")
                 return token;
             }
 
-            return await refreshAccessToken(token.refreshToken as string);
+            return await refreshAccessToken(jwtToken);
         },
 
         async session ({session, token}) {

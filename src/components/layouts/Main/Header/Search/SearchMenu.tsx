@@ -3,10 +3,11 @@ import {ElementType, FC, useEffect} from 'react';
 import styles from './searchMenu.module.scss';
 import { List } from '@/components/ui/list/List';
 import { Item } from '@/components/ui/list/item/Item';
-import { getIconComponent } from '@/utils';
+import { getIconComponent, truncate_string } from '@/utils';
 import { searchParamApi } from '@/redux/services/header/SearchService';
 import { ISearchParam } from '@/types/app/models/ISearchParam.type';
 import SkeletonSearchParam from '@/components/ui/elements/skeleton/SkeletonSearchParam';
+import clsx from 'clsx';
 
 interface SearchMenuProps {
     searchParam: string;
@@ -25,7 +26,7 @@ const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
                 let IconComponent: ElementType
 
                 if(item.icon) {
-                    IconComponent = getIconComponent(item.icon); 
+                    IconComponent = getIconComponent(item.icon);
                 } else {
                     IconComponent = getIconComponent("Search")
                 }
@@ -34,7 +35,7 @@ const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
                     <div className={styles.searchMenuItemContainer}>
                         <IconComponent />
                         <Item className={styles.searchMenuItem}>
-                            {item.name}
+                            {truncate_string(item.name, 50)}
                         </Item>
                     </div>
                 )
@@ -53,9 +54,9 @@ const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
     }, [searchParamList])
 
     return (
-        <div className={styles.searchMenu}>
-            {isLoadingSearchParamList 
-            ? (<SkeletonSearchParam />) 
+        <div className={clsx(styles.searchMenu, isLoadingSearchParamList ? styles.searchMenuLoading : "")}>
+            {isLoadingSearchParamList
+            ? (<SkeletonSearchParam />)
             : <SearchMenuList searchParamList={searchParamList!} />}
         </div>
     );

@@ -13,19 +13,24 @@ async function requestTokenAuthorize<T>(body: AuthenticatedFields): Promise<T> {
     }
 }
 
-async function refreshAccessToken(token: string) {
+async function refreshAccessToken(token: {
+    accessTokenExpires: number;
+    accessToken: string;
+    refreshToken: string;
+}) {
     try {
         const data = {
-            refresh: token
+            refresh: token.refreshToken
         }
         const resData = await axios.post<{access: string, access_expires_in: number}, {refresh: string}>(
-            "/api/v1/refresh/",
+            "/api/token/refresh/",
             data
         )
+
         return {
+            ...token,
             accessToken: resData.access,
-            accessTokenExpires: resData.access_expires_in * 300,
-            refreshToken: token
+            accessTokenExpires: resData.access_expires_in * 1000,
         }
     } catch(error) {
         console.error(error)

@@ -6,7 +6,7 @@ import { axios } from "@/service/axios";
 async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
     isPagination = false,
     currentPage = null
-}: ProductFunApiPaginationAttributes = {}, authToken?: string): Promise<T> {
+}: ProductFunApiPaginationAttributes = {}): Promise<T> {
     "use server"
 
     try {
@@ -23,17 +23,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
         if (params.length > 0)
             url += `?${params.join("&")}`;
 
-
-        const options: [string, Record<string, string>?] = [url];
-
-        if(authToken) {
-            const headers = {
-                "Authorization": `Bearer ${authToken}`
-            }
-            options.push(headers)
-        }
-
-        const data = await axios.get<T>(...options);
+        const data = await axios.get<T>(url);
         return data;
     } catch(error) {
         console.error(error)

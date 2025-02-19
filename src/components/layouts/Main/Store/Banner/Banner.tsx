@@ -12,15 +12,14 @@ import { bannerApi } from "../../../../../redux/services/banner/BannerService"
 
 import SkeletonBanner from "../../../../ui/elements/skeleton/SkeletonBanner"
 import ImageR from "../../../../ui/assets/image/Image"
+import { BannerError } from "@/types/app/enum/banner.enum"
 
 const Banner: FC = () => {
-    const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10,{
+    const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10, {
         skip: false
     });
-
-    
-    const { nextSlide, prevSlide, setNull, stopStartScrolling } = useActions()
-    const { currentMove, isLoadingScroll } = useAppSelector(state => state.bannerReduser);
+    const { nextSlide, prevSlide, setNull, setError, stopStartScrolling } = useActions()
+    const { currentMove, isLoadingScroll, isError, error } = useAppSelector(state => state.bannerReduser);
 
     const refImageContainer = useRef<HTMLUListElement | null>(null)
     const refImage = useRef<HTMLImageElement | null>(null)
@@ -58,55 +57,53 @@ const Banner: FC = () => {
         }
     }, [currentMove, stopStartScrolling, setNull])
 
-    useEffect(() => {
-        console.log(images)
-    }, [images])
 
 
     return (
         <div className={clsx(styles.sliderContainer, "banner__wrapper")}>
             <div className={styles.sliderWrapper}>
-            {isLoadingImage ? (
-                <SkeletonBanner />
-            ) : (
-                <>
-                    <ButtonSet
-                        onClick={onPrevMove}
-                        className={clsx(
-                            styles.moveSliderPrev,
-                            styles.moveButtonSlider
-                        )}
-                        buttonType="btnV4"
-                    >
-                        <ArrowLeft />
-                    </ButtonSet>
-                    <List
-                        items={images}
-                        ref={refImageContainer}
-                        className={clsx("sliderItems", styles.sliderImage)}
-                        mapItems={(item) => (
-                            <Item className={styles.sliderItemsImageContainer}>
-                                <ImageR 
-                                    ref={refImage} 
-                                    src={item.url} 
-                                    alt="" 
-                                    width={1360}
-                                    height={136}
-                                />
-                            </Item>
-                        )}
-                    />
-                    <ButtonSet
-                        onClick={onNextMove}
-                        className={clsx(
-                            styles.moveSliderNext,
-                            styles.moveButtonSlider
-                        )}
-                        buttonType="btnV4"
-                    >
-                        <ArrowRight />
-                    </ButtonSet>
-                </>
+                {isLoadingImage || (isError && error === BannerError.BannerImageError) ? (
+                    <SkeletonBanner />
+                ) : (
+                    <>
+                        <ButtonSet
+                            onClick={onPrevMove}
+                            className={clsx(
+                                styles.moveSliderPrev,
+                                styles.moveButtonSlider
+                            )}
+                            buttonType="btnV4"
+                        >
+                            <ArrowLeft />
+                        </ButtonSet>
+                        <List
+                            items={images}
+                            ref={refImageContainer}
+                            className={clsx("sliderItems", styles.sliderImage)}
+                            mapItems={(item) => (
+                                <Item className={styles.sliderItemsImageContainer}>
+                                    <ImageR
+                                        ref={refImage}
+                                        src={item.url}
+                                        alt=""
+                                        width={1360}
+                                        height={136}
+                                        onError={() => setError(BannerError.BannerImageError)}
+                                    />
+                                </Item>
+                            )}
+                        />
+                        <ButtonSet
+                            onClick={onNextMove}
+                            className={clsx(
+                                styles.moveSliderNext,
+                                styles.moveButtonSlider
+                            )}
+                            buttonType="btnV4"
+                        >
+                            <ArrowRight />
+                        </ButtonSet>
+                    </>
                 )}
             </div>
         </div>

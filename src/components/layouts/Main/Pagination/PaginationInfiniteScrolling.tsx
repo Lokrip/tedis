@@ -127,7 +127,7 @@ const PaginationInfiniteScrolling = <
 
         {hasMoreData() && (
             <div className='product-card-skeleton-list'>
-                <SkeletonProductCard row={1} />
+                <SkeletonProductCard row={2} />
             </div>
         )}
         </>

@@ -16,6 +16,10 @@ export const getIconComponent = (iconName: string): ElementType => {
     return IconComponent || LucideIcons.HelpCircle;
 };
 
+export const truncate_string = (str: string, length: number) => {
+    return str.length > length ? str.slice(0, length - 3) + "..." : str;
+}
+
 export function attachSubComponents<
   C extends React.ComponentType<any>,
   O extends Record<string, React.ComponentType<any>>

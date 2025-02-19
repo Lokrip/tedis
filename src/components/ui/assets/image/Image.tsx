@@ -9,10 +9,11 @@ export interface ImageProps {
     height: number;
     isLoading?: boolean;
     className?: string;
+    onError: () => void;
 }
 
 const ImageR = forwardRef<HTMLImageElement, ImageProps>(
-    ({ src, alt, isLoading, className, width, height }, ref) => {
+    ({ src, alt, isLoading, className, width, height, onError }, ref) => {
         if (isLoading) {
             return (
                 <ContentLoader
@@ -36,6 +37,7 @@ const ImageR = forwardRef<HTMLImageElement, ImageProps>(
                 className={className}
                 width={width}
                 height={height}
+                onError={onError}
             />
         );
     }

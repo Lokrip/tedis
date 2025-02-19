@@ -6,9 +6,10 @@ export interface AuthenticatedFields {
     password: string
 }
 
-export interface JWTTokenType extends JWT {
-    accessToken: string,
-    refreshToken: string
+export interface CustomJWTType extends JWT {
+    accessTokenExpires: number;
+    accessToken: string;
+    refreshToken: string;
 }
 
 export interface JWTUser extends User {
