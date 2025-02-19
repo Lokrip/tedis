@@ -44,5 +44,28 @@ services:
         volumes:
             - postgres_data:/var/lib/postgresql/data/
 
+    redis:
+        image: redis:7.0.5-alpine
+        container_name: redis-container
+        hostname: redis
+        volumes:
+            - redis_data:/var/lib/redis/data/
+        ports:
+            - 6379:6379
+        restart: always
+
+    worker:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.server
+        hostname: worker
+        entrypoint: celery
+        command: -A celery shop worker --logleveL=info
+        volumes:
+          - ".:/web"
+        depends_on:
+            - redis
+
 volumes:
-  postgres_data:
+    postgres_data:
+    redis_data:
