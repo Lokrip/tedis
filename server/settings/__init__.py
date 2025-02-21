@@ -25,4 +25,5 @@ include(
     "docker.py",
     "rest_framework.py",
     "logging.py",
+    "celery.py",
 )

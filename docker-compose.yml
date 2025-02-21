@@ -19,6 +19,7 @@ services:
 
         depends_on:
             - db-54321
+
     # web-app-client:
     #     build:
     #         context: .
@@ -60,11 +61,30 @@ services:
             dockerfile: docker/Dockerfile.server
         hostname: worker
         entrypoint: celery
-        command: -A celery shop worker --logleveL=info
+        command: -A server worker --pool=solo -l info
         volumes:
           - ".:/web"
+        #В docker-compose, директива links используется для связи контейнеров, чтобы они могли обращаться друг к другу по именам хостов. Когда контейнеры запускаются с использованием docker-compose, links позволяет одному контейнеру подключаться к другому с использованием DNS-имени контейнера, указанного в links. Это было полезно в старых версиях Docker, но в последних версиях рекомендуется использовать сеть (network) вместо links.
+        links:
+          - redis
         depends_on:
             - redis
+
+    flower:
+        build:
+            context: .
+            dockerfile: docker/Dockerfile.server
+        hostname: flower
+        entrypoint: celery
+        command: -A server flower
+        volumes:
+          - ".:/web"
+        links:
+          - redis
+        depends_on:
+            - redis
+        ports:
+          - "5555:5555"
 
 volumes:
     postgres_data:

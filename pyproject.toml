@@ -20,6 +20,7 @@ psycopg2 = "^2.9.10"
 django-debug-toolbar = "^5.0.1"
 celery = "^5.4.0"
 redis = "^5.2.1"
+flower = "^2.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
