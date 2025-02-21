@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import ContentLoader from "react-content-loader";
 
 export default function SkeletonSearchParam({ count = 5, ...props }) {
@@ -13,10 +14,10 @@ export default function SkeletonSearchParam({ count = 5, ...props }) {
             {...props}
         >
             {Array.from({ length: count }).map((_, index) => (
-                <>
-                    <rect key={`icon-${index}`} x="10" y={index * 50 + 10} rx="4" ry="4" width="30" height="30" />
-                    <rect key={`text-${index}`} x="50" y={index * 50 + 15} rx="5" ry="5" width="320" height="20" />
-                </>
+                <Fragment key={`group-${index}`}>
+                    <rect x="10" y={index * 50 + 10} rx="4" ry="4" width="30" height="30" />
+                    <rect x="50" y={index * 50 + 15} rx="5" ry="5" width="320" height="20" />
+                </Fragment>
             ))}
         </ContentLoader>
     );

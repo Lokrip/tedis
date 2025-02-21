@@ -9,7 +9,7 @@ export interface ImageProps {
     height: number;
     isLoading?: boolean;
     className?: string;
-    onError: () => void;
+    onError?: () => void;
 }
 
 const ImageR = forwardRef<HTMLImageElement, ImageProps>(

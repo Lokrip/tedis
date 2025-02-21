@@ -1,5 +1,5 @@
-import { ClassNameType } from "@/types/react.type";
 import "./globals.scss";
+import { ClassNameType } from "@/types/react.type";
 import Providers from "@/core/providers/Providers";
 
 

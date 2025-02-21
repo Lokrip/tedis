@@ -2,11 +2,13 @@
 import {FC, useEffect, useState} from 'react';
 
 import Link from "next/link";
+import styles from './navigationBar.module.scss';
 import { List } from '../../../../ui/list/List';
 import { Item } from '../../../../ui/list/item/Item';
 import { getIconComponent } from '../../../../../utils';
 import { useSession } from "next-auth/react";
 import clsx from 'clsx';
+import ButtonSet from '@/components/ui/elements/button/ButtonSet';
 
 const NavigationBar: FC = () => {
     const [navigations, setNavigation] = useState([
@@ -33,11 +35,13 @@ const NavigationBar: FC = () => {
             mapItems={(item) => {
                 const IconComponent = getIconComponent(item.icon);
                 return (
-                    <Link href={item.navigation} className={clsx('navigration-wrapper')}>
-                        <Item className={"navigration-item"}>
-                            {item.titleNavigation}
-                        </Item>
-                        <IconComponent />
+                    <Link href={item.navigation}>
+                        <ButtonSet buttonType="primary" className={styles.navigationWrapper}>
+                            <Item className={"navigration-item"}>
+                                {item.titleNavigation}
+                            </Item>
+                            <IconComponent />
+                        </ButtonSet>
                     </Link>
                 )
             }}

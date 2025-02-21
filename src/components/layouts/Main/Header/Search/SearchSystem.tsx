@@ -7,24 +7,24 @@ import { Search } from 'lucide-react';
 
 interface SearchSystemProps {
     onChange: (event: ChangeEvent<HTMLInputElement>) => void;
-    onClick: (event: MouseEvent<HTMLInputElement>) => void;
+    onMouseDown: (event: MouseEvent<HTMLInputElement>) => void;
 }
 
-const SearchSystem: FC<SearchSystemProps> = ({onChange, onClick}) => {
+const SearchSystem: FC<SearchSystemProps> = ({onChange, onMouseDown}) => {
     return (
         <div  className={styles.searchSystem}>
-            <Field 
-                className={styles.searchField} 
-                onChange={onChange} 
-                onClick={onClick}
-                type="text" 
-                placeholder="Search..." 
+            <Field
+                className={styles.searchField}
+                onChange={onChange}
+                onMouseDown={onMouseDown}
+                type="text"
+                placeholder="Search..."
             />
 
             <div className={styles.buttonContainerSearch} >
-                <ButtonSet 
-                    className={styles.buttonSearch} 
-                    type="submit" 
+                <ButtonSet
+                    className={styles.buttonSearch}
+                    type="submit"
                     buttonType="primary"
                 >
                     <Search />

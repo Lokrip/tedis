@@ -1,4 +1,4 @@
-@import '../../../../../app/styles/color';
+@use '../../../../../app/styles/color' as *;
 
 .searchMenu {
     position: absolute;
@@ -19,8 +19,16 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            cursor: pointer;
         }
 
+        svg {
+            width: 15px;
+            height: 15px;
+            margin: 0px 5px 0px 5px;
+            color: $primary-80-new;
+            cursor: pointer;
+        }
     }
 
 }

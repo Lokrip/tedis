@@ -4,8 +4,11 @@ import Auth from "../../../../components/screens/auth/Auth";
 import GoogleButton from "../../../../components/screens/auth/button/GoogleButton";
 import { ChangeEvent, FormEvent } from "react";
 import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import pages from "@/service/route";
 
 export default function LoginPage() {
+    const {push} = useRouter()
     const {saveEmailInFields, savePasswordInFields, savingErrors} = useActions()
     const {email, password, errorMessage, isError} = useAppSelector(state => state.signInReduser)
 
@@ -24,7 +27,7 @@ export default function LoginPage() {
                     errorMessage: result.error
                 })
             } else {
-                console.log(result)
+                push(pages.home)
             }
 
         } else {

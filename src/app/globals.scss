@@ -1,7 +1,5 @@
-// @import './styles/mixins.scss';
-// @include spacing-utilities;
-@import './styles/utils';
-@import './styles/color';
+@use './styles/utils' as *;
+@use './styles/color' as *;
 
 *,
 *::after,
@@ -51,48 +49,13 @@ select {
     -moz-appearance: none;
 }
 
-nav {
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  li { display: inline-block; }
-
-  a {
-    display: block;
-    padding: 6px 12px;
-    text-decoration: none;
-  }
-}
-
-nav ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-nav li {
-  display: inline-block;
-}
-
-nav a {
-  display: block;
-  padding: 6px 12px;
-  text-decoration: none;
-}
-
-
 html {
-  font-family: 'Kanit', sans-serif;
   font-size: 18px;
 }
 
 
 body {
-  background: $white;
-  scroll-behavior: smooth;
-  /* color: var(--neutral-primary); */
-  height: 2000px;
+    font-family: var(--font-geist-sans), sans-serif;
+    background: $white;
+    scroll-behavior: smooth;
 }

@@ -28,17 +28,17 @@ export default function Search(): JSX.Element {
             })
             router.push(urlWithParams)
         } else {
-            router.push(pages.home) 
+            router.push(pages.home)
         }
 
     }, [router, search]);
 
     const handleChange = (value: any) => {
         saveDataInSearch(value)
-    }; 
+    };
 
     const debouncedChange = useDebounce(handleChange, 500);
-    
+
     const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         debouncedChange(event.target.value);
     }, [debouncedChange])
@@ -65,7 +65,7 @@ export default function Search(): JSX.Element {
 
     return (
         <Form ref={menuRef} className={styles.formSearch} onSubmit={onSubmit}>
-            <SearchSystem onClick={onClick} onChange={onChange} />
+            <SearchSystem onMouseDown={onClick} onChange={onChange} />
             {isMenuOpen && (<SearchMenu searchParam={search} />)}
         </Form>
     )

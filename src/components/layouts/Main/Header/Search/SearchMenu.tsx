@@ -45,7 +45,10 @@ const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
 }
 
 const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
-    const {data: searchParamList, isLoading: isLoadingSearchParamList} = searchParamApi.useFetchAllSearchParamQuery(searchParam, {
+    const {
+        data: searchParamList,
+        isLoading: isLoadingSearchParamList
+    } = searchParamApi.useFetchAllSearchParamQuery(searchParam, {
 
     });
 
@@ -55,9 +58,12 @@ const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
 
     return (
         <div className={clsx(styles.searchMenu, isLoadingSearchParamList ? styles.searchMenuLoading : "")}>
-            {isLoadingSearchParamList
-            ? (<SkeletonSearchParam />)
-            : <SearchMenuList searchParamList={searchParamList!} />}
+            {isLoadingSearchParamList ? (
+                <SkeletonSearchParam />
+            ) : (
+                searchParamList &&
+                <SearchMenuList searchParamList={searchParamList} />
+            )}
         </div>
     );
 };

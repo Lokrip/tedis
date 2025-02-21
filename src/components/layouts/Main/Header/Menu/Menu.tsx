@@ -76,9 +76,9 @@ export default function MenuH(): JSX.Element {
             </ButtonSet>
 
             {openMenu && (
-                <Aside 
-                    isOpen={openMenu} 
-                    close={onOpenCloseMenu} 
+                <Aside
+                    isOpen={openMenu}
+                    close={onOpenCloseMenu}
                     data={data}
                 />
             )}

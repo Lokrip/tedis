@@ -33,7 +33,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
 
 async function getProductData(param: string | number) {
     try {
-        const data = await axios.get<IPost>(`/api/v1/product/${param}/`)
+        const data = await axios.get<IPost>(`/api/v1/products/${param}/`)
         return data;
     } catch(error) {
         console.error(error)

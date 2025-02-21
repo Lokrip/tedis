@@ -1,4 +1,4 @@
-@import '../../../../../app/styles/color';
+@use '../../../../../app/styles/color' as *;
 
 .menuButton {
     display: flex;
@@ -11,7 +11,7 @@
     background-color: $primary-80;
     border-radius: 5px;
     cursor: pointer;
-    
+
 
     svg {
         display: flex;
