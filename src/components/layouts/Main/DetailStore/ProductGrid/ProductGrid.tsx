@@ -5,8 +5,8 @@ import Сharacteristics from "./Сharacteristics/Сharacteristics"
 import Results from './Results/Results';
 import ImageContainerProduct from './ImageContainerProduct/ImageContainerProduct';
 import { IParamPrimaryType } from '../../../../../types/react.type';
-import { getProductData } from '../../../../../service/api/product.api';
 import clsx from 'clsx';
+import { getProductData } from '@/core/api/product.api';
 
 interface ProductGridProps extends IParamPrimaryType {}
 
