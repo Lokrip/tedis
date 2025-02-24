@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import {Roboto} from "next/font/google";
 import Layout from "../../components/layouts/Layout";
 import MainHtml from "../html";
+import ModalLayout from "@/components/layouts/ModalLayout";
 
 const geistSans = Roboto({
   variable: "--font-geist-sans",
@@ -25,8 +26,10 @@ export default function RootLayout({
     <MainHtml className={`${geistSans.variable}`}>
         <Layout>
             {children}
-            {modal}
         </Layout>
+        <ModalLayout>
+            {modal}
+        </ModalLayout>
     </MainHtml>
   );
 }

@@ -10,6 +10,7 @@ import SearchSystem from "./SearchSystem";
 import pages from "@/service/route";
 
 
+
 export default function Search(): JSX.Element {
     const router = useRouter()
 

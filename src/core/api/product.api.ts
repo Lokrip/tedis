@@ -23,6 +23,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
         if (params.length > 0)
             url += `?${params.join("&")}`;
 
+        console.log(url)
         const data = await axios.get<T>(url);
         return data;
     } catch(error) {

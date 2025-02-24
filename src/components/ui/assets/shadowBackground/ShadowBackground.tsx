@@ -4,12 +4,12 @@ import { ClassNameType } from '../../../../types/react.type';
 import { correctClass } from '../../../../utils';
 
 interface ShadowBackgroundTypes extends ClassNameType {
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function ShadowBackground<P extends ShadowBackgroundTypes>({onClick, className}: P) {
     const classNameValid = correctClass(clsx(styles.shadow, 'fixed-full', 'width-full', 'height-full'), className!)
-    
+
     return (
         <div onClick={onClick} className={classNameValid}></div>
     )

@@ -1,5 +1,5 @@
 "use client"
-import {FC, useEffect, useState} from 'react';
+import {FC, MouseEvent, useEffect, useState} from 'react';
 
 import Link from "next/link";
 import styles from './navigationBar.module.scss';
@@ -27,6 +27,7 @@ const NavigationBar: FC = () => {
             })
         }
     }, [session])
+
 
     return (
         <List
