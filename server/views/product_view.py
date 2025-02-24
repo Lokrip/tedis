@@ -10,7 +10,6 @@ from server.serializers.product_serializers import (
     ProductUpdateSerializer
 )
 from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
-from server.service.product_service import get_product_list
 from server.models import Product
 from server.exeption import (
     DATA_NOT_FOUND,
