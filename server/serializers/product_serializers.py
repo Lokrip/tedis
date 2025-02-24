@@ -3,8 +3,9 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from server.models import Product
-from .category_serializers import CategorySerializer
+from server.serializers.category_serializers import CategorySerializer
 from server.exeption import RESOURCE_NOT_FOUND
+from server.pagination import ProductResultsSetPagination
 
 User = get_user_model()
 
@@ -53,8 +54,33 @@ class ProductUpdateSerializer(ProductBaseSerializer):
     def validate(self, attrs):
         return super().validate(attrs)
 
-class ProductDetailSerializer(ProductFieldsAllSerializer):
-    category = CategorySerializer(read_only=True)
 
 class ProductListSerializer(ProductFieldsAllSerializer):
     pass
+
+class ProductDetailSerializer(ProductFieldsAllSerializer):
+    category = CategorySerializer(read_only=True)
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+
+        similar_products = Product.objects.filter(
+            category=instance.category
+        ).exclude(
+            id=instance.id
+        )
+
+        paginator = ProductResultsSetPagination()
+        page = paginator.paginate_queryset(
+            queryset=similar_products,
+            request=self.context["request"]
+        )
+        if page is not None:
+            similar_products_paginator = ProductListSerializer(page, many=True)
+            return paginator.get_paginated_response(similar_products_paginator.data)
+
+
+        similar_products = ProductListSerializer(similar_products, many=True)
+        data['similarProducts'] = similar_products.data
+
+        return data
