@@ -4,14 +4,14 @@ import { ArrowLeft, ArrowRight } from "lucide-react"
 import styles from './banner.module.scss'
 import clsx from "clsx"
 import { FC, memo, useCallback, useEffect, useRef } from "react"
-import ButtonSet from "../../../../ui/elements/button/ButtonSet"
-import { useActions, useAppSelector } from "../../../../../hooks"
-import { List } from "../../../../ui/list/List"
-import { Item } from "../../../../ui/list/item/Item"
-import { bannerApi } from "../../../../../redux/services/banner/BannerService"
+import ButtonSet from "../../../ui/elements/button/ButtonSet"
+import { useActions, useAppSelector } from "../../../../hooks"
+import { List } from "../../../ui/list/List"
+import { Item } from "../../../ui/list/item/Item"
+import { bannerApi } from "../../../../redux/services/banner/BannerService"
 
-import SkeletonBanner from "../../../../ui/elements/skeleton/SkeletonBanner"
-import ImageR from "../../../../ui/assets/image/Image"
+import SkeletonBanner from "../../../ui/elements/skeleton/SkeletonBanner"
+import ImageR from "../../../ui/assets/image/Image"
 import { BannerError } from "@/types/app/enum/banner.enum"
 
 const Banner: FC = () => {

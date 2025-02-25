@@ -1,5 +1,5 @@
-import { ClassNameType } from "../../../../../types/react.type";
-import { attachSubComponents, correctClass } from "../../../../../utils";
+import { ClassNameType } from "../../../../types/react.type";
+import { attachSubComponents, correctClass } from "../../../../utils";
 import { FC, PropsWithChildren } from "react";
 
 import styles from '../store.module.scss'

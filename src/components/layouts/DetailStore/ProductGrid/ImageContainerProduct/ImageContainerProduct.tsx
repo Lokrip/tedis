@@ -3,10 +3,10 @@
 import {FC, MouseEvent, useState} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
-import { Item } from '../../../../../ui/list/item/Item';
-import ImageR from '../../../../../ui/assets/image/Image';
-import { List } from '../../../../../ui/list/List';
-import { IPost } from '../../../../../../types/app/models/IPost.type';
+import { Item } from '../../../../ui/list/item/Item';
+import ImageR from '../../../../ui/assets/image/Image';
+import { List } from '../../../../ui/list/List';
+import { IPost } from '../../../../../types/app/models/IPost.type';
 import clsx from 'clsx';
 
 interface ImageContainerProductProps {

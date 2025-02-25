@@ -1,4 +1,4 @@
-import { Container } from "../../../module/Container/Container"
+import { Container } from "../../module/Container/Container"
 import { MainStore } from "./MainStore/MainStore"
 import Banner from "./Banner/Banner"
 import ContentWrapper from "./ContentWrapper/ContentWrapper"
