@@ -4,7 +4,7 @@ import styles from './form.module.scss';
 import { correctClass } from '../../../utils';
 
 interface FormProps extends PropsWithChildren {
-    onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
     className?: string;
 }
 

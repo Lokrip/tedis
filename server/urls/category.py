@@ -2,11 +2,11 @@ from django.urls import path, include
 
 from rest_framework.routers import SimpleRouter
 
-from server.views.product_view import ProductViewSet
+from server.views.category_view import CategoryViewSet
 
 router = SimpleRouter()
-router.register(r'products', ProductViewSet, basename='product')
+router.register(r"categories", CategoryViewSet, basename="categories")
 
-product_urlpatterns = [
+category_urlpatterns = [
     path("api/v1/", include(router.urls))
 ]

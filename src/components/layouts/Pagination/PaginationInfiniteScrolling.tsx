@@ -80,10 +80,13 @@ const PaginationInfiniteScrolling = <
     const scrollHandler = (event: Event) => {
         const action = document.documentElement;
 
-        if(action.scrollHeight - (action.scrollTop + window.innerHeight) < 100) {
-            if(!fetching && hasMoreData()) {
-                changeTypeFetching(true);
-            }
+        if(
+            action.scrollHeight - (action.scrollTop + window.innerHeight) < 600
+            && !fetching
+            && hasMoreData()
+        ) {
+            console.log("yes")
+            changeTypeFetching(true);
         }
     }
 

@@ -4,7 +4,7 @@ from rest_framework import serializers
 
 from server.models import Product
 from server.serializers.category_serializers import CategorySerializer
-from server.exeption import RESOURCE_NOT_FOUND
+from server.exception import RESOURCE_NOT_FOUND
 from server.pagination import ProductResultsSetPagination
 
 User = get_user_model()

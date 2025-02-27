@@ -11,7 +11,7 @@ from server.serializers.product_serializers import (
 )
 from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
 from server.models import Product
-from server.exeption import (
+from server.exception import (
     DATA_NOT_FOUND,
     RESOURCE_NOT_FOUND,
     CREATION_FAILED
@@ -33,22 +33,8 @@ class ProductViewSet(ViewSet):
         return paginator.get_paginated_response(serializer.data);
 
     def retrieve(self, request, slug=None):
-        if slug is None:
-            return Response(
-                {"message": DATA_NOT_FOUND},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-        try:
-            product = self.mixin.findBySlug(slug=slug, isSlugify=False)
-        except Product.DoesNotExist:
-            return Response(
-                {"message": RESOURCE_NOT_FOUND},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
-        serializer = ProductDetailSerializer(product, context={"request": request})
-        return Response(serializer.data, status=status.HTTP_200_OK,)
+        serializer = self.mixin.findProductBySlug(request=request, slug=slug)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
         data = request.data or None

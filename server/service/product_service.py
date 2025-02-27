@@ -1,7 +1,12 @@
 from server.models import Product
 from server.pagination import ProductResultsSetPagination
-from server.serializers.product_serializers import ProductListSerializer
+from server.serializers.product_serializers import (
+    ProductListSerializer,
+    ProductDetailSerializer
+)
+from server.exception import RESOURCE_NOT_FOUND
 
+#сделать класс сервис
 
 def product_filters(search_query, queryset):
     if not search_query:
@@ -46,3 +51,34 @@ def get_product_list(**kwargs):
 
     serializer = ProductListSerializer(paginated_product, many=True)
     return serializer, paginator
+
+
+def get_product_detail(**kwargs):
+    request = kwargs.get("request", None)
+    slug = kwargs.get("slug", None)
+
+    if request is None:
+        raise ValueError("request not found!")
+
+    if slug is not None:
+        raise ValueError(RESOURCE_NOT_FOUND)
+
+    product = Product.objects.get(slug=slug)
+
+    try:
+        serializer = ProductDetailSerializer(product, context={"request": request})
+    except Product.DoesNotExist:
+        raise ValueError(RESOURCE_NOT_FOUND)
+
+    return serializer
+
+def product_create(**kwargs):
+    perform_create = kwargs.get('perform_create', None)
+    request = kwargs.get("request", None)
+
+    if perform_create is None and not isinstance(perform_create, function):
+        raise ValueError("perform_create not found!")
+
+    if request is None:
+        raise ValueError("request not found!")
+
