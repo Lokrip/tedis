@@ -2,90 +2,30 @@
 import { HeadingH } from "../../plagins/H.number"
 import ButtonSet from "../../ui/elements/button/ButtonSet"
 import styles from "./auth.module.scss"
-import Field from "../../ui/form/fields/Field"
-import { KeyRound, Mail } from "lucide-react"
-import React, { ChangeEvent, FC, FormEvent, useEffect } from "react"
+import React, { useEffect } from "react"
 import Form from "@/components/ui/form/Form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authenticationSchema } from "@/validation"
 import { useRouter } from "next/navigation"
-import { useActions, useAppSelector } from "@/hooks"
+import { useActions } from "@/hooks"
+import { signIn } from "next-auth/react"
+import pages from "@/service/route"
+import { IAuth, TypeAuthFields } from "@/types/app/auth.types"
+import LoginField from "./field/LoginField"
+import RegisterField from "./field/RegisterField"
 
-
-type TypeAuthMethod = 'Login' | 'Register'
-
-interface IAuthFieldsEvent {
-    onChangeEmail?: (event: ChangeEvent<HTMLInputElement>) => void;
-    onChangePassword?: (event: ChangeEvent<HTMLInputElement>) => void;
-}
-
-interface IAuth extends IAuthFieldsEvent {
-    type?: TypeAuthMethod
-    onSubmit?: (event: FormEvent<HTMLFormElement>) => void;
-}
-
-
-interface TypeAuthFields {
-    Login: React.FC<IAuthFieldsEvent>,
-    Register: React.FC<IAuthFieldsEvent>,
-}
-
-const RegisterAuthFields: FC<IAuthFieldsEvent> = ({onChangeEmail, onChangePassword}) => {
-    return (
-        <>
-         <div className={styles.loginField}>
-            <Field
-                type='text'
-                name="email"
-                placeholder='Email...'
-                Icon={Mail}
-            />
-        </div>
-        <div className={styles.loginField}>
-            <Field
-                type='password'
-                name="password"
-                placeholder='Password...'
-                Icon={KeyRound}
-            />
-        </div>
-        </>
-    )
-}
-
-const LoginAuthFields: FC<IAuthFieldsEvent> = ({onChangeEmail, onChangePassword}) => {
-    return (
-        <>
-            <Field
-                placeholder="Email"
-                name="email"
-                type="text"
-                Icon={Mail}
-                onChange={onChangeEmail}
-            />
-            <Field
-                placeholder="Password"
-                name="password"
-                type="password"
-                Icon={KeyRound}
-                onChange={onChangePassword}
-            />
-        </>
-    )
-}
 
 const authFields: TypeAuthFields = {
-    Login: LoginAuthFields,
-    Register: RegisterAuthFields
+    Login: LoginField,
+    Register: RegisterField
 }
 
-export default function Auth<P extends IAuth>({ type, onSubmit, onChangeEmail, onChangePassword }: P) {
+export default function Auth<P extends IAuth>({ type }: P) {
     const {push} = useRouter()
-    const {saveEmailInFields, savePasswordInFields, savingErrors} = useActions()
-    const {email, password, errorMessage, isError} = useAppSelector(state => state.signInReduser)
+    const {savingErrors} = useActions()
 
-    const {handleSubmit} = useForm({
+    const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: zodResolver(authenticationSchema),
         defaultValues: {
             email: "",
@@ -93,14 +33,15 @@ export default function Auth<P extends IAuth>({ type, onSubmit, onChangeEmail, o
         },
     });
 
-    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const onSubmit = async (data: { email: string; password: string }) => {
+        const { email, password } = data;
         if(email && password) {
             const result = await signIn("credentials", {
                 redirect: false,
                 email: email,
                 password: password,
             })
+
 
             if(result?.error) {
                 savingErrors({
@@ -121,9 +62,14 @@ export default function Auth<P extends IAuth>({ type, onSubmit, onChangeEmail, o
 
     useEffect(() => {
         document.body.style.overflow = "hidden";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
     }, [])
 
     const Fields = authFields[type!];
+
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -131,10 +77,8 @@ export default function Auth<P extends IAuth>({ type, onSubmit, onChangeEmail, o
                 <HeadingH level={1} content={type as string} />
             </div>
             <div className="fields">
-                <Fields
-                    onChangeEmail={onChangeEmail}
-                    onChangePassword={onChangePassword}
-                />
+                <Fields errors={errors} register={register}/>
+
             </div>
             <ButtonSet buttonType="primary" type="submit">
                 {type === 'Login' ? 'Войти' : 'Зарегистрироваться'}
