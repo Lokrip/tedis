@@ -6,10 +6,7 @@ from django.utils.text import slugify
 from django.db.models import Model
 from typing import Type
 
-from server.service.product_service import (
-    get_product_list,
-    get_product_detail
-)
+from server.service.product_service import ProductService
 from server.exception import CustomAttributeException
 
 class Mixin:
@@ -105,6 +102,7 @@ class CategoryMixin(CrudMixin):
 class ProductMixin(CrudMixin):
     def __init__(self, model):
         super().__init__(model)
+        self.productService = ProductService()
 
     def __str__(self):
         return "This mixin adds additional CRUD methods for the %s model" % (
@@ -112,7 +110,14 @@ class ProductMixin(CrudMixin):
         )
 
     def findProductAll(self, request, view):
-        return get_product_list(request=request, view=view)
+        return self.productService.get_product_list(request=request, view=view)
 
     def findProductBySlug(self, request, slug):
-        return get_product_detail(request=request, slug=slug)
+        return self.productService.get_product_detail(request=request, slug=slug)
+    def createProduct(self, request):
+        return self.productService.product_create(request=request)
+
+    def updateProduct(self, request, slug):
+        return self.productService.product_update(request=request, slug=slug)
+    def deleteProduct(self, slug):
+        return self.productService.product_delete(slug=slug)

@@ -4,25 +4,16 @@ from rest_framework import status
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from server.serializers.product_serializers import (
-    ProductDetailSerializer,
-    ProductCreateSerializer,
-    ProductUpdateSerializer
-)
 from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
 from server.models import Product
-from server.exception import (
-    DATA_NOT_FOUND,
-    RESOURCE_NOT_FOUND,
-    CREATION_FAILED
-)
+from server.exception import DATA_DELETION_FAILED
 from server.mixins import ProductMixin
 
 
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
     mixin = ProductMixin(Product)
-    permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
+    # permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
     authentication_classes = [JWTAuthentication]
 
     def list(self, request):
@@ -33,21 +24,23 @@ class ProductViewSet(ViewSet):
         return paginator.get_paginated_response(serializer.data);
 
     def retrieve(self, request, slug=None):
-        serializer = self.mixin.findProductBySlug(request=request, slug=slug)
+        try:
+            serializer = self.mixin.findProductBySlug(request=request, slug=slug)
+        except ValueError as EXCEPTION:
+            return Response(
+                {"message": str(EXCEPTION)},
+                status=status.HTTP_404_NOT_FOUND
+            )
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        data = request.data or None
-        if(data is None):
+        try:
+            serializer = self.mixin.createProduct(request=request)
+        except ValueError as EXCEPTION:
             return Response(
-                {"message": CREATION_FAILED},
+                {"message": str(EXCEPTION)},
                 status=status.HTTP_404_NOT_FOUND
             )
-        serializer = ProductCreateSerializer(data=data, context={"request": request})
-
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer=serializer)
-
         headers = self.get_success_headers(
             f'/api/v1/products/{serializer.data.get("id")
                 if (serializer.data.get("id", None) is not None)
@@ -64,36 +57,13 @@ class ProductViewSet(ViewSet):
         )
 
     def update(self, request, slug=None):
-        data = request.data or None
-
-        if slug is None or data is None:
-            message = (
-                DATA_NOT_FOUND
-                if data is None
-                else CREATION_FAILED)
-            return Response(
-                {"message": message},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
         try:
-            product = self.mixin.findBySlug(slug=slug, isSlugify=False)
-        except (Product.DoesNotExist):
+            serializer = self.mixin.updateProduct(request, slug)
+        except ValueError as EXCEPTION:
             return Response(
-                {"message": RESOURCE_NOT_FOUND},
+                {"message": str(EXCEPTION)},
                 status=status.HTTP_404_NOT_FOUND
             )
-
-        if data.get("user_id", None) is None or not data.get("user_id", None):
-            data['user_id'] = product.user.pk
-        if data.get("slug", None) is None or not data.get("slug", None):
-            data['slug'] = product.slug
-
-        serializer = ProductUpdateSerializer(instance=product, data=data)
-
-        serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer=serializer)
-
         headers = self.get_success_headers(
             f'/api/v1/products/{serializer.data.get("id")
                 if (serializer.data.get("id", None) is not None)
@@ -111,25 +81,24 @@ class ProductViewSet(ViewSet):
         )
 
     def delete(self, request, slug=None):
-        if slug is None:
-            return Response(
-                {"message": DATA_NOT_FOUND},
-                status=status.HTTP_404_NOT_FOUND
-            )
-
         try:
-            product = self.mixin.findBySlug(slug=slug, isSlugify=False)
-        except (Product.DoesNotExist):
+            isDeleted = self.mixin.deleteProduct(slug)
+        except ValueError as EXCEPTION:
             return Response(
-                {"message": RESOURCE_NOT_FOUND},
+                {"message": str(EXCEPTION)},
                 status=status.HTTP_404_NOT_FOUND
             )
 
-        product.delete()
-        return Response(
-            {"message": "Product deleted success"},
-            status=status.HTTP_200_OK
-        )
+        if isDeleted:
+            return Response(
+                {"message": "Product deleted success"},
+                status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"message": DATA_DELETION_FAILED},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
     def perform_create(self, serializer):
         serializer.save()
