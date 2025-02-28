@@ -6,6 +6,8 @@ UPDATE_FAILED = "Failed to update resource"  # Не удалось обнови�
 RESOURCE_NOT_UPDATABLE = "Resource cannot be updated"  # Ресурс не подлежит обновлению
 DELETION_FAILED = "Failed to delete resource"  # Не удалось удалить ресурс
 RESOURCE_NOT_DELETABLE = "Resource cannot be deleted"  # Ресурс не подлежит удалению
+DATA_DELETION_FAILED = "Failed to delete data"  # Не удалось удалить данные
+DATA_UPDATE_FAILED = "Failed to update data"  # Не удалось обновить данные
 
 # Ошибки валидации данных
 INVALID_INPUT = "Invalid input provided"  # Введены неверные данные
