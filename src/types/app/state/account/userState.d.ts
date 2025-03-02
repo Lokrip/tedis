@@ -28,4 +28,7 @@ interface SignUpTypeFields extends AuthTypeFields, UserTypeFields, UserStatusTyp
     username: string;
 }
 
-interface SignInTypeFields extends AuthTypeFields, UserStatusType {username?: string;}
+interface SignInTypeFields extends AuthTypeFields, UserStatusType {
+    username?: string;
+    isClodeModalSignIn: boolean;
+}

@@ -6,6 +6,7 @@ import navigationNavbarReduser from './header/NavigationNavbarSlice'
 import bannerReduser from './shop/BannerSlice'
 import signInReduser from './account/signInSlice'
 import productReduser from './shop/ProductSlice'
+import utilsReducer from './utils/UtilsSlice'
 
 import { bannerApi } from '../services/banner/BannerService'
 
@@ -14,6 +15,10 @@ const headerInitialReducers = ({
     headerReduser,
     searchReduser,
     navigationNavbarReduser,
+})
+
+const utilsInitialReducers = ({
+    utilsReducer
 })
 
 const shopInitialReducers = ({
@@ -30,6 +35,7 @@ const rootReducer = combineReducers({
     ...headerInitialReducers,
     ...shopInitialReducers,
     ...accountInitialReducers,
+    ...utilsInitialReducers
 })
 
 export default rootReducer;

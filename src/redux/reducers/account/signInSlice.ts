@@ -1,3 +1,4 @@
+import { AuthStatus } from "@/types/app/enum/auth.enum";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialState: SignInTypeFields = {
@@ -6,7 +7,8 @@ const initialState: SignInTypeFields = {
     isError: false,
     errorMessage: null,
     isSuccess: false,
-    result: null
+    result: null,
+    isClodeModalSignIn: false
 }
 
 export const SignInSlice = createSlice({
@@ -26,6 +28,12 @@ export const SignInSlice = createSlice({
                 state.isError = action.payload.isError
                 state.errorMessage = action.payload.errorMessage
             }
+        },
+
+        savingSuccess(state, action: PayloadAction<boolean>) {
+            state.isClodeModalSignIn = action.payload;
+            state.isSuccess = true
+            state.result = AuthStatus.Authenticated
         },
     }
 })

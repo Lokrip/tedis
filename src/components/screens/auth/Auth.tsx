@@ -23,7 +23,7 @@ const authFields: TypeAuthFields = {
 
 export default function Auth<P extends IAuth>({ type }: P) {
     const {push} = useRouter()
-    const {savingErrors} = useActions()
+    const {savingErrors, modalClose} = useActions()
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: zodResolver(authenticationSchema),
@@ -49,6 +49,7 @@ export default function Auth<P extends IAuth>({ type }: P) {
                     errorMessage: result.error
                 })
             } else {
+                modalClose()
                 push(pages.home)
             }
 
