@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "debug_toolbar",
     "mptt",
+    "drf_yasg",
 
     'server',
 ]

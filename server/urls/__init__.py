@@ -6,6 +6,7 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 from server.urls.auth import auth_urlpatterns
 from server.urls.category import category_urlpatterns
 from server.urls.product import product_urlpatterns
+from server.urls.swagger import swagger_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,5 +15,6 @@ urlpatterns = [
 urlpatterns += [
     *auth_urlpatterns,
     *product_urlpatterns,
-    *category_urlpatterns
+    *category_urlpatterns,
+    *swagger_urlpatterns
 ] + debug_toolbar_urls()
