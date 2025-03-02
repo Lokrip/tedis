@@ -11,7 +11,7 @@ from server.exception import (
     DATA_NOT_FOUND,
     CREATION_FAILED
 )
-def product_filters(self, search_query, queryset):
+def product_filters(search_query, queryset):
     if not search_query:
         raise ValueError("query params must")
     if search_query is not None:
@@ -42,7 +42,7 @@ class ProductService:
         )
 
         if not queryset.exists():
-            return ProductListSerializer([], many=True), ProductResultsSetPagination()
+            return ProductListSerializer([], many=True), None
 
         if search_query is not None:
             queryset = product_filters(search_query=search_query, queryset=queryset)
