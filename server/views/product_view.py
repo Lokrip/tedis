@@ -1,11 +1,16 @@
+import random
+
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from django.contrib.auth import get_user_model
+from django.utils.text import slugify
+
 from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
-from server.models import Product
+from server.models import Product, Category
 from server.exception import DATA_DELETION_FAILED
 from server.mixins import ProductMixin
 
@@ -21,7 +26,11 @@ class ProductViewSet(ViewSet):
             view=self,
             request=request
         )
-        return paginator.get_paginated_response(serializer.data);
+        
+        if(paginator):
+            return paginator.get_paginated_response(serializer.data);
+        else:
+            return Response(serializer.data, status=status.HTTP_200_OK)
 
     def retrieve(self, request, slug=None):
         try:

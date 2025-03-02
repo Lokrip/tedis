@@ -32,3 +32,5 @@ export function attachSubComponents<
 
   return Object.assign(topLevelComponent, otherComponents);
 }
+
+

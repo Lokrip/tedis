@@ -15,6 +15,7 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param}) => {
     const currentPage = Number(param?.page) || 1;
 
     try {
+        console.log(process.env.PRODUCT_API_URL)
         const {results: products, count: totalProductCount} = await getProductsData<IPaginationProduct>(
             searchQuery,
             {isPagination: true,
