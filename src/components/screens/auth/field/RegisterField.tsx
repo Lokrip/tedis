@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import styles from './registerField.module.scss';
+import styles from './field.module.scss';
 import { KeyRound, Mail } from 'lucide-react';
 import Field from '@/components/ui/form/fields/Field';
 import { IAuthFieldsEvent } from '@/types/app/auth.types';
@@ -10,7 +10,7 @@ interface RegisterFieldProps extends IAuthFieldsEvent {}
 const RegisterField: FC<RegisterFieldProps> = ({register}) => {
     return (
         <>
-         <div className={styles.registerField}>
+         <div className={styles.field}>
             <Field
                 type="text"
                 placeholder="Email..."
@@ -18,7 +18,7 @@ const RegisterField: FC<RegisterFieldProps> = ({register}) => {
                 {...register("email")}
             />
         </div>
-        <div className={styles.registerField}>
+        <div className={styles.field}>
             <Field
                 type="password"
                 placeholder="Password..."

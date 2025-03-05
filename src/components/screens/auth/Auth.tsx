@@ -7,7 +7,7 @@ import Form from "@/components/ui/form/Form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { authenticationSchema } from "@/validation"
-import { useRouter } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useActions } from "@/hooks"
 import { signIn } from "next-auth/react"
 import pages from "@/service/route"
@@ -24,6 +24,8 @@ const authFields: TypeAuthFields = {
 export default function Auth<P extends IAuth>({ type }: P) {
     const {push} = useRouter()
     const {savingErrors, modalClose} = useActions()
+    const searchParam = useSearchParams()
+    const callbackRoute = searchParam.get("callback") || pages.home
 
     const {register, handleSubmit, formState: {errors}} = useForm({
         resolver: zodResolver(authenticationSchema),
@@ -50,7 +52,7 @@ export default function Auth<P extends IAuth>({ type }: P) {
                 })
             } else {
                 modalClose()
-                push(pages.home)
+                push(callbackRoute)
             }
 
         } else {
@@ -73,15 +75,14 @@ export default function Auth<P extends IAuth>({ type }: P) {
 
 
     return (
-        <Form onSubmit={handleSubmit(onSubmit)}>
-            <div className="authTitle">
+        <Form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.authTitle}>
                 <HeadingH level={1} content={type as string} />
             </div>
             <div className="fields">
                 <Fields errors={errors} register={register}/>
-
             </div>
-            <ButtonSet buttonType="primary" type="submit">
+            <ButtonSet className={styles.authButton} buttonType="primary" type="submit">
                 {type === 'Login' ? 'Войти' : 'Зарегистрироваться'}
             </ButtonSet>
         </Form>

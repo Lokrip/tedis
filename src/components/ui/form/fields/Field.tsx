@@ -4,18 +4,17 @@ import styles from './field.module.scss';
 import cn from "clsx";
 
 const Field = forwardRef<HTMLInputElement, TypeInputProps>(
-    ({ error, style, Icon, className, ...rest }, ref) => {
-       
+    ({ style, Icon, className, isStyle = false, ...rest }, ref) => {
+
         return (
-            <label className={cn(styles.field, className)} style={style}>
+            <label className={isStyle ? cn(styles.field, className) : className} style={style}>
                 {Icon && (
-                    <div className={styles.icon}>
+                    <div className={isStyle ? styles.icon : ""}>
                         <Icon />
                     </div>
                 )}
 
                 <input ref={ref} {...rest} />
-                {error && <div className={styles.error}>{error.message}</div>}
             </label>
         );
     }

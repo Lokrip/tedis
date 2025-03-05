@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import styles from './loginField.module.scss';
+import styles from './field.module.scss';
 import { KeyRound, Mail } from 'lucide-react';
 import Field from '@/components/ui/form/fields/Field';
 import { IAuthFieldsEvent } from '@/types/app/auth.types';
@@ -10,8 +10,10 @@ interface LoginFieldProps extends IAuthFieldsEvent {}
 const LoginField: FC<LoginFieldProps> = ({register, errors}) => {
     return (
         <>
-         <div className={styles.loginField}>
+        <div className={styles.field}>
             <Field
+                isStyle={true}
+                className={styles.labelField}
                 {...register("email")}
                 type="text"
                 placeholder="Email..."
@@ -19,8 +21,10 @@ const LoginField: FC<LoginFieldProps> = ({register, errors}) => {
             />
             {errors.email && <p className="error">{errors.email.message}</p>}
         </div>
-        <div className={styles.loginField}>
+        <div className={styles.field}>
             <Field
+                isStyle={true}
+                className={styles.labelField}
                 {...register("password")}
                 type="password"
                 placeholder="Password..."
