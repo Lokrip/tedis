@@ -18,6 +18,8 @@ export const UtilsSlice = createSlice({
     initialState,
     reducers: {
         modalClose(state) {
+            state.modalTitle = null;
+            state.modalContent = null;
             state.isModalOpen = false;
             state.isModalClose = true;
         },
@@ -27,6 +29,18 @@ export const UtilsSlice = createSlice({
             state.isModalOpen = true;
             state.modalTitle = action.payload.title;
             state.modalContent = action.payload.content;
+        },
+
+        modalReset(state) {
+            state.isModalClose = false,
+            state.isModalOpen = false,
+            state.isLoading = false,
+            state.isError = false,
+            state.error = null,
+            state.modalTitle = null,
+            state.modalContent = null,
+            state.isResults = false,
+            state.results = null
         }
     }
 })
