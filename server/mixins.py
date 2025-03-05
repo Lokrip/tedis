@@ -7,6 +7,7 @@ from django.db.models import Model
 from typing import Type
 
 from server.service.product_service import ProductService
+from server.service.category_service import CategoryService
 from server.exception import CustomAttributeException
 
 class Mixin:
@@ -89,16 +90,6 @@ class CrudMixin(Mixin):
     def findBySlug(self, slug: str, isSlugify: bool):
         return self._find_by_field("slug", slug, isSlugify)
 
-class CategoryMixin(CrudMixin):
-    def __init__(self, model):
-        super().__init__(model)
-
-
-    def __str__(self):
-        return "This mixin adds additional CRUD methods for the %s model" % (
-            self.model.__name__
-        )
-
 class ProductMixin(CrudMixin):
     def __init__(self, model):
         super().__init__(model)
@@ -121,3 +112,28 @@ class ProductMixin(CrudMixin):
         return self.productService.product_update(request=request, slug=slug)
     def deleteProduct(self, slug):
         return self.productService.product_delete(slug=slug)
+
+class CategoryMixin(CrudMixin):
+    def __init__(self, model):
+        super().__init__(model)
+        self.categoryService = CategoryService()
+
+    def __str__(self):
+        return "This mixin adds additional CRUD methods for the %s model" % (
+            self.model.__name__
+        )
+
+    def findCategoryAll(self):
+        return self.categoryService.get_categories_list()
+
+    def findCategoryBySlug(self, slug):
+        return self.categoryService.get_category_detail(slug=slug)
+
+    def createCategory(self, request):
+        return self.categoryService.category_create(request=request)
+
+    def updateCategory(self, request, slug):
+        return self.categoryService.category_update(request=request, slug=slug)
+
+    def deleteCategory(self, slug):
+        return self.categoryService.category_delete(slug=slug)

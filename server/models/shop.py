@@ -27,6 +27,17 @@ from mptt.models import (
     TreeForeignKey
 )
 
+def generate_and_save_slug(instance):
+    base_slug = slugify(instance.title)
+    instance.slug = generate_unique_slug(instance.__class__, base_slug=base_slug)
+
+    super(instance.__class__, instance).save()
+
+    final_slug = generate_unique_slug(instance.__class__, base_slug=base_slug, id=instance.id)
+    instance.slug = final_slug
+
+    super(instance.__class__, instance).save(update_fields=["slug"])
+
 
 class Category(MPTTModel, ModelTitle, DateCreatedModel):
     parent = TreeForeignKey(
@@ -37,6 +48,12 @@ class Category(MPTTModel, ModelTitle, DateCreatedModel):
         blank=True,
         null=True
     )
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            generate_and_save_slug(self)
+        else:
+            return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.title
@@ -131,16 +148,7 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
 
     def save(self, *args, **kwargs):
         if not self.slug:
-            base_slug = slugify(self.title)
-
-            self.slug = generate_unique_slug(self.__class__, base_slug=base_slug)
-
-            super().save(*args, **kwargs)
-
-            final_slug = generate_unique_slug(self.__class__, base_slug=base_slug, id=self.id)
-            self.slug = final_slug
-
-            super().save(update_fields=["slug"])
+            generate_and_save_slug(self)
         else:
             return super().save(*args, **kwargs)
 

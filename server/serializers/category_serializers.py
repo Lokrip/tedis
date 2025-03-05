@@ -9,6 +9,10 @@ class FilterParentCategorySerializer(serializers.ListSerializer):
         data = data.filter(parent=None)
         return super().to_representation(data)
 
+class CategorySerializerFieldsAllSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = "__all__"
 
 class CategorySerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True)
@@ -18,3 +22,30 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ("id", "title", "metaTitle",
                   "slug", "children")
+
+class CategoryBaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = (
+            'id', 'title', "slug",
+            'parent', 'metaTitle',
+            'created_at'
+        )
+        extra_kwargs = {
+            'id': {
+               'read_only': True
+            },
+            'slug': {
+                "read_only": True
+            },
+            'created_at': {
+                "read_only": True
+            }
+        }
+
+class CategoryCreateSerializer(CategoryBaseSerializer):
+    pass
+
+
+class CategoryUpdateSerializer(CategoryBaseSerializer):
+    pass
