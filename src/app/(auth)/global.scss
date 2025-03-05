@@ -1,0 +1,12 @@
+@use '../styles/utils' as *;
+@use '../styles/color' as color;
+
+body {
+    background: color.$primary-80;
+    scroll-behavior: smooth;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
