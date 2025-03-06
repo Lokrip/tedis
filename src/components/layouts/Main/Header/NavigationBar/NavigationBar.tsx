@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 import clsx from 'clsx';
 import ButtonSet from '@/components/ui/elements/button/ButtonSet';
 import { usePathname } from 'next/navigation';
-import { useActions } from '@/hooks';
+import { useActions, useAppSelector } from '@/hooks';
 import DropdownMenu from '../Menu/DropdownMenu';
 
 const NavigationBar: FC = () => {
@@ -19,7 +19,8 @@ const NavigationBar: FC = () => {
         {id: 2, navigation: "/cy/contacts", type: "contacts", titleNavigation: "Контакт", icon: "BookUser"},
         {id: 3, navigation: "/account/login", type: "sign-in", titleNavigation: "Войти", icon: "User"},
     ])
-    const {modalOpen} = useActions()
+    const {openDropDownMenu} = useAppSelector(state => state.menuReducer)
+    const {modalOpen, toggleMenu} = useActions()
     const pathname = usePathname()
     const session = useSession()
 
@@ -51,6 +52,10 @@ const NavigationBar: FC = () => {
         }
     }
 
+    const handleOpenDropDownMenu = () => {
+        toggleMenu()
+    }
+
 
     return (
         <List
@@ -60,14 +65,14 @@ const NavigationBar: FC = () => {
                 const IconComponent = getIconComponent(item.icon);
                 if(!item.navigation && item.type === "menu") {
                     return (
-                        <div className={styles.navigationMenu}>
+                        <div onClick={handleOpenDropDownMenu} className={styles.navigationMenu}>
                             <ButtonSet buttonType="primary" className={styles.navigationWrapper}>
                                 <Item className={"navigration-item"}>
                                     {item.titleNavigation}
                                 </Item>
                                 <IconComponent />
                             </ButtonSet>
-                            <DropdownMenu />
+                            {openDropDownMenu && <DropdownMenu />}
                         </div>
                     )
                 }

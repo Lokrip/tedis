@@ -5,7 +5,7 @@ import { Logo } from "./Logo/Logo";
 
 import styles from './header.module.scss'
 
-import MenuH from "./Menu/Menu";
+import MenuH from "./Menu/Catalogue/Menu";
 import Search from "./Search/Search";
 import NavigationBar from "./NavigationBar/NavigationBar";
 
