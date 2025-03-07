@@ -10,6 +10,8 @@ import { HeadingH } from "../../../plagins/H.number"
 import ShadowBackground from "../../../ui/assets/shadowBackground/ShadowBackground"
 
 import styles from './aside.module.scss';
+import { catalogParamApi } from '@/redux/services/shop/CatalogService';
+import Link from 'next/link';
 
 interface AsideProps {
     isOpen: boolean;
@@ -18,7 +20,7 @@ interface AsideProps {
 }
 
 const Aside: FC<AsideProps> = ({isOpen, close, data}) => {
-
+    const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(undefined);
     const [isRendered, setIsRendered] = useState(false);
     const [isClosing, setIsClosing] = useState(false);
 
@@ -48,9 +50,9 @@ const Aside: FC<AsideProps> = ({isOpen, close, data}) => {
 
     return (
         <aside className={clsx(
-            styles.modelMenu, 
-            'fixed-full', 
-            'mixed-full-width', 
+            styles.modelMenu,
+            'fixed-full',
+            'mixed-full-width',
             isRendered && styles.active)
         }>
             <ShadowBackground onClick={handleClose} />
@@ -61,25 +63,18 @@ const Aside: FC<AsideProps> = ({isOpen, close, data}) => {
                     styles.modelMenuItemsHeader,
                 )
             }>
-                <div className="modelContainerMenuTitle">
-                        <HeadingH 
-                            content={'Categoryes'} 
-                            level={1} 
-                            className="modelMenuTitle"
-                        />
-                </div>
-                <List 
+                <List
                     className={clsx("menu-list", styles.menuListHeader)}
-                    items={data}
+                    items={categories}
                     mapItems={(item) => {
-                        const IconComponent = getIconComponent(item.icon); 
+                        const IconComponent = getIconComponent(item.icon);
                         return (
-                            <div className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
                                 <IconComponent />
                                 <Item className="menu-items menu-items-header">
-                                    {item.label}
+                                    {item.title}
                                 </Item>
-                            </div>
+                            </Link>
                         )
                     }}
                 />
