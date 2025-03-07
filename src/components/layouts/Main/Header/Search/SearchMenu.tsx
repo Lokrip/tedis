@@ -47,7 +47,8 @@ const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
 const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
     const {
         data: searchParamList,
-        isLoading: isLoadingSearchParamList
+        isLoading: isLoadingSearchParamList,
+        isError
     } = searchParamApi.useFetchAllSearchParamQuery(searchParam, {
 
     });
@@ -56,9 +57,11 @@ const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
         console.log(searchParamList)
     }, [searchParamList])
 
+    console.log(isLoadingSearchParamList, isError, searchParamList)
+
     return (
-        <div className={clsx(styles.searchMenu, isLoadingSearchParamList ? styles.searchMenuLoading : "")}>
-            {isLoadingSearchParamList ? (
+        <div className={clsx(styles.searchMenu, isLoadingSearchParamList || isError || !searchParamList ? styles.searchMenuLoading : "")}>
+            {isLoadingSearchParamList || isError || !searchParamList ? (
                 <SkeletonSearchParam />
             ) : (
                 searchParamList &&
