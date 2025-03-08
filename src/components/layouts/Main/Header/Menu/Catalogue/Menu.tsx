@@ -12,29 +12,6 @@ import Aside from "../../../Aside/Aside"
 import ButtonSet from "@/components/ui/elements/button/ButtonSet"
 
 
-interface CategoryCharType {
-    id: number;
-    label: string;
-}
-
-interface CategoryListType {
-    id: number;
-    label: string;
-    categoryChar: CategoryCharType[]
-}
-
-interface ICategory {categoryList: CategoryListType[]}
-
-async function getData() {
-    try {
-        const response = await axios.get<ICategory>('/api/v1/header')
-        return response.data.categoryList
-    } catch(error) {
-        console.error('Error fetching data:', error);
-        throw error;
-    }
-}
-
 export function MenuHeader<P extends PropsWithChildren>({children}: P) {
     return (
         <div className="menu menu-header">
@@ -45,20 +22,8 @@ export function MenuHeader<P extends PropsWithChildren>({children}: P) {
 
 
 export default function MenuH(): JSX.Element {
-    const { data, isError, error } = useQuery({
-        queryKey: ['category'],
-        queryFn: getData,
-    })
-
     const { onOpenCloseMenu } = useActions();
     const { openMenu } = useAppSelector(state => state.headerReduser)
-
-    useEffect(() => {
-        if (isError) {
-            console.error('Error:', error);
-        }
-    }, [isError, error]);
-
 
     const onOpenMunu = () => {
         onOpenCloseMenu(!openMenu)
@@ -75,13 +40,10 @@ export default function MenuH(): JSX.Element {
                 </div>
             </ButtonSet>
 
-            {openMenu && (
-                <Aside
-                    isOpen={openMenu}
-                    close={onOpenCloseMenu}
-                    data={data}
-                />
-            )}
+            <Aside
+                isOpen={openMenu}
+                close={onOpenCloseMenu}
+            />
         </MenuHeader>
     )
 }

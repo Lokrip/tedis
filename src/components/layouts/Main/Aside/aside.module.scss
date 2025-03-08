@@ -1,39 +1,70 @@
+@use "../../../../app/styles/color" as color;
+
 .modelMenu {
-    height: 100vh;
-    width: 100%;
     z-index: 1001;
-    visibility: hidden;
-
-    &.active {
-        visibility: visible;
-
-        .modelMenuItemsHeader {
-            width: 300px;
-            opacity: 1;
-            transform: translateX(0)
-        }
-    }
+    visibility: visible;
 
     .modelMenuItemsHeader {
+        display: flex;
         position: relative;
-        z-index: 1003;
-        background: white;
+        max-width: max-content;
+        padding: 10px;
         height: 100vh;
-        width: 0px;
-        opacity: 0;
-        transform: translateX(-100%);
-        transition: 0.1s linear;
+        z-index: 1002;
+        background: white;
+
+        .menuListHeader {
+            padding-inline: 10px;
+        }
+        .menuListHeader:first-child {
+            overflow: auto;
+        }
+        .menuListHeader:last-child {
+            overflow: auto;
+            scrollbar-color: #efefef #f9f9f9;
+            scrollbar-width: thin;
+            scroll-behavior: auto;
+        }
 
         .menuListCard {
             display: flex;
             align-items: center;
-            margin-block-end: 20px;
+            justify-content: space-between;
+            gap: 0.5rem;
+            width: 300px;
+            font-size: 16px;
+            padding-inline: 15px;
+            padding-block: 15px;
+            background-color: color.$primary-100-new;
+            margin-block: 10px;
+            border-radius: 5px;
+            color: color.$neutral-20-default;
+            cursor: pointer;
 
+            .menuItems {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
 
-            >svg {
-                margin-right: 0.5rem;
+            &:hover {
+                background-color: color.$primary-95-new;
+
+                .rightIcon {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+            .rightIcon {
+                transition: visibility 0.1s ease-out, opacity 0.1s ease-out;
+                opacity: 0;
+                visibility: hidden;
+            }
+            svg {
+                color: color.$neutral-80-default;
             }
         }
-    }
 
+    }
 }

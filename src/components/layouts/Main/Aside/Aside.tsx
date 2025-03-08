@@ -12,50 +12,23 @@ import ShadowBackground from "../../../ui/assets/shadowBackground/ShadowBackgrou
 import styles from './aside.module.scss';
 import { catalogParamApi } from '@/redux/services/shop/CatalogService';
 import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 
 interface AsideProps {
     isOpen: boolean;
     close: (action: boolean) => void;
-    data: any
 }
 
-const Aside: FC<AsideProps> = ({isOpen, close, data}) => {
+const Aside: FC<AsideProps> = ({isOpen, close}) => {
     const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(undefined);
-    const [isRendered, setIsRendered] = useState(false);
-    const [isClosing, setIsClosing] = useState(false);
-
-    useEffect(() => {
-        if(isOpen) {
-            setIsRendered(true);
-            setIsClosing(false);
-        }
-    }, [isOpen])
-
-    useEffect(() => {
-        if(!isRendered && isClosing) {
-            const timeout = setTimeout(() => {
-                close(false)
-            }, 100)
-
-            return () => {
-                clearTimeout(timeout)
-            }
-        }
-    }, [isRendered, isClosing, close])
-
-    const handleClose = useCallback(() => {
-        setIsClosing(true);
-        setIsRendered(false);
-    }, []);
-
+    console.log(isOpen)
     return (
         <aside className={clsx(
             styles.modelMenu,
             'fixed-full',
-            'mixed-full-width',
-            isRendered && styles.active)
-        }>
-            <ShadowBackground onClick={handleClose} />
+            'mixed-full-width'
+        )}>
+            <ShadowBackground />
 
             <div className={
                 clsx(
@@ -69,12 +42,90 @@ const Aside: FC<AsideProps> = ({isOpen, close, data}) => {
                     mapItems={(item) => {
                         const IconComponent = getIconComponent(item.icon);
                         return (
+                            <>
                             <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                <IconComponent />
-                                <Item className="menu-items menu-items-header">
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
                                     {item.title}
                                 </Item>
+                                <ArrowRight className={styles.rightIcon} />
                             </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            </>
+                        )
+                    }}
+                />
+
+<List
+                    className={clsx("menu-list", styles.menuListHeader)}
+                    items={categories}
+                    mapItems={(item) => {
+                        const IconComponent = getIconComponent(item.icon);
+                        return (
+                            <>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            </>
                         )
                     }}
                 />
