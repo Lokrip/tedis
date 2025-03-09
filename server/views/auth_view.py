@@ -2,13 +2,33 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView
 )
+from rest_framework.viewsets import (
+    ViewSet,
+    ModelViewSet
+)
+from rest_framework.response import Response
+from rest_framework.status import HTTP_201_CREATED
+
 from server.serializers.auth_serializers import (
     CustomTokenObtainPairSerializer,
-    CustomTokenRefreshSerializer
+    CustomTokenRefreshSerializer,
+    RegisterSerializer
 )
+from server.models import Customers
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
 
 class CustomTokenRefreshView(TokenRefreshView):
     serializer_class = CustomTokenRefreshSerializer
+
+
+class RegisterViewSet(ViewSet):
+    def create(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.prefome_create(serializer)
+        return Response(serializer.data, status=HTTP_201_CREATED)
+
+    def prefome_create(self, instanse):
+        instanse.save()

@@ -2,9 +2,19 @@ from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer,
     TokenRefreshSerializer
 )
+from rest_framework import serializers
 from rest_framework_simplejwt.settings import api_settings
 
 from django.utils import timezone
+from django.contrib.auth.hashers import make_password
+
+from django_countries.serializer_fields import CountryField
+
+from server.models import Customers
+from server.validators import is_valid_username, is_valid_email
+
+
+FORBIDDEN_USERNAMES = {"admin", "root", "superuser", "moderator", "support"}
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
@@ -37,3 +47,30 @@ class CustomTokenRefreshSerializer(TokenRefreshSerializer):
         })
 
         return data
+
+
+
+class RegisterSerializer(serializers.ModelSerializer):
+    location = CountryField()
+    username = serializers.CharField(max_length=40)
+
+    class Meta:
+        model = Customers
+        fields = [
+            'email', 'password', 'username', 'first_name', 'last_name',
+            'phone', 'city', 'zip_code', 'street', 'house_number', 'location',
+            'image', 'role'
+        ]
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+    def validate_username(self, username):
+        return is_valid_username(username)
+
+    def validate_email(self, email):
+        return is_valid_email(email)
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data['password'])
+        return super().create(validated_data)
