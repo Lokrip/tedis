@@ -49,6 +49,8 @@ class Category(MPTTModel, ModelTitle, DateCreatedModel):
         null=True
     )
 
+    icon = models.CharField(max_length=10, blank=True, default="HelpCircle")
+
     def save(self, *args, **kwargs):
         if not self.slug:
             generate_and_save_slug(self)

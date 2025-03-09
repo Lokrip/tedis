@@ -5,6 +5,7 @@ from rest_framework import status
 from server.models import Category
 from server.serializers.category_serializers import CategorySerializer
 from server.mixins import CategoryMixin
+from server.exception import DATA_DELETION_FAILED
 
 class CategoryViewSet(ViewSet):
     lookup_field = "slug"
@@ -59,6 +60,25 @@ class CategoryViewSet(ViewSet):
                 "Content-type": "application/json"
             }
         )
+
+    def destroy(self, request, slug=None):
+        try:
+            isDeleted = self.mixin.deleteCategory(slug)
+        except ValueError as EXCEPTION:
+            return Response(
+                {"message": str(EXCEPTION)},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        if isDeleted:
+            return Response(
+                {"message": "Categories deleted success"},
+                status=status.HTTP_200_OK
+            )
+        else:
+            return Response(
+                {"message": DATA_DELETION_FAILED},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
     def get_success_headers(self, location):
         try:

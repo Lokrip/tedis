@@ -20,7 +20,7 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         list_serializer_class = FilterParentCategorySerializer
         model = Category
-        fields = ("id", "title", "metaTitle",
+        fields = ("id", "title", "icon", "metaTitle",
                   "slug", "children")
 
 class CategoryBaseSerializer(serializers.ModelSerializer):

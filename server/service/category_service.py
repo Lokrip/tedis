@@ -87,7 +87,7 @@ class CategoryService:
         except (Category.DoesNotExist):
             raise ValueError(RESOURCE_NOT_FOUND)
 
-        self.perform_destroy(instance=Category)
+        self.perform_destroy(instance=category)
         return True
     def perform_destroy(self, instance):
         instance.delete()
