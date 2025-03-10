@@ -3,5 +3,6 @@ export interface ICategory {
     title: string
     metaTitle: string
     slug: string
+    icon: string
     children?: ICategory[]
 }

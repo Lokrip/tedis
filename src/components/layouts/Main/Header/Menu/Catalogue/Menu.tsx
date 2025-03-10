@@ -1,9 +1,5 @@
 "use client"
 
-import { useQuery } from "@tanstack/react-query"
-
-import axios from 'axios'
-
 import {PropsWithChildren, useEffect } from "react"
 
 import { Menu } from 'lucide-react';
@@ -39,7 +35,6 @@ export default function MenuH(): JSX.Element {
                     Каталог
                 </div>
             </ButtonSet>
-
             <Aside
                 isOpen={openMenu}
                 close={onOpenCloseMenu}

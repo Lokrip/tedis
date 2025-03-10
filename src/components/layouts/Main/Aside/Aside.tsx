@@ -21,6 +21,11 @@ interface AsideProps {
 
 const Aside: FC<AsideProps> = ({isOpen, close}) => {
     const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(undefined);
+    const handlerCloseMenu = () => {close(false)}
+
+    const handlerMouseEnter = (item: any) => {
+        console.log(item)
+    }
 
     return (
         <aside className={clsx(
@@ -29,15 +34,38 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
             'mixed-full-width',
             isOpen && styles.active
         )}>
-            <ShadowBackground />
+            <ShadowBackground onClick={handlerCloseMenu} />
 
-            {isOpen && (
-                <div className={
-                    clsx(
-                        "model-menu-items",
-                        styles.modelMenuItemsHeader,
-                    )
-                }>
+            <div className={
+                clsx(
+                    "model-menu-items",
+                    styles.modelMenuItemsHeader,
+                )
+            }>
+                <List
+                    className={clsx("menu-list", styles.menuListHeader)}
+                    items={categories}
+                    mapItems={(item) => {
+                        const IconComponent = getIconComponent(item.icon);
+                        return (
+                            <>
+                            <Link onMouseEnter={() => handlerMouseEnter(item)} href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                <Item className={styles.menuItems}>
+                                    <IconComponent />
+                                    {item.title}
+                                </Item>
+                                <ArrowRight className={styles.rightIcon} />
+                            </Link>
+                            </>
+                        )
+                    }}
+                />
+                <div className={styles.detailCategory}>
+                    <HeadingH
+                        className={styles.headingDetailCategory}
+                        level={4}
+                        content={"Detail Category"}
+                    />
                     <List
                         className={clsx("menu-list", styles.menuListHeader)}
                         items={categories}
@@ -52,86 +80,12 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
                                     </Item>
                                     <ArrowRight className={styles.rightIcon} />
                                 </Link>
-                                <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                    <Item className={styles.menuItems}>
-                                        <IconComponent />
-                                        {item.title}
-                                    </Item>
-                                    <ArrowRight className={styles.rightIcon} />
-                                </Link>
-                                <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                    <Item className={styles.menuItems}>
-                                        <IconComponent />
-                                        {item.title}
-                                    </Item>
-                                    <ArrowRight className={styles.rightIcon} />
-                                </Link>
-                                <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                    <Item className={styles.menuItems}>
-                                        <IconComponent />
-                                        {item.title}
-                                    </Item>
-                                    <ArrowRight className={styles.rightIcon} />
-                                </Link>
                                 </>
                             )
                         }}
                     />
-                    <div className={styles.detailCategory}>
-                        <HeadingH
-                            className={styles.headingDetailCategory}
-                            level={4}
-                            content={"Detail Category"}
-                        />
-                        <List
-                            className={clsx("menu-list", styles.menuListHeader)}
-                            items={categories}
-                            mapItems={(item) => {
-                                const IconComponent = getIconComponent(item.icon);
-                                return (
-                                    <>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    </>
-                                )
-                            }}
-                        />
-                    </div>
                 </div>
-            )}
+            </div>
         </aside>
     );
 };
