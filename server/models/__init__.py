@@ -3,7 +3,8 @@ from server.models.customers import Customers
 
 from server.models.shop import (
     Product,
-    Category
+    Category,
+    PopularSearch
 )
 
 from server.models.abstract.abstract_title import ModelTitle
@@ -14,6 +15,7 @@ __all__ = (
 
     "Product",
     "Category",
+    "PopularSearch",
 
     "ModelTitle"
 )

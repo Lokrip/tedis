@@ -162,3 +162,13 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
     def __str__(self):
         return self.title
 
+class PopularSearch(models.Model):
+    query = models.CharField(max_length=255, unique=True)
+    count = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.query
+
+    class Meta:
+        verbose_name = _("Popular Search")
+        verbose_name_plural = _("Popular Searches")
