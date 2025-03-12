@@ -26,6 +26,8 @@ class ProductService:
         query_params = request.query_params
 
         search_query = query_params.get("q", None)
+        category_slug = query_params.get("category", None)
+
 
         if request is None:
             raise ValueError("request not found!")
@@ -34,12 +36,15 @@ class ProductService:
             raise ValueError("view not found!")
 
         queryset = Product.objects.order_by(
-            "-created_at"
+                "-created_at"
         ).select_related(
             "category"
         ).prefetch_related(
             "user"
         )
+
+        if category_slug:
+            queryset = queryset.filter(category__slug=category_slug)
 
         if not queryset.exists():
             return ProductListSerializer([], many=True), None
