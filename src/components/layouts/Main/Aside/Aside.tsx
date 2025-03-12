@@ -20,12 +20,34 @@ interface AsideProps {
 }
 
 const Aside: FC<AsideProps> = ({isOpen, close}) => {
+    const [detailCategoryState, setDetailCategoryState] = useState({
+        children: null,
+        title: null,
+    });
+    const [isShowDetailList, setIsShowDetailList] = useState(false);
     const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(undefined);
     const handlerCloseMenu = () => {close(false)}
 
     const handlerMouseEnter = (item: any) => {
-        console.log(item)
+        if(item.children.length > 0
+            && item.children
+            && (
+                detailCategoryState.children != item.children
+                && detailCategoryState.title != item.title
+            )
+        ) {
+            setIsShowDetailList(true);
+            setDetailCategoryState(prev => ({
+                ...prev,
+                children: item.children,
+                title: item.title,
+            }))
+        }
     }
+
+    useEffect(() => {
+        console.log(detailCategoryState)
+    }, [detailCategoryState])
 
     return (
         <aside className={clsx(
@@ -60,31 +82,33 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
                         )
                     }}
                 />
-                <div className={styles.detailCategory}>
-                    <HeadingH
-                        className={styles.headingDetailCategory}
-                        level={4}
-                        content={"Detail Category"}
-                    />
-                    <List
-                        className={clsx("menu-list", styles.menuListHeader)}
-                        items={categories}
-                        mapItems={(item) => {
-                            const IconComponent = getIconComponent(item.icon);
-                            return (
-                                <>
-                                <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
-                                    <Item className={styles.menuItems}>
-                                        <IconComponent />
-                                        {item.title}
-                                    </Item>
-                                    <ArrowRight className={styles.rightIcon} />
-                                </Link>
-                                </>
-                            )
-                        }}
-                    />
-                </div>
+                {isShowDetailList && (
+                    <div className={styles.detailCategory}>
+                        <HeadingH
+                            className={styles.headingDetailCategory}
+                            level={4}
+                            content={detailCategoryState.title ?? "Detail Category"}
+                        />
+                        <List
+                            className={clsx("menu-list", styles.menuListHeader)}
+                            items={detailCategoryState.children}
+                            mapItems={(item) => {
+                                const IconComponent = getIconComponent(item.icon);
+                                return (
+                                    <>
+                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                        <Item className={styles.menuItems}>
+                                            <IconComponent />
+                                            {item.title}
+                                        </Item>
+                                        <ArrowRight className={styles.rightIcon} />
+                                    </Link>
+                                    </>
+                                )
+                            }}
+                        />
+                    </div>
+                )}
             </div>
         </aside>
     );
