@@ -5,9 +5,10 @@ import CardTopWrap from '../CardElements/CardTopWrap/CardTopWrap';
 import CardMiddleWrap from '../CardElements/CardMiddleWrap/CardMiddleWrap';
 import CardBottomWrap from '../CardElements/CardBottomWrap/CardBottomWrap';
 import { IPost } from '../../../../../types/app/models/IPost.type';
+import { IProduct } from '@/types/app/models/IProduct.type';
 
 interface PCardProps {
-    item: IPost
+    item: IProduct
 }
 
 const PCard: FC<PCardProps> = ({item}) => {
@@ -20,9 +21,9 @@ const PCard: FC<PCardProps> = ({item}) => {
 
 
                 <ProductCardWrapper.CardMiddleWrap>
-                    <CardMiddleWrap 
-                        price={item.price_with_discount}
-                        priceDiscount={item.price}  
+                    <CardMiddleWrap
+                        price={item.price_discount}
+                        priceDiscount={item.price}
                         title={item.title}
                         param={item.slug}
                     />
