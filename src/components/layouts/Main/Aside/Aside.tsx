@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 
 import clsx from 'clsx'
 
@@ -25,7 +25,13 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
         title: null,
     });
     const [isShowDetailList, setIsShowDetailList] = useState(false);
-    const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(undefined);
+    const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(
+        undefined,
+        {skip: !isOpen}
+    );
+
+    console.log(categories, "Categories!!!!!!!!!!!!!!")
+
     const handlerCloseMenu = () => {close(false)}
 
     const handlerMouseEnter = (item: any) => {
