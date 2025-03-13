@@ -11,7 +11,6 @@ import { useActions } from '@/hooks';
 import { RootState } from '@/redux/store';
 import { selectedProducts } from '@/redux/selectors/product';
 import PCard from '@/components/ui/elements/card/PrimaryCard/PrimaryCard';
-import { useSession } from 'next-auth/react';
 
 interface ProductListProps {
     searchQuery: string;

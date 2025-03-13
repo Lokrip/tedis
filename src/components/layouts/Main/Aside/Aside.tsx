@@ -30,8 +30,6 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
         {skip: !isOpen}
     );
 
-    console.log(categories, "Categories!!!!!!!!!!!!!!")
-
     const handlerCloseMenu = () => {close(false)}
 
     const handlerMouseEnter = (item: any) => {

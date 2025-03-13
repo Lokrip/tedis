@@ -1,8 +1,5 @@
-class AccountRoute {
-    public login: string = "/account/login"
-    public register: string = "/account/register"
-    public profile: string = "/account/profile"
-}
+import { AccountRoute } from "./routes/accountRoutes";
+import { ProductRoute } from "./routes/productRoutes";
 
 class Route extends AccountRoute {
     public home: string = "/"
@@ -39,5 +36,13 @@ class Route extends AccountRoute {
     }
 }
 
-const pages = new Route()
+const route = new Route()
+
+const pages = {
+    home: route.home,
+    addSearchParam: route.addSearchParam,
+    account: AccountRoute,
+    product: ProductRoute
+}
+
 export default pages;
