@@ -1,7 +1,8 @@
+from decimal import Decimal
+
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
-
 from server.models import Product
 from server.serializers.category_serializers import CategorySerializer
 from server.exception import RESOURCE_NOT_FOUND
@@ -10,12 +11,21 @@ from server.pagination import ProductResultsSetPagination
 User = get_user_model()
 
 class ProductFieldsAllSerializer(serializers.ModelSerializer):
+    price_discount = serializers.SerializerMethodField()
+
+    def get_price_discount(self, instance):
+        return Decimal(instance.price) * (Decimal(1 - instance.discount / 100)) if instance.discount else instance.price
+
     class Meta:
         model = Product
         fields = "__all__"
 
 class ProductBaseSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(required=False)
+    price_discount = serializers.SerializerMethodField()
+
+    def get_price_discount(self, instance):
+        return instance.price * (1 - instance.discount / 100) if instance.discount else instance.price
 
     class Meta:
         model = Product
@@ -23,7 +33,7 @@ class ProductBaseSerializer(serializers.ModelSerializer):
             'id', 'slug', 'title', 'metaTitle', 'summary',
             'accessibility', 'condition', 'warehouse',
             'promotional', 'checks', 'price', 'discount',
-            'category', 'user_id',
+            "price_discount", 'category', 'user_id',
         )
         extra_kwargs = {
             'id': {

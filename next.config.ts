@@ -17,8 +17,7 @@ const nextConfig: NextConfig = {
   },
 
   env: {
-    PRODUCT_API_URL: process.env.PRODUCT_API_URL,
-    JSONPLACEHOLDER_API_URL: process.env.JSONPLACEHOLDER_API_URL
+    PRODUCT_API_URL: process.env.PRODUCT_API_URL
   },
 
   poweredByHeader: false, // Отключает заголовок 'X-Powered-By'
