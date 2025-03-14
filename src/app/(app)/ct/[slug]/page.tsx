@@ -14,14 +14,18 @@ export const dynamicParams = true
 
 
 export default async function ProductsByCategoryPage({
-  searchParams,
+    params,
+    searchParams,
 }: {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+    params: Promise<{ slug: string }>,
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
   const param = await searchParams;
+  const categoryDynamicParam = await params
   return (<Store
     isBannerClose={true}
     param={param}
+    dynamicParam={categoryDynamicParam}
     />);
 }
 

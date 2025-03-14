@@ -6,13 +6,16 @@ import { axios } from "@/service/axios";
 async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
     isPagination = false,
     currentPage = null
-}: ProductFunApiPaginationAttributes = {}): Promise<T> {
+}: ProductFunApiPaginationAttributes = {}, category_slug: string = ""): Promise<T> {
     "use server"
 
     try {
         let url = "/api/v1/products/"
 
         const params = [];
+
+        if(category_slug)
+            params.push(`category=${category_slug}`)
 
         if(search)
             params.push(`q=${search}`)

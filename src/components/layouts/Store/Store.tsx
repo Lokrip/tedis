@@ -6,9 +6,14 @@ import ContentWrapper from "./ContentWrapper/ContentWrapper"
 interface StoreProps {
     isBannerClose: boolean;
     param: any;
+    dynamicParam: {slug: string};
 }
 
-export default function Store<P extends StoreProps>({isBannerClose, param}: P): JSX.Element {
+export default function Store<P extends StoreProps>({
+    isBannerClose,
+    param,
+    dynamicParam
+}: P): JSX.Element {
     return (
         <MainStore className="main-indent-block">
             <Container>
@@ -18,7 +23,10 @@ export default function Store<P extends StoreProps>({isBannerClose, param}: P): 
                 </MainStore.Banner>
 
                 <MainStore.ContentWrapper>
-                    <ContentWrapper param={param} />
+                    <ContentWrapper
+                        dynamicParam={dynamicParam}
+                        param={param}
+                    />
                 </MainStore.ContentWrapper>
             </Container>
         </MainStore>

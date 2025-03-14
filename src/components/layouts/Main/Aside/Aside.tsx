@@ -13,6 +13,7 @@ import styles from './aside.module.scss';
 import { catalogParamApi } from '@/redux/services/shop/CatalogService';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import pages from '@/service/route';
 
 interface AsideProps {
     isOpen: boolean;
@@ -21,7 +22,7 @@ interface AsideProps {
 
 const Aside: FC<AsideProps> = ({isOpen, close}) => {
     const [detailCategoryState, setDetailCategoryState] = useState({
-        children: null,
+        children: [],
         title: null,
     });
     const [isShowDetailList, setIsShowDetailList] = useState(false);
@@ -33,8 +34,7 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
     const handlerCloseMenu = () => {close(false)}
 
     const handlerMouseEnter = (item: any) => {
-        if(item.children.length > 0
-            && item.children
+        if(item.children
             && (
                 detailCategoryState.children != item.children
                 && detailCategoryState.title != item.title
@@ -75,7 +75,11 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
                         const IconComponent = getIconComponent(item.icon);
                         return (
                             <>
-                            <Link onMouseEnter={() => handlerMouseEnter(item)} href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                            <Link
+                                onMouseEnter={() => handlerMouseEnter(item)}
+                                href={pages.product.productByCategoryFilter(item.slug)}
+                                className={clsx(styles.menuListCard, styles.menuListCardHeader)}
+                            >
                                 <Item className={styles.menuItems}>
                                     <IconComponent />
                                     {item.title}
@@ -100,7 +104,10 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
                                 const IconComponent = getIconComponent(item.icon);
                                 return (
                                     <>
-                                    <Link href={""} className={clsx(styles.menuListCard, styles.menuListCardHeader)}>
+                                    <Link
+                                        href={pages.product.productByCategoryFilter(item.slug)}
+                                        className={clsx(styles.menuListCard, styles.menuListCardHeader)}
+                                    >
                                         <Item className={styles.menuItems}>
                                             <IconComponent />
                                             {item.title}
