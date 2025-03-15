@@ -12,6 +12,7 @@ interface PCardProps {
 }
 
 const PCard: FC<PCardProps> = ({item}) => {
+
     return (
        <Card>
             <ProductCardWrapper>

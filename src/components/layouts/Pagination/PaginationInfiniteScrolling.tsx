@@ -6,7 +6,7 @@ import {useAppSelector } from '@/hooks';
 import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type';
 import { IModelPrimary } from '@/types/app/models/IModelPrimary.type';
 import { RootState } from '@/redux/store';
-import SkeletonProductCard from '@/components/ui/elements/skeleton/SkeletonProductCard';
+import SkeletonSingleProductCard from '@/components/ui/elements/skeleton/SkeletonSingleProductCard';
 
 
 export interface PaginationInfiniteScrollingProps<
@@ -63,6 +63,7 @@ const PaginationInfiniteScrolling = <
     const { dataSelector, currentPageSelector, fetchingSelector } = selectors;
     const { setDataList, incrementCurrentPage, changeTypeFetching } = actions;
 
+    const COUNT_CARD_LOADER = 6
 
     const data = useAppSelector(dataSelector);
     const currentPage = useAppSelector(currentPageSelector);
@@ -128,9 +129,11 @@ const PaginationInfiniteScrolling = <
             ))}
         </div>
 
-        {hasMoreData() && (
-            <div className='product-card-skeleton-list'>
-                <SkeletonProductCard row={2} />
+        {hasMoreData() && COUNT_CARD_LOADER > 0 && (
+            <div className={styles.productCardSkeletonList}>
+                {Array.from({ length: COUNT_CARD_LOADER }).map((_, index) => (
+                    <SkeletonSingleProductCard key={index} />
+                ))}
             </div>
         )}
         </>

@@ -14,6 +14,7 @@ import { catalogParamApi } from '@/redux/services/shop/CatalogService';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import pages from '@/service/route';
+import SkeletonCategoryCard from '@/components/ui/elements/skeleton/SkeletonCategoryCard';
 
 interface AsideProps {
     isOpen: boolean;
@@ -25,8 +26,9 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
         children: [],
         title: null,
     });
+    const CATEGORY_CARD_LOADING = 7
     const [isShowDetailList, setIsShowDetailList] = useState(false);
-    const {data: categories} = catalogParamApi.useFetchAllCategoryParamQuery(
+    const {data: categories, isLoading: isLoadingCategories} = catalogParamApi.useFetchAllCategoryParamQuery(
         undefined,
         {skip: !isOpen}
     );
@@ -61,66 +63,79 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
             isOpen && styles.active
         )}>
             <ShadowBackground onClick={handlerCloseMenu} />
-
-            <div className={
-                clsx(
-                    "model-menu-items",
-                    styles.modelMenuItemsHeader,
-                )
-            }>
-                <List
-                    className={clsx("menu-list", styles.menuListHeader)}
-                    items={categories}
-                    mapItems={(item) => {
-                        const IconComponent = getIconComponent(item.icon);
-                        return (
-                            <>
-                            <Link
-                                onMouseEnter={() => handlerMouseEnter(item)}
-                                href={pages.product.productByCategoryFilter(item.slug)}
-                                className={clsx(styles.menuListCard, styles.menuListCardHeader)}
-                            >
-                                <Item className={styles.menuItems}>
-                                    <IconComponent />
-                                    {item.title}
-                                </Item>
-                                <ArrowRight className={styles.rightIcon} />
-                            </Link>
-                            </>
-                        )
-                    }}
-                />
-                {isShowDetailList && (
-                    <div className={styles.detailCategory}>
-                        <HeadingH
-                            className={styles.headingDetailCategory}
-                            level={4}
-                            content={detailCategoryState.title ?? "Detail Category"}
-                        />
-                        <List
-                            className={clsx("menu-list", styles.menuListHeader)}
-                            items={detailCategoryState.children}
-                            mapItems={(item) => {
-                                const IconComponent = getIconComponent(item.icon);
-                                return (
-                                    <>
-                                    <Link
-                                        href={pages.product.productByCategoryFilter(item.slug)}
-                                        className={clsx(styles.menuListCard, styles.menuListCardHeader)}
-                                    >
-                                        <Item className={styles.menuItems}>
-                                            <IconComponent />
-                                            {item.title}
-                                        </Item>
-                                        <ArrowRight className={styles.rightIcon} />
-                                    </Link>
-                                    </>
-                                )
-                            }}
-                        />
-                    </div>
-                )}
-            </div>
+            {isLoadingCategories ? (
+                <div className={
+                    clsx(
+                        "model-menu-items",
+                        styles.modelMenuItemsHeader,
+                        styles.modelMenuItemsHeaderLoading
+                    )
+                }>
+                    {Array.from({ length: CATEGORY_CARD_LOADING }).map((_, index) => (
+                        <SkeletonCategoryCard key={index} />
+                    ))}
+                </div>
+            ) : (
+                <div className={
+                    clsx(
+                        "model-menu-items",
+                        styles.modelMenuItemsHeader,
+                    )
+                }>
+                    <List
+                        className={clsx("menu-list", styles.menuListHeader)}
+                        items={categories}
+                        mapItems={(item) => {
+                            const IconComponent = getIconComponent(item.icon);
+                            return (
+                                <>
+                                <Link
+                                    onMouseEnter={() => handlerMouseEnter(item)}
+                                    href={pages.product.productByCategoryFilter(item.slug)}
+                                    className={clsx(styles.menuListCard, styles.menuListCardHeader)}
+                                >
+                                    <Item className={styles.menuItems}>
+                                        <IconComponent />
+                                        {item.title}
+                                    </Item>
+                                    <ArrowRight className={styles.rightIcon} />
+                                </Link>
+                                </>
+                            )
+                        }}
+                    />
+                    {isShowDetailList && (
+                        <div className={styles.detailCategory}>
+                            <HeadingH
+                                className={styles.headingDetailCategory}
+                                level={4}
+                                content={detailCategoryState.title ?? "Detail Category"}
+                            />
+                            <List
+                                className={clsx("menu-list", styles.menuListHeader)}
+                                items={detailCategoryState.children}
+                                mapItems={(item) => {
+                                    const IconComponent = getIconComponent(item.icon);
+                                    return (
+                                        <>
+                                        <Link
+                                            href={pages.product.productByCategoryFilter(item.slug)}
+                                            className={clsx(styles.menuListCard, styles.menuListCardHeader)}
+                                        >
+                                            <Item className={styles.menuItems}>
+                                                <IconComponent />
+                                                {item.title}
+                                            </Item>
+                                            <ArrowRight className={styles.rightIcon} />
+                                        </Link>
+                                        </>
+                                    )
+                                }}
+                            />
+                        </div>
+                    )}
+                </div>
+            )}
         </aside>
     );
 };

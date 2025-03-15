@@ -24,6 +24,14 @@
         transform: translateX(-100%);
         transition: all .2s linear;
 
+        &.modelMenuItemsHeaderLoading {
+            width: 340px;
+            max-width: 340px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
         .detailCategory {
             padding-inline: 10px;
             overflow: auto;

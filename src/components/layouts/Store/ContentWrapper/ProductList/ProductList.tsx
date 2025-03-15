@@ -1,6 +1,6 @@
 "use client"
 
-import {FC} from 'react';
+import {FC, Suspense} from 'react';
 
 import styles from './productList.module.scss';
 import PaginationInfiniteScrolling from '../../../Pagination/PaginationInfiniteScrolling';
@@ -10,7 +10,14 @@ import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type
 import { useActions } from '@/hooks';
 import { RootState } from '@/redux/store';
 import { selectedProducts } from '@/redux/selectors/product';
-import PCard from '@/components/ui/elements/card/PrimaryCard/PrimaryCard';
+import dynamic from 'next/dynamic';
+import SkeletonSingleProductCard from '@/components/ui/elements/skeleton/SkeletonSingleProductCard';
+
+const PCard = dynamic(() => import('@/components/ui/elements/card/PrimaryCard/PrimaryCard'), {
+    loading: () => (
+        <SkeletonSingleProductCard />
+    )
+})
 
 interface ProductListProps {
     searchQuery: string;
@@ -66,7 +73,7 @@ const ProductList: FC<ProductListProps> = ({
                 currentPageSelector: productCurrentPageSelector,
                 fetchingSelector: productFetchingSelector
             }}
-            mapItems={(item) =><PCard item={item}/>}
+            mapItems={(item) => <PCard item={item}/>}
         />
         </>
     );

@@ -1,0 +1,7 @@
+.productCardSkeletonList {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1rem;
+    margin-top: 10px;
+    width: 100%;
+}
