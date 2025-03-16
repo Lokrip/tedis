@@ -22,7 +22,7 @@ async function refreshAccessToken(token: {
         const data = {
             refresh: token.refreshToken
         }
-        const resData = await axios.post<{access: string, access_expires_in: number}, {refresh: string}>(
+        const resData = await axios.post<{access: string, refresh: string, access_expires_in: number}, {refresh: string}>(
             "/api/token/refresh/",
             data
         )
@@ -30,6 +30,7 @@ async function refreshAccessToken(token: {
         return {
             ...token,
             accessToken: resData.access,
+            refreshToken: resData.refresh,
             accessTokenExpires: resData.access_expires_in * 1000,
         }
     } catch(error) {

@@ -70,6 +70,7 @@ export const authOptions: NextAuthOptions = {
                 return token;
             }
 
+            console.log("Generated New Token")
             return await refreshAccessToken(jwtToken);
         },
 

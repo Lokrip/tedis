@@ -8,7 +8,8 @@ const initialState: SignInTypeFields = {
     errorMessage: null,
     isSuccess: false,
     result: null,
-    isClodeModalSignIn: false
+    isClodeModalSignIn: false,
+    isDispatchRequest: false
 }
 
 export const SignInSlice = createSlice({
@@ -25,8 +26,10 @@ export const SignInSlice = createSlice({
 
         savingErrors(state, action: PayloadAction<UserStatusErrorType>) {
             if(action.payload.isError) {
+                state.isSuccess = false;
                 state.isError = action.payload.isError
                 state.errorMessage = action.payload.errorMessage
+                state.result = AuthStatus.NotAuthenticated
             }
         },
 
@@ -35,6 +38,10 @@ export const SignInSlice = createSlice({
             state.isSuccess = true
             state.result = AuthStatus.Authenticated
         },
+
+        changeDispatchRequest(state, action: PayloadAction<boolean>) {
+            state.isDispatchRequest = action.payload
+        }
     }
 })
 

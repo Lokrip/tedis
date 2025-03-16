@@ -13,10 +13,8 @@ import pages from "@/service/route";
 
 export default function Search(): JSX.Element {
     const router = useRouter()
-
     const { saveDataInSearch, openSearchMenu, closeSearchMenu } = useActions()
     const { search, isMenuOpen } = useAppSelector(state => state.searchReduser)
-
     const menuRef = useRef<HTMLFormElement | null>(null);
 
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
@@ -34,7 +32,7 @@ export default function Search(): JSX.Element {
 
     }, [router, search]);
 
-    const handleChange = (value: any) => {
+    const handleChange = (value: string) => {
         saveDataInSearch(value)
     };
 

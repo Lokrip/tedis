@@ -26,7 +26,7 @@ const Aside: FC<AsideProps> = ({isOpen, close}) => {
         children: [],
         title: null,
     });
-    const CATEGORY_CARD_LOADING = 7
+    const CATEGORY_CARD_LOADING = 10
     const [isShowDetailList, setIsShowDetailList] = useState(false);
     const {data: categories, isLoading: isLoadingCategories} = catalogParamApi.useFetchAllCategoryParamQuery(
         undefined,

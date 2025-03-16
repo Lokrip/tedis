@@ -25,6 +25,7 @@ const NavigationBar: FC = () => {
     const session = useSession()
 
     useEffect(() => {
+        console.log(session)
         if(session.status == "authenticated") {
             setNavigation(prev => {
                 return prev.some(nav => nav.type === "menu")

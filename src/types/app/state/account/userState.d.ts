@@ -14,6 +14,8 @@ interface UserStatusType extends UserStatusErrorType, UserStatusSuccessType {}
 interface AuthTypeFields {
     email: string;
     password: string;
+
+    isDispatchRequest?: boolean;
 }
 
 interface UserTypeFields {
