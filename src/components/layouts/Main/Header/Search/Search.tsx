@@ -1,7 +1,7 @@
 "use client"
 import Form from "../../../../ui/form/Form";
 import styles from "./search.module.scss"
-import { ChangeEvent, FormEvent, useCallback, useEffect, useRef } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { useActions, useAppSelector, useDebounce } from "../../../../../hooks";
 import { useRouter } from 'next/navigation'
@@ -20,7 +20,6 @@ export default function Search(): JSX.Element {
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-
         if(search) {
             const urlWithParams = pages.addSearchParam(pages.home,  {
                 q: search
@@ -36,7 +35,7 @@ export default function Search(): JSX.Element {
         saveDataInSearch(value)
     };
 
-    const debouncedChange = useDebounce(handleChange, 500);
+    const debouncedChange = useDebounce(handleChange, 200);
 
     const onChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         debouncedChange(event.target.value);

@@ -8,17 +8,26 @@ import { searchParamApi } from '@/redux/services/header/SearchService';
 import { ISearchParam } from '@/types/app/models/ISearchParam.type';
 import SkeletonSearchParam from '@/components/ui/elements/skeleton/SkeletonSearchParam';
 import clsx from 'clsx';
+import { Search } from 'lucide-react';
 
 interface SearchMenuProps {
     searchParam: string;
 }
 
 interface SearchMenuListProps {
-    searchParamList: ISearchParam[];
+    searchParamList: ISearchParam[] | undefined;
 }
 
-const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
-    return (
+const SearchMenuList: FC<
+    SearchMenuListProps
+    & SearchMenuProps
+> = ({searchParamList, searchParam}) => {
+    useEffect(() => {
+        console.log(searchParamList?.length !== 0, "global!!!!!!!!!!!!!!!!!")
+    }, [searchParamList])
+
+
+    return searchParamList?.length !== 0 ? (
         <List
             className={styles.searchMenuList}
             items={searchParamList}
@@ -35,12 +44,21 @@ const SearchMenuList: FC<SearchMenuListProps> = ({searchParamList}) => {
                     <div className={styles.searchMenuItemContainer}>
                         <IconComponent />
                         <Item className={styles.searchMenuItem}>
-                            {truncate_string(item.name, 50)}
+                            {truncate_string(item.query, 50)}
                         </Item>
                     </div>
                 )
             }}
         />
+    ) : (
+        <div className={styles.searchMenuList}>
+            <div className={styles.searchMenuItemContainer}>
+                <Search />
+                <div className={styles.searchMenuItem}>
+                    {searchParam}
+                </div>
+            </div>
+        </div>
     )
 }
 
@@ -49,21 +67,17 @@ const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
         data: searchParamList,
         isLoading: isLoadingSearchParamList,
         isError
-    } = searchParamApi.useFetchAllSearchParamQuery(searchParam, {
-
-    });
-
-    useEffect(() => {
-        console.log(searchParamList)
-    }, [searchParamList])
+    } = searchParamApi.useFetchAllSearchParamQuery(searchParam);
 
     return (
-        <div className={clsx(styles.searchMenu, isLoadingSearchParamList || isError || !searchParamList ? styles.searchMenuLoading : "")}>
-            {isLoadingSearchParamList || isError || !searchParamList ? (
+        <div className={clsx(styles.searchMenu, isLoadingSearchParamList || isError ? styles.searchMenuLoading : "")}>
+            {isLoadingSearchParamList || isError ? (
                 <SkeletonSearchParam />
             ) : (
-                searchParamList &&
-                <SearchMenuList searchParamList={searchParamList} />
+                <SearchMenuList
+                    searchParam={searchParam}
+                    searchParamList={searchParamList}
+                />
             )}
         </div>
     );

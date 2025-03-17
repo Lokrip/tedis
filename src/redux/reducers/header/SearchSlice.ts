@@ -1,13 +1,10 @@
+import { SearchState } from "@/types/app/state/header/searchState";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface SearchState {
-    search: string;
-    isMenuOpen: boolean;
-}
 
 const initialState: SearchState = {
     search: "",
-    isMenuOpen: false
+    isMenuOpen: false,
+    isSearchReady: false
 }
 
 
@@ -25,6 +22,10 @@ export const SearchSlice = createSlice({
 
         closeSearchMenu(state) {
             state.isMenuOpen = false;
+        },
+
+        searchReady(state, action: PayloadAction<boolean>) {
+            state.isSearchReady = action.payload;
         }
     }
 })
