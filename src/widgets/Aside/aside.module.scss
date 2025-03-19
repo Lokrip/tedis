@@ -1,0 +1,116 @@
+@use "../../app/styles/color" as color;
+
+.modelMenu {
+    z-index: 1001;
+    visibility: hidden;
+
+    &.active {
+        visibility: visible;
+
+        .modelMenuItemsHeader {
+            transform: translateX(0);
+        }
+    }
+
+    .modelMenuItemsHeader {
+        display: flex;
+        position: relative;
+        max-width: max-content;
+        overflow: hidden;
+        padding: 10px;
+        height: 100vh;
+        z-index: 1002;
+        background: white;
+        transform: translateX(-100%);
+        transition: all .2s linear;
+
+        &.modelMenuItemsHeaderLoading {
+            width: 340px;
+            max-width: 340px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .detailCategory {
+            padding-inline: 10px;
+            overflow: auto;
+
+            .headingDetailCategory {
+                margin-block: 20px;
+                font-size: 22px;
+                color: color.$neutral-30-default;
+
+            }
+
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            &::-webkit-scrollbar-track {
+              box-shadow: inset 0 0 5px rgb(225, 225, 225);
+              border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgb(225, 225, 225);
+                border-radius: 10px;
+            }
+
+            &::-webkit-scrollbar-thumb:hover {
+                background: #d2d2d2;
+            }
+
+            .menuListCard {
+                padding-inline: 10px;
+                padding-block: 10px;
+            }
+        }
+        .menuListHeader:first-child {
+            overflow: auto;
+            padding-inline: 10px;
+        }
+
+        .menuListCard {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.5rem;
+            width: 300px;
+            font-size: 16px;
+            padding-inline: 15px;
+            padding-block: 15px;
+            background-color: color.$primary-100-new;
+            margin-block: 10px;
+            border-radius: 5px;
+            color: color.$neutral-20-default;
+            cursor: pointer;
+
+            .menuItems {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            &:hover {
+                background-color: color.$primary-95-new;
+
+                .rightIcon {
+                    visibility: visible;
+                    opacity: 1;
+                }
+            }
+
+            .rightIcon {
+                transition: visibility 0.1s ease-out, opacity 0.1s ease-out;
+                opacity: 0;
+                visibility: hidden;
+            }
+            svg {
+                color: color.$neutral-80-default;
+            }
+        }
+
+    }
+}

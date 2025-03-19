@@ -1,0 +1,43 @@
+@use '../../../app/styles/color' as *;
+
+.searchMenu {
+    position: absolute;
+    top: 100%;
+    border: 2px solid $primary-80;
+    background: $primary-100-white-new;
+    width: 450px;
+    border-radius: 5px;
+
+    .searchMenuItemContainer {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        gap: .5rem;
+
+
+        .searchMenuItem {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+        }
+
+        svg {
+            width: 15px;
+            height: 15px;
+            margin: 0px 5px 0px 5px;
+            color: $primary-80-new;
+            cursor: pointer;
+        }
+    }
+
+}
+
+.searchMenuLoading {
+    position: absolute;
+    top: 100%;
+    border: 2px solid rgb(233, 233, 233);
+    background: rgb(233, 233, 233);
+    width: 450px;
+    border-radius: 5px;
+}

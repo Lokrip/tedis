@@ -1,4 +1,4 @@
-import LoginModal from '@/components/layouts/Modal/login/LoginModal';
+import LoginModal from '@/shared/Modal/login/LoginModal';
 import {FC} from 'react';
 
 const LoginDynamicPage: FC = () => {

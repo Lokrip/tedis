@@ -1,0 +1,10 @@
+@use "../../../../../app/styles/color" as *;
+
+.titleCard {
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+
+    .titleCardName {
+        color: $primary-70-new;
+    }
+}

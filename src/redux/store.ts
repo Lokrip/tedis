@@ -7,9 +7,9 @@ import rootReducer from './reducers/reducer'
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
-        middleware: (getDefaultMiddleware) => 
+        middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware().concat(bannerApi.middleware)
-        
+
     })
 }
 

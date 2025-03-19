@@ -10,13 +10,15 @@ import utilsReducer from './utils/UtilsSlice';
 import menuReducer from "./header/MenuSlice";
 
 import { bannerApi } from '../services/banner/BannerService'
+import { searchParamApi } from '../services/header/SearchService';
 
 
 const headerInitialReducers = ({
     headerReduser,
     searchReduser,
     navigationNavbarReduser,
-    menuReducer
+    menuReducer,
+    [searchParamApi.reducerPath]: searchParamApi.reducer
 })
 
 const utilsInitialReducers = ({
@@ -39,5 +41,6 @@ const rootReducer = combineReducers({
     ...accountInitialReducers,
     ...utilsInitialReducers
 })
+
 
 export default rootReducer;

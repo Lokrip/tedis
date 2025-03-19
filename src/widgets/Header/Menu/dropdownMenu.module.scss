@@ -1,0 +1,15 @@
+@use '../../../app/styles/color' as color;
+
+.dropdownMenu {
+    position: absolute;
+    top: 100%;
+    margin-top: 10px;
+    border-radius: 5px;
+    background: color.$primary-100-white-new;
+    right: 0;
+    width: 200px;
+    padding: 5px;
+    -webkit-box-shadow: 0px 0px 107px -10px rgba(0,0,0,0.53);
+    -moz-box-shadow: 0px 0px 107px -10px rgba(0,0,0,0.53);
+    box-shadow: 0px 0px 20px -10px rgba(0,0,0,0.53);
+}

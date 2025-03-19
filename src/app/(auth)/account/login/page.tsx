@@ -1,6 +1,6 @@
 "use client"
 
-import LoginForm from "@/components/ui/form/LoginForm"
+import LoginForm from "@/widgets/ui/form/LoginForm"
 
 export default function LoginPage() {
 
