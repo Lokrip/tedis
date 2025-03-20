@@ -14,16 +14,17 @@ interface PriceProps {
 }
 
 const Price: FC<PriceProps> = ({price, priceDiscount}) => {
+    console.log("Price discount", + priceDiscount)
     return (
         <div className={clsx(styles.productCardPrice, 'price', 'flex-center')}>
             <div className={clsx(styles.priceWrap, "flex-center")}>
-                <HeadingH level={4} content={price} />
+                <HeadingH level={4} content={priceDiscount} />
                 <CircleDollarSign height={20} width={20} />
             </div>
 
             <div className={clsx(styles.priceDiscount, 'flex-center')}>
                 <TextPl as='p' maxLength={9}>
-                    {priceDiscount}
+                    {price}
                 </TextPl>
                 <CircleDollarSign height={15} width={15} />
             </div>

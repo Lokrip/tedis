@@ -22,8 +22,8 @@ const PCard: FC<PCardProps> = ({item}) => {
 
                 <ProductCardWrapper.CardMiddleWrap>
                     <CardMiddleWrap
-                        price={item.price_discount}
-                        priceDiscount={item.price}
+                        price={item.price}
+                        priceDiscount={item.price_discount}
                         title={item.title}
                         param={item.slug}
                     />

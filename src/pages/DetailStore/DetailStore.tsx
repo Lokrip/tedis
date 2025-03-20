@@ -4,9 +4,9 @@ import styles from './detailStore.module.scss';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import { MainDetailStore } from './MainDetailStore/MainDetailStore';
 import ProductGrid from './ProductGrid/ProductGrid';
-import { IParamPrimaryType } from '../../../types/react.type';
 import clsx from 'clsx';
 import { Container } from '@/widgets/module/Container/Container';
+import { IParamPrimaryType } from '@/types/react.type';
 
 interface DetailStoreProps extends IParamPrimaryType {}
 

@@ -36,7 +36,7 @@ class ProductService:
             raise ValueError("view not found!")
 
         queryset = Product.objects.order_by(
-                "-created_at"
+            "-created_at"
         ).select_related(
             "category"
         ).prefetch_related(

@@ -12,6 +12,7 @@ import { Search } from 'lucide-react';
 
 interface SearchMenuProps {
     searchParam: string;
+    findElement?: (search: string) => void;
 }
 
 interface SearchMenuListProps {
@@ -21,7 +22,13 @@ interface SearchMenuListProps {
 const SearchMenuList: FC<
     SearchMenuListProps
     & SearchMenuProps
-> = ({searchParamList, searchParam}) => {
+> = ({searchParamList, searchParam, findElement}) => {
+    const onSearch = (item: any) => {
+        if(findElement) {
+            findElement(item.query);
+        }
+    }
+
     return searchParamList?.length !== 0 ? (
         <List
             className={styles.searchMenuList}
@@ -36,7 +43,7 @@ const SearchMenuList: FC<
                 }
 
                 return (
-                    <div className={styles.searchMenuItemContainer}>
+                    <div onClick={() => onSearch(item)} className={styles.searchMenuItemContainer}>
                         <IconComponent />
                         <Item className={styles.searchMenuItem}>
                             {truncate_string(item.query, 50)}
@@ -57,7 +64,7 @@ const SearchMenuList: FC<
     )
 }
 
-const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
+const SearchMenu: FC<SearchMenuProps> = ({searchParam, findElement}) => {
     const {
         data: searchParamList,
         isLoading: isLoadingSearchParamList,
@@ -70,6 +77,7 @@ const SearchMenu: FC<SearchMenuProps> = ({searchParam}) => {
                 <SkeletonSearchParam />
             ) : (
                 <SearchMenuList
+                    findElement={findElement}
                     searchParam={searchParam}
                     searchParamList={searchParamList}
                 />

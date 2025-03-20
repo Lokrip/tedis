@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
@@ -5,7 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
 
 from server.models.status.customers_status import Role
-
+from server.models.abstract.abstract_created_at import DateCreatedModel
+from server.core.utils.date import default_expiry_time
 
 class Customers(AbstractUser):
     """User AbstractUser Model
@@ -81,3 +84,31 @@ class Customers(AbstractUser):
     def __str__(self):
         return self.email
 
+class GenerateCodeConfirmationEmail(models.Model, DateCreatedModel):
+    user = models.ForeignKey(
+        Customers,
+        on_delete=models.CASCADE,
+        verbose_name=_('User')
+    )
+    code = models.CharField(
+        max_length=6,
+        verbose_name=_('Confirmation Code'),
+        help_text=_('A 6-digit confirmation code')
+    )
+    uuid = models.UUIDField(
+        unique=True,
+        editable=False,
+        verbose_name=_('Uuid CODE'),
+        default=uuid.uuid4
+    )
+    expiry_time = models.DateTimeField(
+        verbose_name=_('Expiry Time'),
+        default=default_expiry_time() #текущее время создание + 10 минут
+    )
+
+    def __str__(self):
+        return str(self.pk)
+
+    class Meta:
+        verbose_name = 'Generate Code'
+        verbose_name_plural = 'Generate Codes'

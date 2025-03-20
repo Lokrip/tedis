@@ -5,5 +5,6 @@ const API_URL = process.env.PRODUCT_API_URL
 export const serviceApi = createApi({
     reducerPath: 'bannerApi',
     baseQuery: fetchBaseQuery({baseUrl: API_URL}),
+    tagTypes: ['SearchQuery'],
     endpoints: _ => ({})
 })

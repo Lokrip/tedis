@@ -69,6 +69,12 @@ services:
           - redis
         depends_on:
             - redis
+            - db-54321
+        environment:
+            - DB_HOST=db-54321
+            - DB_NAME=tedis
+            - DB_USER=dbuser
+            - DB_PASS=pass
 
     flower:
         build:

@@ -22,10 +22,10 @@ class ProductFieldsAllSerializer(serializers.ModelSerializer):
 
 class ProductBaseSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(required=False)
-    price_discount = serializers.SerializerMethodField()
+    # price_discount = serializers.SerializerMethodField()
 
-    def get_price_discount(self, instance):
-        return instance.price * (1 - instance.discount / 100) if instance.discount else instance.price
+    # def get_price_discount(self, instance):
+    #     return instance.price * (1 - instance.discount / 100) if instance.discount else instance.price
 
     class Meta:
         model = Product

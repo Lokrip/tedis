@@ -7,7 +7,11 @@ from rest_framework.viewsets import (
     ModelViewSet
 )
 from rest_framework.response import Response
-from rest_framework.status import HTTP_201_CREATED
+from rest_framework.decorators import action
+from rest_framework.status import (
+    HTTP_201_CREATED,
+    HTTP_200_OK
+)
 
 from server.serializers.auth_serializers import (
     CustomTokenObtainPairSerializer,
@@ -29,6 +33,10 @@ class RegisterViewSet(ViewSet):
         serializer.is_valid(raise_exception=True)
         self.prefome_create(serializer)
         return Response(serializer.data, status=HTTP_201_CREATED)
+    @action(detail=False, methods=['post'], url_path="verify")
+    def verify(self, request):
+        serializer = 
+        return Response({"message": "Verification successful"}, status=HTTP_200_OK)
 
     def prefome_create(self, instanse):
         instanse.save()

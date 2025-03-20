@@ -49,7 +49,6 @@ class CustomTokenRefreshSerializer(TokenRefreshSerializer):
         return data
 
 
-
 class RegisterSerializer(serializers.ModelSerializer):
     location = CountryField()
     username = serializers.CharField(max_length=40)
@@ -74,3 +73,15 @@ class RegisterSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
         return super().create(validated_data)
+
+
+class VerifySerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    code = serializers.IntegerField()
+
+    def validate_email(self, email):
+        return is_valid_email(email)
+
+    def create(self, validated_data):
+        return super().create(validated_data)
+

@@ -1,7 +1,6 @@
 "use client";
+import Auth from '@/features/Auth/Auth';
 import { FC, useEffect } from 'react';
-import Auth from '@/components/screens/auth/Auth';
-import { useActions, useAppSelector } from '@/hooks';
 
 interface LoginFormProps {}
 

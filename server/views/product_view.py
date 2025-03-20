@@ -1,6 +1,6 @@
 import random
 
-from rest_framework.viewsets import ViewSet
+from rest_framework.viewsets import ViewSet, ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -13,6 +13,7 @@ from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrRead
 from server.models import Product, Category
 from server.exception import DATA_DELETION_FAILED
 from server.mixins import ProductMixin
+
 
 
 class ProductViewSet(ViewSet):
@@ -109,11 +110,6 @@ class ProductViewSet(ViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
 
-    def perform_create(self, serializer):
-        serializer.save()
-
-    def perform_update(self, serializer):
-        serializer.save()
 
     def get_success_headers(self, location):
         try:

@@ -3,14 +3,14 @@
 import {FC, MouseEvent, useState} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
-import { Item } from '../../../../ui/list/item/Item';
-import ImageR from '../../../../ui/assets/image/Image';
-import { List } from '../../../../ui/list/List';
-import { IPost } from '../../../../../types/app/models/IPost.type';
 import clsx from 'clsx';
+import { List } from 'lucide-react';
+import { Item } from '@/widgets/ui/list/item/Item';
+import ImageR from '@/widgets/ui/assets/image/Image';
+import { IProduct } from '@/types/app/models/IProduct.type';
 
 interface ImageContainerProductProps {
-    product: IPost
+    product: IProduct
 }
 
 const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {

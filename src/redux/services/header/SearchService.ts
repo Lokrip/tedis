@@ -7,14 +7,16 @@ export const searchParamApi = serviceApi.injectEndpoints({
             query: (param) => ({
                 url: "/api/v1/search/suggestions/",
                 params: {query: param}
-            })
+            }),
+            providesTags: result => ["SearchQuery"]
         }),
         createSearchParam: builder.mutation<string, {query: string}>({
             query: (query) => ({
                 url: "/api/v1/search/add-popular-search/",
                 method: "POST",
                 body: query
-            })
+            }),
+            invalidatesTags: ['SearchQuery']
         })
     })
 })

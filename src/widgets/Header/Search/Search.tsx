@@ -19,13 +19,11 @@ export default function Search(): JSX.Element {
     const { search, isMenuOpen } = useAppSelector(state => state.searchReduser)
     const menuRef = useRef<HTMLFormElement | null>(null);
 
-    const handleCreateSearchQuery = async (search: string) => {
+    const handleCreateSearchQuery = useCallback(async (search: string) => {
         await createSearchParam({query: search})
-    }
+    }, [search, createSearchParam])
 
-    const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-
+    const findElement = (search: string) => {
         if(search) {
             handleCreateSearchQuery(search)
             const urlWithParams = pages.addSearchParam(pages.home,  {
@@ -35,7 +33,11 @@ export default function Search(): JSX.Element {
         } else {
             router.push(pages.home)
         }
+    }
 
+    const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        findElement(search);
     }, [router, search]);
 
     const handleChange = (value: string) => {
@@ -75,7 +77,7 @@ export default function Search(): JSX.Element {
     return (
         <Form ref={menuRef} className={styles.formSearch} onSubmit={onSubmit}>
             <SearchSystem onMouseDown={onClick} onChange={onChange} />
-            {isMenuOpen && (<SearchMenu searchParam={search} />)}
+            {isMenuOpen && (<SearchMenu findElement={findElement} searchParam={search} />)}
         </Form>
     )
 }

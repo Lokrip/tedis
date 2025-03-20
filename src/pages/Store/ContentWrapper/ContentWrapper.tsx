@@ -2,7 +2,7 @@ import {FC} from 'react';
 import styles from './contentWrapper.module.scss';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
 import ProductList from './ProductList/ProductList';
-import { getProductsData } from '@/redux/service/api/product.api';
+import { getProductsData } from '@/utils/service/api/product.api';
 import { ProductError } from '@/types/app/enum/product.enum';
 import { HeadingH } from '@/widgets/plagins/H.number';
 

@@ -1,4 +1,4 @@
-import Store from "@/components/layouts/Store/Store";
+import Store from "@/pages/Store/Store";
 
 export const revalidate = 1
 

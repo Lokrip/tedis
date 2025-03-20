@@ -13,6 +13,7 @@ router.register(r"auth", RegisterViewSet, basename="auth")
 
 auth_urlpatterns = [
     path('api/v1/drf-auth/', include('rest_framework.urls')),
+    
     path('api/v1/', include(router.urls)),
 
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),

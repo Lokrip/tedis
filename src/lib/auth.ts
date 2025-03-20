@@ -3,7 +3,7 @@ import { NextAuthOptions } from "next-auth";
 import { AuthenticatedFields, CustomJWTType, JWTUser, ReponseUserToken } from "../types/app/auth.types";
 import pages from "../config/route";
 
-import { requestTokenAuthorize, refreshAccessToken } from "../redux/service/api/token.api";
+import { requestTokenAuthorize, refreshAccessToken } from "../utils/service/api/token.api";
 import { JWT } from "next-auth/jwt";
 
 

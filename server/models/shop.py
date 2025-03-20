@@ -13,6 +13,7 @@ from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_updated_at import DateUpdatedModel
 from server.models.abstract.abstract_title import ModelTitle
 from server.core.utils.slug import generate_unique_slug
+from server.tasks.product_tasks import set_price_discount
 
 from server.models.status.product_status import (
     ProductAccessibilityStatus,
@@ -146,13 +147,20 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         verbose_name=_("product discount (%)"),
         default=0
     )
+    price_discount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        verbose_name=_("product price discount"),
+        default=99.99
+    )
 
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, save_modal=True, **kwargs):
+        if save_modal:
+            set_price_discount.delay(self.id)
         if not self.slug:
             generate_and_save_slug(self)
-        else:
-            return super().save(*args, **kwargs)
+        return super().save(*args, **kwargs)
 
 
     class Meta:

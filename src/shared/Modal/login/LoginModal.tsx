@@ -5,9 +5,9 @@ import {FC, useEffect} from 'react';
 import styles from './loginModal.module.scss';
 import Modal from '../Modal';
 import LoginForm from '@/widgets/ui/form/LoginForm';
-import { useActions, useAppSelector } from '@/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import pages from '@/config/route';
+import { useActions, useAppSelector } from '@/utils/hooks';
 
 interface LoginModalProps {}
 
