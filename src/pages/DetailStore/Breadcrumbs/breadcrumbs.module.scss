@@ -1,0 +1,36 @@
+@use "../../../app/styles/color" as *;
+
+
+.productPageBreadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 20px;
+
+    .breadcrumbsList {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .breadcrumbsItemsContainer {
+            color: $neutral-60-default;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            &:hover {
+                color: $primary-80;
+            }
+
+            .icon {
+                display: flex;
+                align-items: center;
+                svg {
+                    color: $neutral-60-default;
+                    width: 15px;
+                }
+            }
+        }
+    }
+}

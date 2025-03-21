@@ -1,26 +1,40 @@
 import {FC} from 'react';
 
-import ButtonSet from '../../../ui/elements/button/ButtonSet';
-import { List } from "../../../ui/list/List"
-import { Item } from "../../../ui/list/item/Item"
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import styles from './breadcrumbs.module.scss';
+import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
+import { List } from '@/widgets/ui/list/List';
+import { Item } from '@/widgets/ui/list/item/Item';
+import clsx from 'clsx';
 
 interface BreadcrumbsProps {}
 
 const Breadcrumbs: FC<BreadcrumbsProps> = () => {
+    const data = [
+        {id: 1, page: "HELLO WORLD", href: "Normal"},
+        {id: 2, page: "HELLO WORLD 2", href: "Normal 1"},
+    ]
+
     return (
-        <div className="product-page__breadcrumbs breadcrumbs">
+        <div className={clsx(styles.productPageBreadcrumbs, "breadcrumbs")}>
             <ButtonSet buttonType="btnV4">
                 <ArrowLeft />
             </ButtonSet>
 
             <List
-                items={[{id: 1, page: "HELLO WORLD", href: "Normal"}]}
-                mapItems={(item) => (
-                    <Item className={styles.sliderItemsImageContainer}>
-                       {item.page}
+                items={data}
+                className={styles.breadcrumbsList}
+                mapItems={(item, index) => (
+                    <Item className={styles.breadcrumbsItemsContainer}>
+                        <div className={styles.text}>
+                            {item.page}
+                        </div>
+                        {index! + 1 < data.length && (
+                            <div className={styles.icon}>
+                                <ArrowRight />
+                            </div>
+                        )}
                     </Item>
                 )}
             />

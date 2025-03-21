@@ -12,12 +12,7 @@ interface DetailStoreProps extends IParamPrimaryType {}
 
 const DetailStore: FC<DetailStoreProps> = ({param}) => {
     return (
-        <MainDetailStore className={
-            clsx(
-                styles.layoutDetailStore,
-                "main-indent-block"
-            )
-        }>
+        <MainDetailStore className={"main-indent-block"}>
             <Container>
                 <MainDetailStore.Breadcrumbs>
                     <Breadcrumbs />

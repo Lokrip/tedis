@@ -1,8 +1,8 @@
-import { ClassNameType } from "../../../../types/react.type";
-import { attachSubComponents, correctClass } from "../../../../utils";
 import { FC, PropsWithChildren } from "react";
 
 import styles from '../detailStore.module.scss'
+import { attachSubComponents, correctClass } from "@/utils/utils";
+import { ClassNameType } from "@/types/react.type";
 
 
 const BreadcrumbsComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {

@@ -1,15 +1,16 @@
 import {FC} from 'react';
 
 import styles from './characteristics.module.scss';
-import { HeadingH } from '../../../../plagins/H.number';
-import RatingCard from '../../../../ui/elements/card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
-import Price from '../../../../ui/elements/card/CardElements/CardMiddleWrap/Price/Price';
-import { List } from '../../../../ui/list/List';
-import { Item } from '../../../../ui/list/item/Item';
-import { IPost } from '../../../../../types/app/models/IPost.type';
+import { HeadingH } from '@/widgets/plagins/H.number';
+import { IProduct } from '@/types/app/models/IProduct.type';
+import RatingCard from '@/shared/Card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
+import Price from '@/shared/Card/CardElements/CardMiddleWrap/Price/Price';
+import { List } from '@/widgets/ui/list/List';
+import { Item } from '@/widgets/ui/list/item/Item';
+
 
 interface СharacteristicsProps {
-    product: IPost
+    product: IProduct
 }
 
 const Сharacteristics: FC<СharacteristicsProps> = ({product}) => {
@@ -26,7 +27,7 @@ const Сharacteristics: FC<СharacteristicsProps> = ({product}) => {
                 <RatingCard />
             </div>
             <div className="product__characteristics-price__wrapper">
-                <Price price={product.price_with_discount} priceDiscount={product.price} />
+                <Price price={product.price_discount} priceDiscount={product.price} />
             </div>
 
             <div className="product__full-description">

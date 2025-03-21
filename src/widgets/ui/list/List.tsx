@@ -5,7 +5,7 @@ import { forwardRef, Fragment, PropsWithChildren, ReactNode } from "react";
 
 interface ListProps extends ClassNameType {
     items: any;
-    mapItems: (item: any) => ReactNode;
+    mapItems: (item: any, index?: number) => ReactNode;
 }
 
 const ListContainer = forwardRef<HTMLUListElement, PropsWithChildren & ClassNameType>(
@@ -26,9 +26,9 @@ export const List = forwardRef<HTMLUListElement, ListProps>(
     ({ items, mapItems, className }, ref) => {
       return (
           <ListContainer ref={ref} className={className}>
-              {items?.map((item: any) => (
+              {items?.map((item: any, index: number) => (
                   <Fragment key={item.id}>
-                      {mapItems(item)}
+                      {mapItems(item, index)}
                   </Fragment>
               ))}
           </ListContainer>
