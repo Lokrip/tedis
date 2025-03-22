@@ -8,6 +8,7 @@ from typing import Type
 
 from server.service.product_service import ProductService
 from server.service.category_service import CategoryService
+from server.service.auth_service import AuthService
 from server.exception import CustomAttributeException
 
 class Mixin:
@@ -137,3 +138,16 @@ class CategoryMixin(CrudMixin):
 
     def deleteCategory(self, slug):
         return self.categoryService.category_delete(slug=slug)
+
+
+class AuthMixin(CrudMixin):
+    def __init__(self, model):
+        super().__init__(model)
+        self.authService = AuthService()
+
+    def __str__(self):
+        return "This mixin adds additional CRUD methods for the %s model" % (
+            self.model.__name__
+        )
+    def sendCodeForCustomer(self, request, user, uuid_code):
+        return self.authService.send_mail(user, uuid_code)

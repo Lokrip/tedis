@@ -1,0 +1,28 @@
+@use "../../../../../app/styles/color" as *;
+
+.ratingCard {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+
+    font-size: 18px;
+    color: $neutral-30-default;
+
+    cursor: pointer;
+
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            color: $yellow;
+        }
+    }
+
+    .assessmentsCard {
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+    }
+}

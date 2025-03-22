@@ -1,3 +1,5 @@
+import uuid
+
 from rest_framework_simplejwt.serializers import (
     TokenObtainPairSerializer,
     TokenRefreshSerializer
@@ -11,7 +13,15 @@ from django.contrib.auth.hashers import make_password
 from django_countries.serializer_fields import CountryField
 
 from server.models import Customers
-from server.validators import is_valid_username, is_valid_email
+from server.validators import (
+    is_valid_username,
+    is_valid_email
+)
+from server.tasks.auth_tasks import send_mail_to_auth
+from server.exception import (
+    DATA_NOT_FOUND,
+    VALIDATION_ERROR
+)
 
 
 FORBIDDEN_USERNAMES = {"admin", "root", "superuser", "moderator", "support"}
@@ -70,9 +80,30 @@ class RegisterSerializer(serializers.ModelSerializer):
     def validate_email(self, email):
         return is_valid_email(email)
 
+    def auth(self, customer: Customers):
+        if not customer:
+            raise ValueError(DATA_NOT_FOUND)
+
+        email = customer.email
+        password = customer.password
+
+        if (
+            email is not None and
+            password is not None
+        ):
+            uuid_code = uuid.uuid4()
+            send_mail_to_auth.delay(customer.pk, str(uuid_code))
+            return customer
+        else:
+            raise serializers.ValidationError(VALIDATION_ERROR)
+
+
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])
-        return super().create(validated_data)
+        customer = Customers.objects.create(**validated_data)
+        customer.is_active = False
+        customer.save()
+        return self.auth(customer)
 
 
 class VerifySerializer(serializers.Serializer):

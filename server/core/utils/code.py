@@ -1,4 +1,7 @@
 import uuid
+import random
+
+from server.models import GenerateCodeConfirmationEmail
 
 def generate_unique_slug(model, **kwargs):
     while True:
@@ -11,3 +14,10 @@ def generate_unique_slug(model, **kwargs):
         )
         if not model.objects.filter(slug=temp_slug).exists():
             return temp_slug
+
+
+def generate_unique_code(length: int):
+    while True:
+        code = ''.join([str(random.randint(0, 9)) for _ in range(length)])
+        if not GenerateCodeConfirmationEmail.objects.filter(code=code).exists():
+            return code

@@ -1,5 +1,8 @@
 from server.models.core import PostTags
-from server.models.customers import Customers
+from server.models.customers import (
+    Customers,
+    GenerateCodeConfirmationEmail
+)
 
 from server.models.shop import (
     Product,
@@ -11,8 +14,9 @@ from server.models.abstract.abstract_title import ModelTitle
 
 __all__ = (
     "Customers",
-    "PostTags",
+    "GenerateCodeConfirmationEmail",
 
+    "PostTags",
     "Product",
     "Category",
     "PopularSearch",

@@ -24,9 +24,8 @@ const MainCardMiddleWrap: FC<PropsWithChildren & ClassNameType> = ({className, c
     )
 }
 
-
 const MainCardBottomWrap: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
-    const classNameValid = correctClass('card__bottom-wrap-container', className!)
+    const classNameValid = correctClass(styles.cardBottomWrapContainer, className!)
 
     return (
         <div className={classNameValid} {...props}>

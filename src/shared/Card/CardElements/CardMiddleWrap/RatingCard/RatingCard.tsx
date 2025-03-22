@@ -16,7 +16,9 @@ const AssessmentsCard: FC = () => {
 const RatingCard: FC = () => {
     return (
         <div className={styles.ratingCard}>
-            <Star />
+            <div className={styles.icon}>
+                <Star />
+            </div>
             <TextPl as='span'>4,8</TextPl>
             <AssessmentsCard />
         </div>

@@ -16,17 +16,17 @@ interface СharacteristicsProps {
 const Сharacteristics: FC<СharacteristicsProps> = ({product}) => {
     return (
         <div className="product__page-characteristics">
-            <div className="product__characteristics-title__wrapper">
+            <div className={styles.productCharacteristicsTitleWrapper}>
                 <HeadingH
-                    className={styles.titleCardAuthor}
+                    className={styles.titleCard}
                     level={4}
                     content={product.title}
                 />
             </div>
-            <div className="product__characteristics-review__wrapper">
+            <div className={styles.productCharacteristicsReviewWrapper}>
                 <RatingCard />
             </div>
-            <div className="product__characteristics-price__wrapper">
+            <div className={styles.productCharacteristicsPriceWrapper}>
                 <Price price={product.price_discount} priceDiscount={product.price} />
             </div>
 

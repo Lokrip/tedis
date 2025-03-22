@@ -35,7 +35,7 @@ class RegisterViewSet(ViewSet):
         return Response(serializer.data, status=HTTP_201_CREATED)
     @action(detail=False, methods=['post'], url_path="verify")
     def verify(self, request):
-        serializer = 
+        # serializer = 
         return Response({"message": "Verification successful"}, status=HTTP_200_OK)
 
     def prefome_create(self, instanse):

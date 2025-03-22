@@ -12,7 +12,7 @@ from django.utils.text import slugify
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_updated_at import DateUpdatedModel
 from server.models.abstract.abstract_title import ModelTitle
-from server.core.utils.slug import generate_unique_slug
+from server.core.utils.code import generate_unique_slug
 from server.tasks.product_tasks import set_price_discount
 
 from server.models.status.product_status import (

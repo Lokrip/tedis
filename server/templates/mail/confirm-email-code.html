@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+
+
+        body .code {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            padding: 20px;
+            background: rgb(204, 255, 170);
+            border-radius: 10px;
+        }
+
+        body .code h1 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="code">
+        {% if random_numbers %}
+            <h1>{{ random_numbers }}</h1>
+        {% endif %}
+    </div>
+</body>
+</html>

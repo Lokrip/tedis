@@ -84,7 +84,7 @@ class Customers(AbstractUser):
     def __str__(self):
         return self.email
 
-class GenerateCodeConfirmationEmail(models.Model, DateCreatedModel):
+class GenerateCodeConfirmationEmail(DateCreatedModel):
     user = models.ForeignKey(
         Customers,
         on_delete=models.CASCADE,
@@ -112,3 +112,5 @@ class GenerateCodeConfirmationEmail(models.Model, DateCreatedModel):
     class Meta:
         verbose_name = 'Generate Code'
         verbose_name_plural = 'Generate Codes'
+
+

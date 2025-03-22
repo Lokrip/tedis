@@ -8,7 +8,7 @@ interface CardBottomWrapProps {}
 const CardBottomWrap: FC<CardBottomWrapProps> = () => {
     return (
         <div className={styles.cardBottomWrap}>
-            <ButtonSet buttonType="primary">
+            <ButtonSet className={styles.cardBottom} buttonType="primary">
                 Добавить в корзину
             </ButtonSet>
         </div>
