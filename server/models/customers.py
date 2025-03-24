@@ -88,7 +88,7 @@ class GenerateCodeConfirmationEmail(DateCreatedModel):
     user = models.ForeignKey(
         Customers,
         on_delete=models.CASCADE,
-        verbose_name=_('User')
+        verbose_name=_('User'),
     )
     code = models.CharField(
         max_length=6,

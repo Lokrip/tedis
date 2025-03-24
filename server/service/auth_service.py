@@ -11,7 +11,7 @@ from server.models import (
 )
 
 class AuthService:
-    def send_mail(user: Customers, uuid_code):
+    def send_mail(self, user: Customers, uuid_code):
         subject = 'Confirm Your Email'
         from_email = EMAIL_HOST_USER
         random_numbers = generate_unique_code(6)
@@ -24,8 +24,20 @@ class AuthService:
                 code=random_numbers,
                 uuid=uuid_code
             )
-
-        html_content = render_to_string('main/confirm-email-code.html', {
+        """
+        {
+            "email": "lokrip2@gmail.com",
+            "password": "lol1234lol1234",
+            "username": "lokrip",
+            "first_name": "ASDASDA",
+            "last_name":"aSDASD",
+            "city":"aSDASD",
+            "zip_code": "asDASD",
+            "street": "SADASD",
+            "location": "BH"
+        }
+        """
+        html_content = render_to_string('mail/confirm-email-code.html', {
             "title": "Code is active",
             "random_numbers": random_numbers
         })

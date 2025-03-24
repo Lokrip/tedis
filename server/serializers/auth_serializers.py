@@ -12,7 +12,10 @@ from django.contrib.auth.hashers import make_password
 
 from django_countries.serializer_fields import CountryField
 
-from server.models import Customers
+from server.models import (
+    Customers,
+    GenerateCodeConfirmationEmail
+)
 from server.validators import (
     is_valid_username,
     is_valid_email
@@ -107,12 +110,6 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class VerifySerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    code = serializers.IntegerField()
-
-    def validate_email(self, email):
-        return is_valid_email(email)
-
-    def create(self, validated_data):
-        return super().create(validated_data)
-
+    class Meta:
+        model = GenerateCodeConfirmationEmail
+        fields = [""]

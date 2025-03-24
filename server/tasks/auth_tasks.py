@@ -7,3 +7,4 @@ def send_mail_to_auth(customer_id, uuid_code):
     mixin = AuthMixin(Customers)
     customer = mixin.findById(customer_id)
     return mixin.sendCodeForCustomer(user=customer, uuid_code=uuid_code)
+

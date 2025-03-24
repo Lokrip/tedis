@@ -5,6 +5,8 @@ from split_settings.tools import include, optional
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+print(BASE_DIR / "templates")
+
 
 ENVVAR_SETTINGS_PREFIX = "CORESETTINGS_"
 

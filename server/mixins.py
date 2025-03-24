@@ -149,5 +149,5 @@ class AuthMixin(CrudMixin):
         return "This mixin adds additional CRUD methods for the %s model" % (
             self.model.__name__
         )
-    def sendCodeForCustomer(self, request, user, uuid_code):
+    def sendCodeForCustomer(self, user, uuid_code):
         return self.authService.send_mail(user, uuid_code)
