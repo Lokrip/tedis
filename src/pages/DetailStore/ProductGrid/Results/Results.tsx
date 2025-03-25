@@ -1,14 +1,13 @@
 import {FC} from 'react';
 
-import styles from './results.module.scss';
 import Price from '@/shared/Card/CardElements/CardMiddleWrap/Price/Price';
 import PriceBadgeVeryGood from '@/widgets/ui/elements/badge/priceBadge/PriceBadgeVeryGood';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
-import { IProduct } from '@/types/app/models/IProduct.type';
+import { IProductDetails } from '@/types/app/models/IProductDetails.type';
 
 
 interface ResultsProps {
-    product: IProduct
+    product: IProductDetails
 }
 
 const Results: FC<ResultsProps> = ({product}) => {

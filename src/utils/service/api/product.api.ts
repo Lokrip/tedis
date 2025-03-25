@@ -1,6 +1,7 @@
 import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from "@/types/app/api/product.type";
 import { axios } from "@/lib/axios";
 import { IProduct } from "@/types/app/models/IProduct.type";
+import { IProductDetails } from "@/types/app/models/IProductDetails.type";
 
 
 async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
@@ -37,7 +38,7 @@ async function getProductsData<T>(search: ProductFunApiSearchAttributes, {
 
 async function getProductData(param: string | number) {
     try {
-        const data = await axios.get<IProduct>(`/api/v1/products/${param}/`)
+        const data = await axios.get<IProductDetails>(`/api/v1/products/${param}/`)
         return data;
     } catch(error) {
         console.error(error)

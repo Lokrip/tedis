@@ -2,15 +2,15 @@ import {FC} from 'react';
 
 import styles from './characteristics.module.scss';
 import { HeadingH } from '@/widgets/plagins/H.number';
-import { IProduct } from '@/types/app/models/IProduct.type';
 import RatingCard from '@/shared/Card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
 import Price from '@/shared/Card/CardElements/CardMiddleWrap/Price/Price';
 import { List } from '@/widgets/ui/list/List';
 import { Item } from '@/widgets/ui/list/item/Item';
+import { IProductDetails } from '@/types/app/models/IProductDetails.type';
 
 
 interface СharacteristicsProps {
-    product: IProduct
+    product: IProductDetails
 }
 
 const Сharacteristics: FC<СharacteristicsProps> = ({product}) => {

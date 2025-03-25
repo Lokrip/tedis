@@ -25,6 +25,16 @@ const ProductGridComponets: FC<PropsWithChildren & ClassNameType> = ({className,
     )
 }
 
+const SimilarProductsComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+    const classNameValid = correctClass(styles.similarProductsContainer, className!);
+
+    return (
+        <div className={classNameValid} {...props}>
+            {children}
+        </div>
+    )
+}
+
 
 const MainDetailStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
     const classNameValid = correctClass(styles.detailStore, className!)
@@ -42,5 +52,6 @@ export const MainDetailStore = attachSubComponents(
     {
         "Breadcrumbs": BreadcrumbsComponets,
         "ProductGrid": ProductGridComponets,
+        "SimilarProducts": SimilarProductsComponets
     }
 )

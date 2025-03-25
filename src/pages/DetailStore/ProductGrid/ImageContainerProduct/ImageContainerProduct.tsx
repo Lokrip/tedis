@@ -1,16 +1,16 @@
 "use client"
 
-import {FC, MouseEvent, useState} from 'react';
+import {FC} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
 import clsx from 'clsx';
 import { Item } from '@/widgets/ui/list/item/Item';
 import ImageR from '@/widgets/ui/assets/image/Image';
-import { IProduct } from '@/types/app/models/IProduct.type';
 import { List } from '@/widgets/ui/list/List';
+import { IProductDetails } from '@/types/app/models/IProductDetails.type';
 
 interface ImageContainerProductProps {
-    product: IProduct
+    product: IProductDetails
 }
 
 const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {

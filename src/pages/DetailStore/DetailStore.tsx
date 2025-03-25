@@ -7,10 +7,15 @@ import ProductGrid from './ProductGrid/ProductGrid';
 import clsx from 'clsx';
 import { Container } from '@/widgets/module/Container/Container';
 import { IParamPrimaryType } from '@/types/react.type';
+import { getProductData } from '@/utils/service/api/product.api';
+import SimilarProducts from './SimilarProducts/SimilarProducts';
 
 interface DetailStoreProps extends IParamPrimaryType {}
 
-const DetailStore: FC<DetailStoreProps> = ({param}) => {
+const DetailStore: FC<DetailStoreProps> = async ({param}) => {
+
+    const data = await getProductData(param);
+
     return (
         <MainDetailStore className={"main-indent-block"}>
             <Container>
@@ -18,8 +23,11 @@ const DetailStore: FC<DetailStoreProps> = ({param}) => {
                     <Breadcrumbs />
                 </MainDetailStore.Breadcrumbs>
                 <MainDetailStore.ProductGrid>
-                    <ProductGrid param={param} />
+                    <ProductGrid data={data} />
                 </MainDetailStore.ProductGrid>
+                <MainDetailStore.SimilarProducts>
+                    <SimilarProducts data={getProductData} />
+                </MainDetailStore.SimilarProducts>
             </Container>
         </MainDetailStore>
     );

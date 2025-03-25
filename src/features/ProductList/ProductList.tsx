@@ -20,7 +20,7 @@ const PCard = dynamic(() => import('@/shared/Card/PrimaryCard/PrimaryCard'), {
 })
 
 interface ProductListProps {
-    searchQuery: string;
+    searchQuery?: ProductFunApiSearchAttributes;
     initialProducts: IProduct[];
     getProductsData: (
         search: ProductFunApiSearchAttributes,
@@ -57,7 +57,7 @@ const ProductList: FC<ProductListProps> = ({
             ProductFunApiSearchAttributes,
             ProductFunApiPaginationAttributes
         >
-            searchQuery={searchQuery}
+            searchQuery={searchQuery ?? null}
             actions={{
                 setDataList: setProductList,
                 incrementCurrentPage: incrementCurrentPage,

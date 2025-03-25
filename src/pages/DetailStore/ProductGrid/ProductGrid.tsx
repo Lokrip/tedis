@@ -5,15 +5,13 @@ import Сharacteristics from "./Сharacteristics/Сharacteristics"
 import Results from './Results/Results';
 import ImageContainerProduct from './ImageContainerProduct/ImageContainerProduct';
 import clsx from 'clsx';
-import { getProductData } from '@/utils/service/api/product.api';
-import { IParamPrimaryType } from '@/types/react.type';
+import { IProductDetails } from '@/types/app/models/IProductDetails.type';
 
-interface ProductGridProps extends IParamPrimaryType {}
+interface ProductGridProps {
+    data: IProductDetails;
+}
 
-const ProductGrid: FC<ProductGridProps> = async ({param}) => {
-
-    const data = await getProductData(param);
-
+const ProductGrid: FC<ProductGridProps> = async ({data}) => {
     return (
         <div className={(clsx(styles.productGrid))}>
             <div className="product__page-main-slider">

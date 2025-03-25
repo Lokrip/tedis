@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import styles from './contentWrapper.module.scss';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
-import ProductList from './ProductList/ProductList';
 import { getProductsData } from '@/utils/service/api/product.api';
 import { ProductError } from '@/types/app/enum/product.enum';
 import { HeadingH } from '@/widgets/plagins/H.number';
+import ProductList from '@/features/ProductList/ProductList';
 
 interface ContentWrapperProps {
     param?: any;
@@ -15,8 +15,6 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param, dynamicParam}) =>
     const searchQuery = param.q ?? param.searchQuery;
     const currentPage = Number(param?.page) || 1;
     const category_slug = dynamicParam?.slug
-
-    console.log(category_slug)
 
     try {
         const {results: products, count: totalProductCount} = await getProductsData<IPaginationProduct>(
