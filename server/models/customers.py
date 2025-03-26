@@ -5,6 +5,7 @@ from django.contrib.auth.models import AbstractUser
 from django_countries.fields import CountryField
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
+from django.utils import timezone
 
 from server.models.status.customers_status import Role
 from server.models.abstract.abstract_created_at import DateCreatedModel
@@ -101,10 +102,15 @@ class GenerateCodeConfirmationEmail(DateCreatedModel):
         verbose_name=_('Uuid CODE'),
         default=uuid.uuid4
     )
-    expiry_time = models.DateTimeField(
-        verbose_name=_('Expiry Time'),
-        default=default_expiry_time() #текущее время создание + 10 минут
-    )
+    expiry_time = models.DateTimeField(verbose_name=_('Expiry Time'),)
+
+    def is_expired(self):
+        return self.expiry_time < timezone.now()
+
+    def save(self, *args, **kwargs):
+        if not self.expiry_time:
+            self.expiry_time = default_expiry_time()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return str(self.pk)

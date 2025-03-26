@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import get_object_or_404
 
 from rest_framework_simplejwt.views import (
@@ -46,7 +47,7 @@ class RegisterViewSet(ViewSet):
         email = request.data.get("email", None)
         code = request.data.get("code", None)
 
-        if (email is None and code is None):
+        if email is None or code is None:
             return Response({"error": "Email and code are required."}, status=HTTP_400_BAD_REQUEST)
 
         verify_code = get_object_or_404(
@@ -55,9 +56,10 @@ class RegisterViewSet(ViewSet):
             user__email=email
         )
 
-        verify_code.user.is_active = True
-        verify_code.user.save()
-        verify_code.save()
+        with transaction.atomic():
+            verify_code.user.is_active = True
+            verify_code.user.save()
+            verify_code.delete()
 
         return Response({"message": "Verification successful"}, status=HTTP_200_OK)
 
