@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import styles from './contentWrapper.module.scss';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
-import { getProductsData } from '@/utils/service/api/product.api';
+import { getProductsData, getProductsPaginationData } from '@/utils/service/api/product.api';
 import { ProductError } from '@/types/app/enum/product.enum';
 import { HeadingH } from '@/widgets/plagins/H.number';
 import ProductList from '@/features/ProductList/ProductList';
@@ -13,16 +13,11 @@ interface ContentWrapperProps {
 
 const ContentWrapper: FC<ContentWrapperProps> = async ({param, dynamicParam}) => {
     const searchQuery = param.q ?? param.searchQuery;
-    const currentPage = Number(param?.page) || 1;
     const category_slug = dynamicParam?.slug
 
     try {
         const {results: products, count: totalProductCount} = await getProductsData<IPaginationProduct>(
             searchQuery,
-            {
-                isPagination: true,
-                currentPage: currentPage
-            },
             category_slug ?? ""
         )
         return (
@@ -31,7 +26,7 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param, dynamicParam}) =>
                     searchQuery={searchQuery}
                     totalProductCount={totalProductCount}
                     initialProducts={products}
-                    getProductsData={getProductsData}
+                    getProductsData={getProductsPaginationData}
                     classNameListDataContainer={styles.productContentWrapper}
                 />
             ) : <HeadingH

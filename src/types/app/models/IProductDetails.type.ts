@@ -2,7 +2,7 @@ import { ICategory } from "./ICategory"
 import { IPaginationProduct } from "./IProduct.type"
 
 export interface IProductDetails {
-id: number
+  id: number
   price_discount: number
   category: ICategory
   created_at: string
@@ -19,5 +19,4 @@ id: number
   price: string
   discount: number
   user: number
-  similarProducts: IPaginationProduct
 }

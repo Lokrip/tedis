@@ -11,17 +11,11 @@ import { useAppSelector } from '@/utils/hooks';
 
 export interface PaginationInfiniteScrollingProps<
     T,
-    DataFunApiSearchAttributes,
     DataFunApiPaginationAttributes
 > {
-    searchQuery: DataFunApiSearchAttributes;
     initialData: T[];
 
-    getData: (
-        search: DataFunApiSearchAttributes,
-        pagination: DataFunApiPaginationAttributes
-    ) => Promise<IPaginationResponse<T>>;
-
+    getData: (pagination: DataFunApiPaginationAttributes) => Promise<IPaginationResponse<T>>;
     limit: number;
     totalDataCount: number;
 
@@ -43,7 +37,6 @@ export interface PaginationInfiniteScrollingProps<
 
 const PaginationInfiniteScrolling = <
     T extends IModelPrimary,
-    DataFunApiSearchAttributes,
     DataFunApiPaginationAttributes,
 >({
     getData,
@@ -53,11 +46,9 @@ const PaginationInfiniteScrolling = <
     totalDataCount,
     actions,
     selectors,
-    searchQuery,
     classNameListDataContainer
 }: PaginationInfiniteScrollingProps<
     T,
-    DataFunApiSearchAttributes,
     DataFunApiPaginationAttributes
 >) => {
     const { dataSelector, currentPageSelector, fetchingSelector } = selectors;
@@ -112,7 +103,7 @@ const PaginationInfiniteScrolling = <
             isPagination: true,
             currentPage: nextPage!
         } as DataFunApiPaginationAttributes
-        const { results } = await getData(searchQuery, pagintaion);
+        const { results } = await getData(pagintaion);
         setDataList([...data, ...results]);
         incrementCurrentPage(nextPage);
 

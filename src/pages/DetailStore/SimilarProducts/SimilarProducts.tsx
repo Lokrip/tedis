@@ -8,13 +8,7 @@ import {FC} from 'react';
 interface SimilarProductsProps {
     totalProductCount: number,
     products: IProduct[],
-    getProductsData: (
-        search: ProductFunApiSearchAttributes,
-        {
-            isPagination,
-            currentPage
-        }: ProductFunApiPaginationAttributes
-    ) => Promise<IPaginationResponse<IProduct>>;
+    getProductsData: (paginator: ProductFunApiPaginationAttributes) => Promise<IPaginationResponse<IProduct>>;
 }
 
 const SimilarProducts: FC<SimilarProductsProps> = ({

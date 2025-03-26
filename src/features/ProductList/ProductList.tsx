@@ -22,13 +22,7 @@ const PCard = dynamic(() => import('@/shared/Card/PrimaryCard/PrimaryCard'), {
 interface ProductListProps {
     searchQuery?: ProductFunApiSearchAttributes;
     initialProducts: IProduct[];
-    getProductsData: (
-        search: ProductFunApiSearchAttributes,
-        {
-            isPagination,
-            currentPage
-        }: ProductFunApiPaginationAttributes
-    ) => Promise<IPaginationResponse<IProduct>>;
+    getProductsData: (paginator: ProductFunApiPaginationAttributes) => Promise<IPaginationResponse<IProduct>>;
     totalProductCount: number;
     classNameListDataContainer: string;
 }
@@ -53,11 +47,8 @@ const ProductList: FC<ProductListProps> = ({
         <>
         <PaginationInfiniteScrolling<
             IProduct,
-
-            ProductFunApiSearchAttributes,
             ProductFunApiPaginationAttributes
         >
-            searchQuery={searchQuery ?? null}
             actions={{
                 setDataList: setProductList,
                 incrementCurrentPage: incrementCurrentPage,
