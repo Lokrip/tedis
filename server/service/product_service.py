@@ -9,7 +9,8 @@ from server.serializers.product_serializers import (
 from server.exception import (
     RESOURCE_NOT_FOUND,
     DATA_NOT_FOUND,
-    CREATION_FAILED
+    CREATION_FAILED,
+    REQUEST_NOT_FOUND
 )
 def product_filters(search_query, queryset):
     if not search_query:
@@ -30,7 +31,7 @@ class ProductService:
 
 
         if request is None:
-            raise ValueError("request not found!")
+            raise ValueError(REQUEST_NOT_FOUND)
 
         if view is None:
             raise ValueError("view not found!")

@@ -3,29 +3,37 @@ from decimal import Decimal
 from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
-from server.models import Product
+
+from server.models import (
+    Product,
+    ProductImage
+)
 from server.serializers.category_serializers import CategorySerializer
 from server.exception import RESOURCE_NOT_FOUND
 from server.pagination import ProductResultsSetPagination
 
 User = get_user_model()
 
+
+class ProductImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ("id", "image", "product")
+        extra_kwargs = {
+            'id': {
+                'read_only': True
+            }
+        }
+
+
 class ProductFieldsAllSerializer(serializers.ModelSerializer):
-    price_discount = serializers.SerializerMethodField()
-
-    def get_price_discount(self, instance):
-        return Decimal(instance.price) * (Decimal(1 - instance.discount / 100)) if instance.discount else instance.price
-
     class Meta:
         model = Product
         fields = "__all__"
 
 class ProductBaseSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(required=False)
-    # price_discount = serializers.SerializerMethodField()
 
-    # def get_price_discount(self, instance):
-    #     return instance.price * (1 - instance.discount / 100) if instance.discount else instance.price
 
     class Meta:
         model = Product
@@ -66,7 +74,13 @@ class ProductUpdateSerializer(ProductBaseSerializer):
 
 
 class ProductListSerializer(ProductFieldsAllSerializer):
-    pass
+    image = serializers.SerializerMethodField()
+
+    def get_image(self, obj):
+        images = ProductImage.objects.filter(product=obj, is_main=True)
+        if images.exists():
+            return images.first().get_image()
+        return None
 
 class ProductDetailSerializer(ProductFieldsAllSerializer):
     category = CategorySerializer(read_only=True)

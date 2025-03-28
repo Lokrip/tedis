@@ -1,9 +1,6 @@
 from django.urls import path, include
 
-from rest_framework.routers import (
-    SimpleRouter,
-    DefaultRouter
-)
+from rest_framework.routers import DefaultRouter
 
 from server.views.product_view import ProductViewSet
 from server.views.search_view import SearchViewSet
@@ -11,7 +8,7 @@ from server.views.search_view import SearchViewSet
 search_router = DefaultRouter()
 search_router.register(r'search', SearchViewSet, basename='search')
 
-product_router = SimpleRouter()
+product_router = DefaultRouter()
 product_router.register(r'products', ProductViewSet, basename='product')
 
 product_urlpatterns = [

@@ -5,11 +5,15 @@ from server.models import (
     Category,
     Customers,
     PopularSearch,
-    GenerateCodeConfirmationEmail
+    GenerateCodeConfirmationEmail,
+    ProductImage,
+    Banner
 )
 
 admin.site.register(Product)
+admin.site.register(Banner)
 admin.site.register(Category)
 admin.site.register(Customers)
+admin.site.register(ProductImage)
 admin.site.register(PopularSearch)
 admin.site.register(GenerateCodeConfirmationEmail)

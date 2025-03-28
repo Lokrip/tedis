@@ -9,6 +9,7 @@ from django.core.validators import (
 )
 from django.utils.text import slugify
 
+from server.models.advertising import Banner
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_updated_at import DateUpdatedModel
 from server.models.abstract.abstract_title import ModelTitle
@@ -102,6 +103,12 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         null=True,
         verbose_name=_("product category")
     )
+    banner = models.ForeignKey(
+        Banner,
+        on_delete=models.SET_NULL,
+        null=True,
+        verbose_name=_("product banner")
+    )
     accessibility = models.CharField(
         _("product accessibility"),
         max_length=30,
@@ -164,11 +171,41 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
 
 
     class Meta:
+        indexes = [
+            models.Index(fields=[
+                "title",
+                "metaTitle"
+            ])
+        ]
+
         verbose_name = _("Product")
         verbose_name_plural = _("Products")
 
     def __str__(self):
         return self.title
+
+class ProductImage(DateCreatedModel, DateUpdatedModel):
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        verbose_name=_("Product"),
+        related_name="images"
+    )
+    image = models.ImageField(
+        _('Product Image'),
+        upload_to='product/images/%Y/%m/%d/',
+        blank=True,
+        null=True
+    )
+    is_main = models.BooleanField(_('Is main'), default=False)
+    def get_image(self):
+        return self.image.url
+    def __str__(self):
+        return f'{self.product.title} -> {self.image.url}'
+
+    class Meta:
+        verbose_name = _('Product Image')
+        verbose_name_plural = _('Product Images')
 
 class PopularSearch(models.Model):
     query = models.CharField(max_length=255, unique=True)

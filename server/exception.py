@@ -40,6 +40,9 @@ DATABASE_ERROR = "Database operation failed"  # Ошибка базы данны
 TOO_MANY_REQUESTS = "Too many requests, please try again later"  # Слишком много запросов, попробуйте позже
 
 
+REQUEST_NOT_FOUND = "Request not found"
+
+
 class CustomAttributeException(AttributeError):
     def __init__(self, message):
         super().__init__(message)
