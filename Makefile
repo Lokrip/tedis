@@ -6,4 +6,4 @@ makemigrations:
 	python manage.py makemigrations
 
 run-server:
-	docker-compose up
+	python manage.py runserver 0.0.0.0:8000
