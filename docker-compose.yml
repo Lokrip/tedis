@@ -15,7 +15,7 @@ services:
             - DB_USER=dbuser
             - DB_PASS=pass
         command: >
-            sh /web/scripts/start.sh
+            sh /web/scripts/run_server.sh
 
         depends_on:
             - db-54321
