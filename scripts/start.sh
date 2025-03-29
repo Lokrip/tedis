@@ -7,11 +7,15 @@ log() {
 
 log "Запуск настройки приложения..."
 
-log "Запуск миграций базы данных..."
-make makemigrations
-make migrate
+log "Переход в корневую директорию проекта"
+cd "$(dirname "$0")/.." || exit 1
 
 log "Запуск сервера..."
-make run-server
+if command -v make &> /dev/null; then
+    make run-server
+else
+    log "Команда 'make' не найдена, запускаем альтернативную команду..."
+    docker-compose up
+fi
 
 log "Настройка приложения успешно завершена!"
