@@ -1,5 +1,5 @@
 import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from "@/types/app/api/product.type";
-import { axios } from "@/lib/axios";
+import { axios } from "@/config/axios";
 import { IProductDetails } from "@/types/app/models/IProductDetails.type";
 
 

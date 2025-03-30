@@ -15,6 +15,7 @@ export interface IProduct extends IModelPrimary {
     condition: string;
     warehouse: string;
     promotional: string;
+    image: string;
     checks: string;
     price: string;  // Можно заменить на number, если конвертировать
     discount: number;

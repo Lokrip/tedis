@@ -14,7 +14,6 @@ interface PriceProps {
 }
 
 const Price: FC<PriceProps> = ({price, priceDiscount}) => {
-    console.log("Price discount", + priceDiscount)
     return (
         <div className={clsx(styles.productCardPrice, 'price', 'flex-center')}>
             <div className={clsx(styles.priceWrap, "flex-center")}>

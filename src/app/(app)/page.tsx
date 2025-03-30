@@ -1,4 +1,4 @@
-import Store from "@/pages/Store/Store";
+import Store from "@/features/Store/Store";
 
 
 export const revalidate = 1

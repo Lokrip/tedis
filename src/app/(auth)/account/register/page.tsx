@@ -1,4 +1,4 @@
-import Auth from "../../../../components/screens/auth/Auth";
+import Auth from "@/features/Auth/Auth";
 
 export default function RegisterPage() {
     return (

@@ -1,4 +1,4 @@
-import { axios } from "@/lib/axios";
+import { axios } from "@/config/axios";
 import { AuthenticatedFields } from "@/types/app/auth.types";
 
 async function requestTokenAuthorize<T>(body: AuthenticatedFields): Promise<T> {

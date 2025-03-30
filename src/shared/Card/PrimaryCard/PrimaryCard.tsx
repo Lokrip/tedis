@@ -16,7 +16,7 @@ const PCard: FC<PCardProps> = ({item}) => {
        <Card>
             <ProductCardWrapper>
                 <ProductCardWrapper.CardTopWrap>
-                    <CardTopWrap />
+                    <CardTopWrap src={item.image}/>
                 </ProductCardWrapper.CardTopWrap>
 
 

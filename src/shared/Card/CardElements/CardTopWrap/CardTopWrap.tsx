@@ -9,10 +9,13 @@ interface CardTopWrapProps {
 }
 
 const CardTopWrap: FC<CardTopWrapProps> = ({src}) => {
+    const image = src
+        ? `${process.env.PRODUCT_API_URL}${src}`
+        : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s'
     return (
         <div className={styles.cardTopWrap}>
             <ImageR
-                src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXJA32WU4rBpx7maglqeEtt3ot1tPIRWptxA&s'
+                src={image}
                 width={150}
                 height={150}
                 alt=''

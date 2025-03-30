@@ -13,6 +13,8 @@ import { Item } from "@/widgets/ui/list/item/Item"
 import ImageR from "@/widgets/ui/assets/image/Image"
 import { List } from "@/widgets/ui/list/List"
 import { useActions, useAppSelector } from "@/utils/hooks"
+import { correctUrl } from "@/utils/utils"
+import Image from "next/image"
 
 const Banner: FC = () => {
     const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10, {
@@ -58,7 +60,6 @@ const Banner: FC = () => {
     }, [currentMove, stopStartScrolling, setNull])
 
 
-
     return (
         <div className={clsx(styles.sliderContainer, "banner__wrapper")}>
             <div className={styles.sliderWrapper}>
@@ -84,12 +85,21 @@ const Banner: FC = () => {
                                 <Item className={styles.sliderItemsImageContainer}>
                                     <ImageR
                                         ref={refImage}
-                                        src={item.url}
-                                        alt=""
+                                        src={correctUrl(process.env.PRODUCT_API_URL!, item.image)}
+                                        alt={correctUrl(process.env.PRODUCT_API_URL!, item.image)}
                                         width={1360}
                                         height={136}
                                         onError={() => setError(BannerError.BannerImageError)}
                                     />
+                                    {/* Loading Image */}
+                                    {/* <Image
+                                        src={correctUrl(process.env.PRODUCT_API_URL!, item.image)}
+                                        alt={correctUrl(process.env.PRODUCT_API_URL!, item.image)}
+                                        width={1360}
+                                        height={136}
+                                        onLoadingComplete={() => console.log("end")}
+                                        onError={() => setError(BannerError.BannerImageError)}
+                                    /> */}
                                 </Item>
                             )}
                         />

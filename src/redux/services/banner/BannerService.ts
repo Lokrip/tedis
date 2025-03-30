@@ -5,7 +5,7 @@ export const bannerApi = serviceApi.injectEndpoints({
     endpoints: (build) => ({
         fetchAllImages: build.query<IBanner, number>({
             query: (limit) => ({
-                url: "/photos",
+                url: "/api/v1/banners/",
                 params: {
                     _limit: limit
                 }
