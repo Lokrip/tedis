@@ -1,6 +1,8 @@
 import uuid
 import random
 
+from django.utils.text import slugify
+
 from server.models import GenerateCodeConfirmationEmail
 
 def generate_unique_slug(model, **kwargs):
@@ -14,6 +16,18 @@ def generate_unique_slug(model, **kwargs):
         )
         if not model.objects.filter(slug=temp_slug).exists():
             return temp_slug
+
+
+def generate_and_save_slug(instance):
+    base_slug = slugify(instance.title)
+    instance.slug = generate_unique_slug(instance.__class__, base_slug=base_slug)
+
+    super(instance.__class__, instance).save()
+
+    final_slug = generate_unique_slug(instance.__class__, base_slug=base_slug, id=instance.id)
+    instance.slug = final_slug
+
+    super(instance.__class__, instance).save(update_fields=["slug"])
 
 
 def generate_unique_code(length: int):
