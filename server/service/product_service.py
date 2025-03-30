@@ -12,6 +12,8 @@ from server.exception import (
     CREATION_FAILED,
     REQUEST_NOT_FOUND
 )
+from server.core.utils.perform import PerformBase
+
 def product_filters(search_query, queryset):
     if not search_query:
         raise ValueError("query params must")
@@ -19,7 +21,7 @@ def product_filters(search_query, queryset):
         queryset = queryset.filter(title__icontains=search_query)
     return queryset
 
-class ProductService:
+class ProductService(PerformBase):
 
     def get_product_list(self, **kwargs):
         request = kwargs.get("request", None)
@@ -143,12 +145,3 @@ class ProductService:
 
         self.perform_destroy(instance=product)
         return True
-
-    def perform_destroy(self, instance):
-        instance.delete()
-
-    def perform_create(self, serializer):
-        serializer.save()
-
-    def perform_update(self, serializer):
-        serializer.save()

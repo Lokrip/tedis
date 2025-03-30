@@ -9,8 +9,9 @@ from server.exception import (
     DATA_NOT_FOUND,
     CREATION_FAILED
 )
+from server.core.utils.perform import PerformBase
 
-class CategoryService:
+class CategoryService(PerformBase):
     def get_categories_list(self, **kwargs):
         queryset = Category.objects.order_by("-created_at")
         serializer = CategorySerializer(queryset, many=True)
@@ -89,11 +90,3 @@ class CategoryService:
 
         self.perform_destroy(instance=category)
         return True
-    def perform_destroy(self, instance):
-        instance.delete()
-
-    def perform_create(self, serializer):
-        serializer.save()
-
-    def perform_update(self, serializer):
-        serializer.save()
