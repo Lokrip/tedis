@@ -6,14 +6,9 @@ from rest_framework import status
 
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from django.contrib.auth import get_user_model
-from django.utils.text import slugify
-
-from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
-from server.models import Product, Category
+from server.models import Product
 from server.exception import DATA_DELETION_FAILED
 from server.mixins import ProductMixin
-
 
 
 class ProductViewSet(ViewSet):

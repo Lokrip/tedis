@@ -3,7 +3,7 @@ from server.models.customers import (
     Customers,
     GenerateCodeConfirmationEmail
 )
-
+from server.models.proxy import BannerProxy
 from server.models.shop import (
     Product,
     Category,
@@ -17,8 +17,9 @@ from server.models.abstract.abstract_title import ModelTitle
 __all__ = (
     "Customers",
     "GenerateCodeConfirmationEmail",
-    
+
     "Banner",
+    "BannerProxy",
 
     "PostTags",
     "Product",

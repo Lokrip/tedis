@@ -7,13 +7,12 @@ from django.core.validators import (
     MinValueValidator,
     MaxValueValidator
 )
-from django.utils.text import slugify
 
+from server.core.utils.code import generate_and_save_slug
 from server.models.advertising import Banner
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_updated_at import DateUpdatedModel
 from server.models.abstract.abstract_title import ModelTitle
-from server.core.utils.code import generate_unique_slug
 from server.tasks.product_tasks import set_price_discount
 
 from server.models.status.product_status import (
@@ -28,17 +27,6 @@ from mptt.models import (
     MPTTModel,
     TreeForeignKey
 )
-
-def generate_and_save_slug(instance):
-    base_slug = slugify(instance.title)
-    instance.slug = generate_unique_slug(instance.__class__, base_slug=base_slug)
-
-    super(instance.__class__, instance).save()
-
-    final_slug = generate_unique_slug(instance.__class__, base_slug=base_slug, id=instance.id)
-    instance.slug = final_slug
-
-    super(instance.__class__, instance).save(update_fields=["slug"])
 
 
 class Category(MPTTModel, ModelTitle, DateCreatedModel):
