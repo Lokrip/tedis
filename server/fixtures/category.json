@@ -1,0 +1,82 @@
+[
+{
+  "model": "server.category",
+  "pk": 6,
+  "fields": {
+    "created_at": "2025-03-09T12:50:29.534Z",
+    "title": "Electronics",
+    "metaTitle": "electronics",
+    "slug": "electronics-1",
+    "parent": null,
+    "icon": "Cable",
+    "lft": 1,
+    "rght": 4,
+    "tree_id": 1,
+    "level": 0
+  }
+},
+{
+  "model": "server.category",
+  "pk": 7,
+  "fields": {
+    "created_at": "2025-03-09T12:51:05.271Z",
+    "title": "Computer",
+    "metaTitle": "computer",
+    "slug": "computer-1",
+    "parent": 6,
+    "icon": "Computer",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 1,
+    "level": 1
+  }
+},
+{
+  "model": "server.category",
+  "pk": 8,
+  "fields": {
+    "created_at": "2025-03-09T12:52:27.350Z",
+    "title": "House and Garden",
+    "metaTitle": "house and garden",
+    "slug": "house-and-garden-1",
+    "parent": null,
+    "icon": "Apple",
+    "lft": 1,
+    "rght": 2,
+    "tree_id": 2,
+    "level": 0
+  }
+},
+{
+  "model": "server.category",
+  "pk": 10,
+  "fields": {
+    "created_at": "2025-03-12T09:47:28.345Z",
+    "title": "Male gender",
+    "metaTitle": "male-gender",
+    "slug": "male-gender-1",
+    "parent": null,
+    "icon": "BicepsFlexed",
+    "lft": 1,
+    "rght": 4,
+    "tree_id": 3,
+    "level": 0
+  }
+},
+{
+  "model": "server.category",
+  "pk": 11,
+  "fields": {
+    "created_at": "2025-03-12T09:49:26.851Z",
+    "title": "Shirt",
+    "metaTitle": "shirt",
+    "slug": "shirt-v1",
+    "parent": 10,
+    "icon": "Shirt",
+    "lft": 2,
+    "rght": 3,
+    "tree_id": 3,
+    "level": 1
+  }
+}
+]

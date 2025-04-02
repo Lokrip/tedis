@@ -1,0 +1,42 @@
+[
+{
+  "model": "server.popularsearch",
+  "pk": 1,
+  "fields": {
+    "query": "car",
+    "count": 8
+  }
+},
+{
+  "model": "server.popularsearch",
+  "pk": 2,
+  "fields": {
+    "query": "product 20",
+    "count": 3
+  }
+},
+{
+  "model": "server.popularsearch",
+  "pk": 3,
+  "fields": {
+    "query": "hello",
+    "count": 2
+  }
+},
+{
+  "model": "server.popularsearch",
+  "pk": 4,
+  "fields": {
+    "query": "Iphone 12",
+    "count": 8
+  }
+},
+{
+  "model": "server.popularsearch",
+  "pk": 5,
+  "fields": {
+    "query": "Iphone 11",
+    "count": 1
+  }
+}
+]
