@@ -2,7 +2,7 @@ import * as LucideIcons from 'lucide-react';
 import { ElementType } from 'react';
 
 export const correctClass = (primary: string, className: string) => {
-    return className ? `${primary} ${className}` : primary
+    return className ? [primary, className].join(" ").trim() : primary
 }
 
 export const correctUrl = (primaryUrl: string, path: string) => {

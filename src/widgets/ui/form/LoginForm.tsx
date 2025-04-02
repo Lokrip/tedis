@@ -1,20 +1,32 @@
 "use client";
 import Auth from '@/features/Auth/Auth';
-import { FC, useEffect } from 'react';
+import Link from 'next/link';
+import { FC } from 'react';
+import styles from "./loginForm.module.scss";
+import ButtonSet from '../elements/button/ButtonSet';
+import AuthForm from './AuthForm';
+import pages from '@/config/route';
 
 interface LoginFormProps {}
 
 const LoginForm: FC<LoginFormProps> = () => {
-
     return (
-        <>
+        <AuthForm>
             <Auth type="Login"/>
             <div className="social-auth">
                 {/* <GoogleButton>
                     Google
                 </GoogleButton> */}
             </div>
-        </>
+            <div className={styles.authenticationOrText}>
+                <span className={styles.text}>or</span>
+            </div>
+            <Link href={pages.account.register} className={styles.authenticationProperties}>
+                <ButtonSet buttonType="secondary">
+                    Create a new account
+                </ButtonSet>
+            </Link>
+        </AuthForm>
     );
 };
 

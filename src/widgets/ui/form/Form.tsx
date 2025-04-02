@@ -9,7 +9,7 @@ interface FormProps extends PropsWithChildren {
 }
 
 const Form = forwardRef<HTMLFormElement, FormProps>(({children, className, onSubmit}, ref) => {
-    const classNameValid = correctClass(styles.form, className!);
+    const classNameValid = correctClass(styles.form, className ?? "");
     return (
         <form ref={ref} onSubmit={onSubmit} className={classNameValid}>
             {children}

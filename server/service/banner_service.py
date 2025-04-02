@@ -7,12 +7,13 @@ from server.exception import (
     RESOURCE_NOT_FOUND,
     DATA_NOT_FOUND
 )
+from server.core.utils.perform import PerformBase
 from server.serializers.banner_serializers import (
     BannerListSerializer,
     BannerDetailSerializer
 )
 
-class BannerService:
+class BannerService(PerformBase):
     def get_banner_list(self, **kwargs):
         request = kwargs.pop('request', None)
         if request is None:
@@ -57,4 +58,5 @@ class BannerService:
 
         if request is None:
             raise ValueError(REQUEST_NOT_FOUND)
+
 

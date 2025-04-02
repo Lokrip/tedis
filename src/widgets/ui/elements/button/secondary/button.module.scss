@@ -1,0 +1,23 @@
+@use '../../../../../app/styles/color' as *;
+
+.button {
+    display: flex;
+    place-items: center;
+    width: 100%;
+    max-width: max-content;
+    padding-inline: 20px;
+    background-color: $green;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
+
+    svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:hover {
+        background-color: $green-black;
+    }
+}

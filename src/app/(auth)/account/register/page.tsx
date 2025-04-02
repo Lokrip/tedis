@@ -1,9 +1,5 @@
-import Auth from "@/features/Auth/Auth";
+import RegisterForm from "@/widgets/ui/form/RegisterForm";
 
 export default function RegisterPage() {
-    return (
-        <div>
-            <Auth type="Register" />
-        </div>
-    )
+    return (<RegisterForm />)
 }

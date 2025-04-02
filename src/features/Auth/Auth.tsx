@@ -15,6 +15,8 @@ import RegisterField from "./field/RegisterField"
 import { AuthStatus } from "@/types/app/enum/auth.enum"
 import { HeadingH } from "@/widgets/plagins/H.number"
 import { useActions, useAppSelector } from "@/utils/hooks"
+import { ClassNameType } from "@/types/react.type"
+import { correctClass } from "@/utils/utils"
 
 
 const authFields: TypeAuthFields = {
@@ -22,7 +24,7 @@ const authFields: TypeAuthFields = {
     Register: RegisterField
 }
 
-export default function Auth<P extends IAuth>({ type }: P) {
+export default function Auth<P extends IAuth & ClassNameType>({ type, className }: P) {
     const { push } = useRouter()
     const { isDispatchRequest, isSuccess, result } = useAppSelector((state) => state.signInReduser)
     const {savingErrors, modalClose, changeDispatchRequest} = useActions()
@@ -78,10 +80,9 @@ export default function Auth<P extends IAuth>({ type }: P) {
     }, [])
 
     const Fields = authFields[type!];
-
-
+    const classNameValid = correctClass(styles.authForm, className ?? "");
     return (
-        <Form className={styles.authForm} onSubmit={handleSubmit(onSubmit)}>
+        <Form className={classNameValid} onSubmit={handleSubmit(onSubmit)}>
             <div className={styles.authTitle}>
                 <HeadingH level={1} content={type as string} />
             </div>

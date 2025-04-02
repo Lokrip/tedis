@@ -10,8 +10,29 @@ interface RegisterFieldProps extends IAuthFieldsEvent {}
 const RegisterField: FC<RegisterFieldProps> = ({register}) => {
     return (
         <>
-         <div className={styles.field}>
+        <div className={styles.fieldNames}>
+            <div className={styles.field}>
+                <Field
+                    className={styles.labelField}
+                    type="text"
+                    placeholder="First Name..."
+                    Icon={Mail}
+                    {...register("email")}
+                />
+            </div>
+            <div className={styles.field}>
+                <Field
+                    className={styles.labelField}
+                    type="text"
+                    placeholder="Last Name..."
+                    Icon={Mail}
+                    {...register("email")}
+                />
+            </div>
+        </div>
+        <div className={styles.field}>
             <Field
+                className={styles.labelField}
                 type="text"
                 placeholder="Email..."
                 Icon={Mail}
@@ -20,6 +41,7 @@ const RegisterField: FC<RegisterFieldProps> = ({register}) => {
         </div>
         <div className={styles.field}>
             <Field
+                className={styles.labelField}
                 type="password"
                 placeholder="Password..."
                 Icon={KeyRound}
