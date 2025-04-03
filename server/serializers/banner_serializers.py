@@ -16,7 +16,8 @@ class BannerBaseSerializer(serializers.ModelSerializer):
             "metaTitle",
             "image",
             "slug",
-            "is_active"
+            "is_active",
+            "user"
         ]
         extra_kwargs = {
             "image": {
@@ -35,4 +36,10 @@ class BannerListSerializer(BannerFieldsAllSerializer):
     pass
 
 class BannerDetailSerializer(BannerFieldsAllSerializer):
+    pass
+
+class BannerCreateSerializer(BannerBaseSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+class BannerUpdateSerializer(BannerBaseSerializer):
     pass

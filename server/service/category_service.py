@@ -7,7 +7,8 @@ from server.models import Category
 from server.exception import (
     RESOURCE_NOT_FOUND,
     DATA_NOT_FOUND,
-    CREATION_FAILED
+    CREATION_FAILED,
+    REQUEST_NOT_FOUND
 )
 from server.core.utils.perform import PerformBase
 
@@ -22,7 +23,7 @@ class CategoryService(PerformBase):
         slug = kwargs.get("slug", None)
 
         if request is None:
-            raise ValueError("request not found!")
+            raise ValueError(REQUEST_NOT_FOUND)
         if slug is None:
             raise ValueError(RESOURCE_NOT_FOUND)
         try:
@@ -38,7 +39,7 @@ class CategoryService(PerformBase):
         data = request.data
 
         if request is None:
-            raise ValueError("request not found!")
+            raise ValueError(REQUEST_NOT_FOUND)
 
         if data is None:
             raise ValueError(DATA_NOT_FOUND)
@@ -55,7 +56,7 @@ class CategoryService(PerformBase):
         data = request.data
 
         if request is None:
-            raise ValueError("request not found!")
+            raise ValueError(REQUEST_NOT_FOUND)
         if slug is None:
             raise ValueError(RESOURCE_NOT_FOUND)
 

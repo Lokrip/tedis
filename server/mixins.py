@@ -128,8 +128,8 @@ class CategoryMixin(CrudMixin):
     def findCategoryAll(self):
         return self.categoryService.get_categories_list()
 
-    def findCategoryBySlug(self, slug):
-        return self.categoryService.get_category_detail(slug=slug)
+    def findCategoryBySlug(self, slug, request):
+        return self.categoryService.get_category_detail(request=request, slug=slug)
 
     def createCategory(self, request):
         return self.categoryService.category_create(request=request)
@@ -166,3 +166,15 @@ class BannerMixin(CrudMixin):
 
     def findAllBanners(self, request):
         return self.bannerService.get_banner_list(request=request)
+
+    def findBannerBySlug(self, slug, request):
+        return self.bannerService.get_banner_by_slug(request=request, slug=slug)
+
+    def createBanner(self, request):
+        return self.bannerService.banner_create(request=request)
+
+    def updateBanner(self, slug, request):
+        return self.bannerService.banner_update(request=request, slug=slug)
+
+    def deleteBanner(self, slug):
+        return self.bannerService.banner_delete(slug=slug)

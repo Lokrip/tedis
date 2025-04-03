@@ -71,7 +71,7 @@ class ProductService(PerformBase):
         slug = kwargs.get("slug", None)
 
         if request is None:
-            raise ValueError("request not found!")
+            raise ValueError(REQUEST_NOT_FOUND)
         if slug is None:
             raise ValueError(RESOURCE_NOT_FOUND)
         try:
