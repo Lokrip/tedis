@@ -1,0 +1,28 @@
+[
+{
+  "model": "server.banner",
+  "pk": 1,
+  "fields": {
+    "created_at": "2025-03-28T14:37:45.467Z",
+    "title": "Banner 1",
+    "metaTitle": "banner 1",
+    "slug": "banner-1",
+    "user": 1,
+    "image": "banners/logo-right.jpg",
+    "is_active": true
+  }
+},
+{
+  "model": "server.banner",
+  "pk": 2,
+  "fields": {
+    "created_at": "2025-03-30T14:00:07.523Z",
+    "title": "Banner 2",
+    "metaTitle": "banner-2",
+    "slug": "banner-2",
+    "user": 14,
+    "image": "banners/G3uCxDNfSya6n7IWnBkpRQ-removebg-preview.png",
+    "is_active": true
+  }
+}
+]
