@@ -4,8 +4,6 @@ import { AuthenticatedFields, CustomJWTType, JWTUser, ReponseUserToken } from ".
 import pages from "../config/route";
 
 import { requestTokenAuthorize, refreshAccessToken } from "../utils/service/api/token.api";
-import { JWT } from "next-auth/jwt";
-
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -15,7 +13,7 @@ export const authOptions: NextAuthOptions = {
                 email: {label: "Email", type:"email", placeholder: "Email..."},
                 password: {label: "Password", type: "password", placeholder: "Password..."}
             },
-            async authorize(credentials, req) {
+            async authorize(credentials) {
                 if (!credentials?.email || !credentials.password) {
                     return null;
                 }

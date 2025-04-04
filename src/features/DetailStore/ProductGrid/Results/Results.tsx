@@ -10,7 +10,7 @@ interface ResultsProps {
     product: IProductDetails
 }
 
-const Results: FC<ResultsProps> = ({product}) => {
+const Results: FC<ResultsProps> = () => {
     return (
         <div className="product__page-results">
             <div className="product__results-price__wrapper">

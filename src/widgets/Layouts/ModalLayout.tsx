@@ -1,13 +1,20 @@
 "use client"
 
-import {FC, PropsWithChildren, useEffect} from 'react';
-
-import styles from './modalLayout.module.scss';
+import {FC, PropsWithChildren, useEffect, useState} from 'react';
 import { createPortal } from 'react-dom';
 
-interface ModalLayoutProps extends PropsWithChildren {}
+type ModalLayoutProps = PropsWithChildren
 
 const ModalLayout: FC<ModalLayoutProps> = ({children}) => {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
+    if (!isClient) {
+        return null;
+    }
     return (<>{children && createPortal(children, document.body)}</>);
 };
 

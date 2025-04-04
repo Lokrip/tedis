@@ -1,4 +1,3 @@
-import { IProduct } from "@/types/app/models/IProduct.type";
 import { RootState } from "../store";
 import { createAppSelector } from "../utils";
 

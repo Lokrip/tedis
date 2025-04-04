@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, Suspense} from 'react';
 
 import styles from './loginModal.module.scss';
 import Modal from '../Modal';
@@ -8,9 +8,11 @@ interface LoginModalProps {}
 
 const LoginModal: FC<LoginModalProps> = () => {
     return (
-        <Modal>
-            <LoginForm />
-        </Modal>
+        <Suspense>
+            <Modal>
+                <LoginForm />
+            </Modal>
+        </Suspense>
     );
 };
 

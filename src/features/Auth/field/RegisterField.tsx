@@ -5,7 +5,7 @@ import { KeyRound, Mail } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
 import { IAuthFieldsEvent } from '@/types/app/auth.types';
 
-interface RegisterFieldProps extends IAuthFieldsEvent {}
+type RegisterFieldProps = IAuthFieldsEvent
 
 const RegisterField: FC<RegisterFieldProps> = ({register}) => {
     return (

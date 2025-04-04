@@ -1,8 +1,6 @@
 import styles from "./similarProducts.module.scss";
 import ProductList from '@/features/ProductList/ProductList';
-import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from '@/types/app/api/product.type';
 import { ProductError } from "@/types/app/enum/product.enum";
-import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type';
 import { IPaginationProduct, IProduct } from '@/types/app/models/IProduct.type';
 import { IProductDetails } from "@/types/app/models/IProductDetails.type";
 import { getSimilarPaginationProducts } from "@/utils/service/api/product.api";

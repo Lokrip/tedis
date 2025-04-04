@@ -1,6 +1,5 @@
 import {FC} from 'react';
 
-import styles from './detailStore.module.scss';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import { MainDetailStore } from './MainDetailStore/MainDetailStore';
 import ProductGrid from './ProductGrid/ProductGrid';
@@ -9,7 +8,7 @@ import { IParamPrimaryType } from '@/types/react.type';
 import { getProductData } from '@/utils/service/api/product.api';
 import SimilarProducts from './SimilarProducts/SimilarProducts';
 
-interface DetailStoreProps extends IParamPrimaryType {}
+type DetailStoreProps = IParamPrimaryType
 
 const DetailStore: FC<DetailStoreProps> = async ({param}) => {
     const data = await getProductData(param);

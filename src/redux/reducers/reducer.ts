@@ -8,6 +8,7 @@ import signInReduser from './account/signInSlice';
 import productReduser from './shop/ProductSlice';
 import utilsReducer from './utils/UtilsSlice';
 import menuReducer from "./header/MenuSlice";
+import scrollsReducer from "./utils/ScrollsSlice";
 
 import { bannerApi } from '../services/banner/BannerService'
 import { searchParamApi } from '../services/header/SearchService';
@@ -22,7 +23,8 @@ const headerInitialReducers = ({
 })
 
 const utilsInitialReducers = ({
-    utilsReducer
+    utilsReducer,
+    scrollsReducer
 })
 
 const shopInitialReducers = ({

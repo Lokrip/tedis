@@ -23,10 +23,10 @@ export const useActions = () => {
   }, [dispatch])
 }
 
-export const useDebounce = (callback: (...args: any[]) => void, delay: number) => {
+export const useDebounce = (callback: (...args: string[]) => void, delay: number) => {
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const debouncedCallback = useCallback((...args: any[]) => {
+  const debouncedCallback = useCallback((...args: string[]) => {
     if (timer.current) {
       clearTimeout(timer.current)
     }

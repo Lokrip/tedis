@@ -13,7 +13,7 @@ interface ImageContainerProductProps {
     product: IProductDetails
 }
 
-const ImageContainerProduct: FC<ImageContainerProductProps> = ({product}) => {
+const ImageContainerProduct: FC<ImageContainerProductProps> = () => {
 
     return (
         <div className={styles.imageContainer}>

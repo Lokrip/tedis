@@ -30,7 +30,7 @@ class AxiosClient {
     private async fetch<T>(
         path: string,
         method: string,
-        body?: Record<string, any>,
+        body?: Record<string, unknown>,
         headers?: Record<string, string>,
     ): Promise<T> {
         const url = correctUrl(this.API_URL, path);

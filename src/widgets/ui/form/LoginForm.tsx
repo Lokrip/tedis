@@ -1,7 +1,7 @@
 "use client";
 import Auth from '@/features/Auth/Auth';
 import Link from 'next/link';
-import { FC } from 'react';
+import { FC, Suspense } from 'react';
 import styles from "./loginForm.module.scss";
 import ButtonSet from '../elements/button/ButtonSet';
 import AuthForm from './AuthForm';
@@ -12,7 +12,9 @@ interface LoginFormProps {}
 const LoginForm: FC<LoginFormProps> = () => {
     return (
         <AuthForm>
-            <Auth type="Login"/>
+            <Suspense>
+                <Auth type="Login"/>
+            </Suspense>
             <div className="social-auth">
                 {/* <GoogleButton>
                     Google

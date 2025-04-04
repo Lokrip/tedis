@@ -14,7 +14,6 @@ import ImageR from "@/widgets/ui/assets/image/Image"
 import { List } from "@/widgets/ui/list/List"
 import { useActions, useAppSelector } from "@/utils/hooks"
 import { correctUrl } from "@/utils/utils"
-import Image from "next/image"
 
 const Banner: FC = () => {
     const { data: images, isLoading: isLoadingImage } = bannerApi.useFetchAllImagesQuery(10, {

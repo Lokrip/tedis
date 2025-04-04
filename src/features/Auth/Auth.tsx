@@ -1,7 +1,6 @@
 "use client"
 import ButtonSet from "../../widgets/ui/elements/button/ButtonSet"
 import styles from "./auth.module.scss"
-import React, { useEffect } from "react"
 import Form from "@/widgets/ui/form/Form"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -70,14 +69,6 @@ export default function Auth<P extends IAuth & ClassNameType>({ type, className 
             })
         }
     }
-
-    useEffect(() => {
-        document.body.style.overflow = "hidden";
-
-        return () => {
-            document.body.style.overflow = "auto";
-        }
-    }, [])
 
     const Fields = authFields[type!];
     const classNameValid = correctClass(styles.authForm, className ?? "");

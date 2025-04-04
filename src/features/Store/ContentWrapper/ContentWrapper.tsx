@@ -7,12 +7,12 @@ import { HeadingH } from '@/widgets/plagins/H.number';
 import ProductList from '@/features/ProductList/ProductList';
 
 interface ContentWrapperProps {
-    param?: any;
+    param?: {[key: string]: string | string[] | undefined;};
     dynamicParam?: {slug: string};
 }
 
 const ContentWrapper: FC<ContentWrapperProps> = async ({param, dynamicParam}) => {
-    const searchQuery = param.q ?? param.searchQuery;
+    const searchQuery = (param!.q ?? param!.searchQuery) as string;
     const category_slug = dynamicParam?.slug
 
     try {
@@ -34,6 +34,7 @@ const ContentWrapper: FC<ContentWrapperProps> = async ({param, dynamicParam}) =>
                 content={ProductError.ProductNotFound}
             />}</>
         );
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch(error) {
         const productNotFound = ProductError.ProductNotFound
 

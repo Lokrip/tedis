@@ -8,7 +8,7 @@ import { List } from '@/widgets/ui/list/List';
 import { Item } from '@/widgets/ui/list/item/Item';
 import clsx from 'clsx';
 
-interface BreadcrumbsProps {}
+type BreadcrumbsProps = object
 
 const Breadcrumbs: FC<BreadcrumbsProps> = () => {
     const data = [

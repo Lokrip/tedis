@@ -8,7 +8,6 @@ const initialState: SignInTypeFields = {
     errorMessage: null,
     isSuccess: false,
     result: null,
-    isClodeModalSignIn: false,
     isDispatchRequest: false
 }
 
@@ -33,15 +32,16 @@ export const SignInSlice = createSlice({
             }
         },
 
-        savingSuccess(state, action: PayloadAction<boolean>) {
-            state.isClodeModalSignIn = action.payload;
-            state.isSuccess = true
-            state.result = AuthStatus.Authenticated
+        savingSuccess(state) {
+            state.isSuccess = true;
+            state.result = AuthStatus.Authenticated;
         },
 
         changeDispatchRequest(state, action: PayloadAction<boolean>) {
             state.isDispatchRequest = action.payload
-        }
+        },
+
+        
     }
 })
 

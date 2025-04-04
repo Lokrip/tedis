@@ -1,8 +1,7 @@
 "use client"
 
-import {FC, Suspense} from 'react';
+import {FC, useEffect} from 'react';
 
-import styles from './productList.module.scss';
 import PaginationInfiniteScrolling from '@/shared/Pagination/PaginationInfiniteScrolling';
 import { IProduct } from '@/types/app/models/IProduct.type';
 import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from '@/types/app/api/product.type';
@@ -11,7 +10,7 @@ import { RootState } from '@/redux/store';
 import { selectedProducts } from '@/redux/selectors/product';
 import dynamic from 'next/dynamic';
 import SkeletonSingleProductCard from '@/widgets/ui/elements/skeleton/SkeletonSingleProductCard';
-import { useActions } from '@/utils/hooks';
+import { useActions, useAppSelector } from '@/utils/hooks';
 
 const PCard = dynamic(() => import('@/shared/Card/PrimaryCard/PrimaryCard'), {
     loading: () => (
@@ -28,7 +27,6 @@ interface ProductListProps {
 }
 
 const ProductList: FC<ProductListProps> = ({
-    searchQuery,
     getProductsData,
     initialProducts,
     totalProductCount,
@@ -36,11 +34,29 @@ const ProductList: FC<ProductListProps> = ({
 }) => {
     const LIMIT = 18;
 
-    const {setProductList, incrementCurrentPage, changeTypeFetching} = useActions()
+    const {
+        setProductList,
+        incrementCurrentPage,
+        changeTypeFetching,
+        resetScrollsPosition
+    } = useActions()
 
     const productSelector = (state: RootState) => selectedProducts(state)
     const productCurrentPageSelector = (state: RootState) => state.productReduser.currentPage
     const productFetchingSelector = (state: RootState) => state.productReduser.isFetching
+    const scrollResultPosition = useAppSelector((state) => state.scrollsReducer.scrollResetPosition)
+
+
+    useEffect(() => {
+        if(scrollResultPosition) {
+            const handleScroll = () => {
+                window.scrollTo(0, scrollResultPosition);
+                resetScrollsPosition();
+            };
+            const timeout = setTimeout(handleScroll, 0);
+            return () => clearTimeout(timeout);
+        }
+    }, [scrollResultPosition, resetScrollsPosition])
 
 
     return (

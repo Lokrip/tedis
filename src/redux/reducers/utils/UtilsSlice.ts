@@ -1,3 +1,4 @@
+import { UtilsState } from "@/types/app/state/util/utilState";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 const initialState: UtilsState = {
@@ -24,23 +25,15 @@ export const UtilsSlice = createSlice({
             state.isModalClose = true;
         },
 
-        modalOpen(state, action: PayloadAction<{title: string, content: string}>) {
+        modalOpen(state, action: PayloadAction<{
+            title: string,
+            content: string
+        }>) {
+            const {title, content} = action.payload;
             state.isModalClose = false;
             state.isModalOpen = true;
-            state.modalTitle = action.payload.title;
-            state.modalContent = action.payload.content;
-        },
-
-        modalReset(state) {
-            state.isModalClose = false,
-            state.isModalOpen = false,
-            state.isLoading = false,
-            state.isError = false,
-            state.error = null,
-            state.modalTitle = null,
-            state.modalContent = null,
-            state.isResults = false,
-            state.results = null
+            state.modalTitle = title;
+            state.modalContent = content;
         }
     }
 })

@@ -1,4 +1,4 @@
-interface UtilsState {
+export interface UtilsState {
     isModalClose: boolean;
     isModalOpen: boolean;
     isLoading: boolean;

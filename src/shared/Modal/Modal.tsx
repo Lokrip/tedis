@@ -1,6 +1,6 @@
 "use client"
 
-import {FC, PropsWithChildren} from 'react';
+import {FC, PropsWithChildren, useEffect} from 'react';
 
 import styles from './modal.module.scss';
 import clsx from 'clsx';
@@ -9,15 +9,19 @@ import { useActions, useAppSelector } from '@/utils/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import pages from '@/config/route';
 
-interface ModalProps extends PropsWithChildren {
-}
+type ModalProps = PropsWithChildren;
 
 const Modal: FC<ModalProps> = ({children}) => {
-    const { modalClose } = useActions()
-    const {isModalClose, isModalOpen} = useAppSelector((state) => state.utilsReducer)
+    const { modalClose, savedScrollsPositionToResult } = useActions()
+    const { isModalClose } = useAppSelector((state) => state.utilsReducer)
+    const { scrollSetPosition } = useAppSelector((state) => state.scrollsReducer)
     const searchParam = useSearchParams()
     const callbackRoute = searchParam.get("callback") || pages.home
     const router = useRouter()
+
+    useEffect(() => {
+        console.log(scrollSetPosition)
+    }, [scrollSetPosition])
 
     const onClick = () => {
         if (callbackRoute) {
@@ -26,6 +30,10 @@ const Modal: FC<ModalProps> = ({children}) => {
             router.push(pages.home)
         }
         modalClose()
+
+        if(scrollSetPosition) {
+            savedScrollsPositionToResult({scrollPosition: scrollSetPosition});
+        }
     }
 
     return !isModalClose && (

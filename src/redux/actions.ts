@@ -6,6 +6,7 @@ import { SearchSlice } from "./reducers/header/SearchSlice";
 import { ProductSlice } from "./reducers/shop/ProductSlice";
 import { UtilsSlice } from "./reducers/utils/UtilsSlice";
 import { MenuSlice } from "./reducers/header/MenuSlice";
+import { ScrollsSlice } from "./reducers/utils/ScrollsSlice";
 
 const headerAction = {
     ...HeaderSlice.actions,
@@ -14,7 +15,8 @@ const headerAction = {
     ...MenuSlice.actions
 }
 const utilsAction = {
-    ...UtilsSlice.actions
+    ...UtilsSlice.actions,
+    ...ScrollsSlice.actions
 }
 const shopAction = {
     ...BannerSlice.actions,

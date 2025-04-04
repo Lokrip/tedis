@@ -1,5 +1,5 @@
 "use client"
-import {FC, MouseEvent, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 
 import Link from "next/link";
 import styles from './navigationBar.module.scss';
@@ -20,7 +20,7 @@ const NavigationBar: FC = () => {
         {id: 3, navigation: "/account/login", type: "sign-in", titleNavigation: "Войти", icon: "User"},
     ])
     const {openDropDownMenu} = useAppSelector(state => state.menuReducer)
-    const {modalOpen, toggleMenu} = useActions()
+    const {modalOpen, toggleMenu, savedScrollsPositionToInit} = useActions()
     const pathname = usePathname()
     const session = useSession()
 
@@ -48,7 +48,10 @@ const NavigationBar: FC = () => {
         if(type === "sign-in") {
             modalOpen({
                 title: "Login Modal",
-                content: "Authenticated Modal"
+                content: "Authenticated Modal",
+            })
+            savedScrollsPositionToInit({
+                scrollPosition: window.scrollY
             })
         }
     }
@@ -78,7 +81,7 @@ const NavigationBar: FC = () => {
                     )
                 }
                 return (
-                    <Link onClick={(e) => onClickNavigationItem(item.type)} href={item.type === "sign-in" ? `${item.navigation}?callback=${pathname}` : item.navigation}>
+                    <Link onClick={() => onClickNavigationItem(item.type)} href={item.type === "sign-in" ? `${item.navigation}?callback=${pathname}` : item.navigation}>
                         <ButtonSet buttonType="primary" className={styles.navigationWrapper}>
                             <Item className={"navigration-item"}>
                                 {item.titleNavigation}

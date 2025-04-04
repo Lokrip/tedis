@@ -21,9 +21,9 @@ export default function Search(): JSX.Element {
 
     const handleCreateSearchQuery = useCallback(async (search: string) => {
         await createSearchParam({query: search})
-    }, [search, createSearchParam])
+    }, [createSearchParam])
 
-    const findElement = (search: string) => {
+    const findElement = useCallback((search: string) => {
         if(search) {
             handleCreateSearchQuery(search)
             const urlWithParams = pages.addSearchParam(pages.home,  {
@@ -33,12 +33,12 @@ export default function Search(): JSX.Element {
         } else {
             router.push(pages.home)
         }
-    }
+    }, [handleCreateSearchQuery, router])
 
     const onSubmit = useCallback((event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         findElement(search);
-    }, [router, search]);
+    }, [findElement, search]);
 
     const handleChange = (value: string) => {
         saveDataInSearch(value)
