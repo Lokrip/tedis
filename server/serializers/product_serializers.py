@@ -1,7 +1,4 @@
-from decimal import Decimal
-
 from django.contrib.auth import get_user_model
-
 from rest_framework import serializers
 
 from server.models import (
@@ -10,7 +7,6 @@ from server.models import (
 )
 from server.serializers.category_serializers import CategorySerializer
 from server.exception import RESOURCE_NOT_FOUND
-from server.pagination import ProductResultsSetPagination
 
 User = get_user_model()
 
