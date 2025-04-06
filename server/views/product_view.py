@@ -20,8 +20,7 @@ class ProductViewSet(ViewSet):
             view=self,
             request=request
         )
-
-        if(paginator):
+        if paginator:
             return paginator.get_paginated_response(serializer.data);
         else:
             return Response(serializer.data, status=status.HTTP_200_OK)
