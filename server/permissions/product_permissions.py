@@ -9,7 +9,7 @@ class IsSubscriberOrOwnerEditOrReadOnly(BasePermission):
     def has_permission(self, request, view):
         if (
             request.user.is_authenticated
-            and request.method == "POST"
+            and request.method in ("POST", "PUT", "PATCH", "DELETE")
         ):
             return True
         return request.method in SAFE_METHODS

@@ -2,11 +2,6 @@ from server.models import (
     BannerProxy,
     Banner
 )
-from server.exception import (
-    REQUEST_NOT_FOUND,
-    RESOURCE_NOT_FOUND,
-    DATA_NOT_FOUND
-)
 from server.core.utils.perform import PerformBase
 from server.serializers.banner_serializers import (
     BannerListSerializer,
@@ -15,91 +10,48 @@ from server.serializers.banner_serializers import (
     BannerUpdateSerializer
 )
 
+
 class BannerService(PerformBase):
     def get_banner_list(self, **kwargs):
-        request = kwargs.pop('request', None)
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
+        # request = self.get_request(kwargs)
         queryset = BannerProxy.objects.all()
         serializer = BannerListSerializer(queryset, many=True)
         return serializer
 
     def get_banner_by_id(self, **kwargs):
-        request = kwargs.pop('request', None)
-        id = kwargs.get('id', None)
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-
-        try:
-            banner = Banner.objects.get(id=id)
-        except Banner.DoesNotExist:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        # request = self.get_request(kwargs)
+        id = self.get_id(kwargs)
+        banner = self.get_object_or_error(Banner, slug=id)
         serializer = BannerDetailSerializer(banner)
         return serializer
 
     def get_banner_by_slug(self, **kwargs):
-        request = kwargs.pop('request', None)
-        slug = kwargs.get('slug', None)
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-        try:
-            banner = Banner.objects.get(slug=slug)
-        except Banner.DoesNotExist:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        # request = self.get_request(kwargs)
+        slug = self.get_slug(kwargs)
+        banner = self.get_object_or_error(Banner, slug=slug)
         serializer = BannerDetailSerializer(banner)
         return serializer
 
     def banner_create(self, **kwargs):
-        request = kwargs.get("request", None)
-        data = request.data
-
-        if data is None:
-            raise ValueError(DATA_NOT_FOUND)
-
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-
-
+        request = self.get_request(kwargs)
+        data = self.get_data(request=request)
         serializer = BannerCreateSerializer(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return serializer
 
     def banner_update(self, **kwargs):
-        request = kwargs.get("request", None)
-        slug = kwargs.get("slug", None)
-
-        data = request.data
-
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-        if data is None:
-            raise ValueError(DATA_NOT_FOUND)
-        if slug is None:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
-        try:
-            banner = Banner.objects.get(slug=slug)
-        except Banner.DoesNotExist:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        request = self.get_request(kwargs)
+        slug = self.get_slug(kwargs)
+        data = self.get_data(request=request)
+        banner = self.get_object_or_error(Banner, slug=slug)
         serializer = BannerUpdateSerializer(instance=banner, data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_updated(serializer)
         return serializer
 
     def banner_delete(self, **kwargs):
-        slug = kwargs.get("slug", None)
-
-        if slug is None:
-            return ValueError(RESOURCE_NOT_FOUND)
-
-        try:
-            banner = Banner.objects.get(slug=slug)
-        except Banner.DoesNotExist:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        slug = self.get_slug(kwargs)
+        banner = self.get_object_or_error(Banner, slug=slug)
         self.perform_destroy(banner)
         return True

@@ -1,6 +1,4 @@
-import random
-
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import status
 
@@ -70,10 +68,7 @@ class ProductViewSet(ViewSet):
                 status=status.HTTP_404_NOT_FOUND
             )
         headers = self.get_success_headers(
-            f'/api/v1/products/{serializer.data.get("id")
-                if (serializer.data.get("id", None) is not None)
-                else ""
-            }'
+            f'/api/v1/products/{serializer.data.get("id") if (serializer.data.get("id", None) is not None) else ""}'
         )
 
         return Response(
@@ -104,7 +99,6 @@ class ProductViewSet(ViewSet):
                 {"message": DATA_DELETION_FAILED},
                 status=status.HTTP_404_NOT_FOUND
             )
-
 
     def get_success_headers(self, location):
         try:

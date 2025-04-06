@@ -7,6 +7,7 @@ from rest_framework_simplejwt.views import (
 )
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import action
 from rest_framework.status import (
     HTTP_201_CREATED,
@@ -22,8 +23,10 @@ from server.serializers.auth_serializers import (
 from server.serializers.code_serializers import CodeSerializer
 from server.models import Customers, GenerateCodeConfirmationEmail
 
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+
 
 class CustomTokenRefreshView(TokenRefreshView):
     serializer_class = CustomTokenRefreshSerializer

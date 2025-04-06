@@ -4,10 +4,14 @@ from rest_framework import status
 
 from server.mixins import BannerMixin
 from server.models import Banner
+from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
+
 
 class BannerViewSet(ViewSet):
     lookup_field = "slug"
+    permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
     mixin = BannerMixin(Banner)
+
     def list(self, request):
         serializer = self.mixin.findAllBanners(request)
         return Response(serializer.data, status=status.HTTP_200_OK)
@@ -32,10 +36,7 @@ class BannerViewSet(ViewSet):
             )
 
         headers = self.get_success_headers(
-            f'/api/v1/products/{serializer.data.get("id")
-                if (serializer.data.get("id", None) is not None)
-                else ""
-            }'
+            f'/api/v1/products/{serializer.data.get("id") if (serializer.data.get("id", None) is not None) else ""}'
         )
 
         return Response(

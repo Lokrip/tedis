@@ -4,13 +4,8 @@ from server.serializers.category_serializers import (
     CategoryUpdateSerializer
 )
 from server.models import Category
-from server.exception import (
-    RESOURCE_NOT_FOUND,
-    DATA_NOT_FOUND,
-    CREATION_FAILED,
-    REQUEST_NOT_FOUND
-)
 from server.core.utils.perform import PerformBase
+
 
 class CategoryService(PerformBase):
     def get_categories_list(self, **kwargs):
@@ -19,75 +14,32 @@ class CategoryService(PerformBase):
         return serializer
 
     def get_category_detail(self, **kwargs):
-        request = kwargs.get("request", None)
-        slug = kwargs.get("slug", None)
-
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-        if slug is None:
-            raise ValueError(RESOURCE_NOT_FOUND)
-        try:
-            category = Category.objects.get(slug=slug)
-        except Category.DoesNotExist:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        # request = self.get_request(kwargs)
+        slug = self.get_slug(kwargs)
+        category = self.get_object_or_error(Category, slug=slug)
         serializer = CategorySerializer(category)
         return serializer
 
     def category_create(self, **kwargs):
-        request = kwargs.get("request", None)
-        data = request.data
-
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-
-        if data is None:
-            raise ValueError(DATA_NOT_FOUND)
-
+        request = self.get_request(kwargs)
+        data = self.get_data(request=request)
         serializer = CategoryCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return serializer
 
     def category_update(self, **kwargs):
-        request = kwargs.get("request", None)
-        slug = kwargs.get("slug", None)
-
-        data = request.data
-
-        if request is None:
-            raise ValueError(REQUEST_NOT_FOUND)
-        if slug is None:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
-        if slug is None or data is None:
-            message = (
-                DATA_NOT_FOUND
-                if data is None
-                else CREATION_FAILED)
-            raise ValueError(message)
-
-        try:
-            category = Category.objects.get(slug=slug)
-        except (Category.DoesNotExist):
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        request = self.get_request(kwargs)
+        slug = self.get_slug(kwargs)
+        data = self.get_data(request=request)
+        category = self.get_object_or_error(Category, slug=slug)
         serializer = CategoryUpdateSerializer(instance=category, data=data)
-
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer=serializer)
         return serializer
 
     def category_delete(self, **kwargs):
-        slug = kwargs.get("slug", None)
-
-        if slug is None:
-            raise ValueError(RESOURCE_NOT_FOUND)
-
-        try:
-            category = Category.objects.get(slug=slug)
-        except (Category.DoesNotExist):
-            raise ValueError(RESOURCE_NOT_FOUND)
-
+        slug = self.get_slug(kwargs)
+        category = self.get_object_or_error(Category, slug=slug)
         self.perform_destroy(instance=category)
         return True
