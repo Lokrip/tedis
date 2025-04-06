@@ -1,0 +1,11 @@
+@use "../../../app/styles/color" as *;
+
+.loginText {
+    margin: 5px 0px 0px 5px;
+    color: $neutral-40-default;
+    cursor: pointer;
+
+    &:hover {
+        color: $neutral-20-default;
+    }
+}

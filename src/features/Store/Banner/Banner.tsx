@@ -80,7 +80,7 @@ const Banner: FC = () => {
                             items={images}
                             ref={refImageContainer}
                             className={clsx("sliderItems", styles.sliderImage)}
-                            mapItems={(item) => (
+                            mapItems={(item) => item.image && (
                                 <Item className={styles.sliderItemsImageContainer}>
                                     <ImageR
                                         ref={refImage}

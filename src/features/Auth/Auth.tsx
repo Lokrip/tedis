@@ -38,6 +38,7 @@ export default function Auth<P extends IAuth & ClassNameType>({ type, className 
         },
     });
 
+
     const onSubmit = async (data: { email: string; password: string }) => {
         const { email, password } = data;
         if(email && password) {

@@ -2,7 +2,7 @@ import {FC, PropsWithChildren} from 'react';
 
 import styles from './authForm.module.scss';
 
-interface AuthFormProps extends PropsWithChildren {}
+type AuthFormProps = PropsWithChildren
 
 const AuthForm: FC<AuthFormProps> = ({children}) => {
     return (

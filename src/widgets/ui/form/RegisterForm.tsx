@@ -1,10 +1,13 @@
 import {FC, Suspense} from 'react';
 
-import styles from './registerForm.module.scss';
+import authStyles from "./authForm.module.scss";
+import styles from "./registerForm.module.scss"
 import Auth from '@/features/Auth/Auth';
 import AuthForm from './AuthForm';
+import Link from 'next/link';
+import pages from '@/config/route';
 
-interface RegisterFormProps {}
+type RegisterFormProps = object;
 
 const RegisterForm: FC<RegisterFormProps> = () => {
     return (
@@ -24,6 +27,11 @@ const RegisterForm: FC<RegisterFormProps> = () => {
             <Suspense>
                 <Auth type="Register" />
             </Suspense>
+            <div className={authStyles.authenticationProperties}>
+                <Link className={styles.loginText} href={pages.account.login}>
+                    У вас уже есть аккаунт?
+                </Link>
+            </div>
             <div className="social-auth">
                 {/* <GoogleButton>
                     Google
