@@ -27,9 +27,9 @@ class ProductFieldsAllSerializer(serializers.ModelSerializer):
         model = Product
         fields = "__all__"
 
+
 class ProductBaseSerializer(serializers.ModelSerializer):
     user_id = serializers.IntegerField(required=False)
-
 
     class Meta:
         model = Product
@@ -47,6 +47,7 @@ class ProductBaseSerializer(serializers.ModelSerializer):
                 "read_only": True
             },
         }
+
     def validate(self, attrs):
         user_id = attrs.pop("user_id", None)
 
@@ -61,8 +62,10 @@ class ProductBaseSerializer(serializers.ModelSerializer):
         attrs['user'] = user
         return super().validate(attrs)
 
+
 class ProductCreateSerializer(ProductBaseSerializer):
     pass
+
 
 class ProductUpdateSerializer(ProductBaseSerializer):
     def validate(self, attrs):
@@ -77,6 +80,7 @@ class ProductListSerializer(ProductFieldsAllSerializer):
         if images.exists():
             return images.first().get_image()
         return None
+
 
 class ProductDetailSerializer(ProductFieldsAllSerializer):
     category = CategorySerializer(read_only=True)
