@@ -61,7 +61,7 @@ class ProductService(PerformBase):
         data = self.get_data(request=request)
         serializer = ProductCreateSerializer(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer=serializer)
+        self.perform_create(instance=serializer)
         return serializer
 
     def product_update(self, **kwargs):
@@ -75,7 +75,7 @@ class ProductService(PerformBase):
             data["slug"] = product.slug
         serializer = ProductUpdateSerializer(instance=product, data=data)
         serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer=serializer)
+        self.perform_update(instance=serializer)
         return serializer
 
     def product_delete(self, **kwargs):

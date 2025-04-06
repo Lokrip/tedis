@@ -37,7 +37,7 @@ class BannerService(PerformBase):
         data = self.get_data(request=request)
         serializer = BannerCreateSerializer(data=data, context={"request": request})
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        self.perform_create(instance=serializer)
         return serializer
 
     def banner_update(self, **kwargs):
@@ -47,11 +47,11 @@ class BannerService(PerformBase):
         banner = self.get_object_or_error(Banner, slug=slug)
         serializer = BannerUpdateSerializer(instance=banner, data=data)
         serializer.is_valid(raise_exception=True)
-        self.perform_updated(serializer)
+        self.perform_update(instance=serializer)
         return serializer
 
     def banner_delete(self, **kwargs):
         slug = self.get_slug(kwargs)
         banner = self.get_object_or_error(Banner, slug=slug)
-        self.perform_destroy(banner)
+        self.perform_destroy(instance=banner)
         return True

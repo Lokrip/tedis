@@ -25,7 +25,7 @@ class CategoryService(PerformBase):
         data = self.get_data(request=request)
         serializer = CategoryCreateSerializer(data=data)
         serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
+        self.perform_create(instance=serializer)
         return serializer
 
     def category_update(self, **kwargs):
@@ -35,7 +35,7 @@ class CategoryService(PerformBase):
         category = self.get_object_or_error(Category, slug=slug)
         serializer = CategoryUpdateSerializer(instance=category, data=data)
         serializer.is_valid(raise_exception=True)
-        self.perform_update(serializer=serializer)
+        self.perform_update(instance=serializer)
         return serializer
 
     def category_delete(self, **kwargs):
