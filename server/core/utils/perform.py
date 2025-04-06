@@ -11,7 +11,7 @@ class PerformCreated:
 
 
 class PerformUpdated:
-    def perform_updated(self, instance):
+    def perform_update(self, instance):
         instance.save()
 
 
