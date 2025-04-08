@@ -45,6 +45,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         })
         return data
 
+
 class CustomTokenRefreshSerializer(TokenRefreshSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
@@ -99,7 +100,6 @@ class RegisterSerializer(serializers.ModelSerializer):
             return customer
         else:
             raise serializers.ValidationError(VALIDATION_ERROR)
-
 
     def create(self, validated_data):
         validated_data['password'] = make_password(validated_data['password'])

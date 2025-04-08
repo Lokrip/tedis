@@ -9,6 +9,7 @@ from server.urls.category import category_urlpatterns
 from server.urls.product import product_urlpatterns
 from server.urls.swagger import swagger_urlpatterns
 from server.urls.banner import banner_urlpatterns
+from server.urls.country import country_urlpatterns
 from server import settings
 
 urlpatterns = [
@@ -20,7 +21,8 @@ urlpatterns += [
     *product_urlpatterns,
     *category_urlpatterns,
     *swagger_urlpatterns,
-    *banner_urlpatterns
+    *banner_urlpatterns,
+    *country_urlpatterns
 ] + debug_toolbar_urls()
 
 

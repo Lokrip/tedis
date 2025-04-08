@@ -11,6 +11,7 @@ from server.models.status.customers_status import Role
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.core.utils.date import default_expiry_time
 
+
 class Customers(AbstractUser):
     """User AbstractUser Model
 
@@ -84,6 +85,7 @@ class Customers(AbstractUser):
 
     def __str__(self):
         return self.email
+
 
 class GenerateCodeConfirmationEmail(DateCreatedModel):
     user = models.ForeignKey(

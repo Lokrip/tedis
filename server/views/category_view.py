@@ -7,6 +7,7 @@ from server.serializers.category_serializers import CategorySerializer
 from server.mixins import CategoryMixin
 from server.exception import DATA_DELETION_FAILED
 
+
 class CategoryViewSet(ViewSet):
     lookup_field = "slug"
     mixin = CategoryMixin(Category)
@@ -37,6 +38,7 @@ class CategoryViewSet(ViewSet):
                 "Content-type": "application/json"
             }
         )
+        
     def update(self, request, slug=None):
         try:
             serializer = self.mixin.updateCategory(request, slug)
