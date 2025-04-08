@@ -2,10 +2,12 @@ from rest_framework import serializers
 
 from server.models import Banner
 
+
 class BannerFieldsAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = Banner
         fields = "__all__"
+
 
 class BannerBaseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -35,11 +37,14 @@ class BannerBaseSerializer(serializers.ModelSerializer):
 class BannerListSerializer(BannerFieldsAllSerializer):
     pass
 
+
 class BannerDetailSerializer(BannerFieldsAllSerializer):
     pass
 
+
 class BannerCreateSerializer(BannerBaseSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
 
 class BannerUpdateSerializer(BannerBaseSerializer):
     pass

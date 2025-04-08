@@ -89,12 +89,14 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         Category,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         verbose_name=_("product category")
     )
     banner = models.ForeignKey(
         Banner,
         on_delete=models.SET_NULL,
         null=True,
+        blank=True,
         verbose_name=_("product banner")
     )
     accessibility = models.CharField(
@@ -149,14 +151,13 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
         default=99.99
     )
 
-
     def save(self, *args, save_modal=True, **kwargs):
-        if save_modal:
-            set_price_discount.delay(self.id)
         if not self.slug:
             generate_and_save_slug(self)
-        return super().save(*args, **kwargs)
-
+        else:
+            return super().save(*args, **kwargs)
+        # if save_modal:
+        #     set_price_discount.delay(self.id)
 
     class Meta:
         indexes = [
@@ -172,6 +173,7 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
     def __str__(self):
         return self.title
 
+
 class ProductImage(DateCreatedModel, DateUpdatedModel):
     product = models.ForeignKey(
         Product,
@@ -186,8 +188,10 @@ class ProductImage(DateCreatedModel, DateUpdatedModel):
         null=True
     )
     is_main = models.BooleanField(_('Is main'), default=False)
+
     def get_image(self):
         return self.image.url
+
     def __str__(self):
         return f'{self.product.title} -> {self.image.url}'
 

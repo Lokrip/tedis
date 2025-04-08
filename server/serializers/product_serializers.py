@@ -29,15 +29,13 @@ class ProductFieldsAllSerializer(serializers.ModelSerializer):
 
 
 class ProductBaseSerializer(serializers.ModelSerializer):
-    user_id = serializers.IntegerField(required=False)
-
     class Meta:
         model = Product
         fields = (
             'id', 'slug', 'title', 'metaTitle', 'summary',
             'accessibility', 'condition', 'warehouse',
             'promotional', 'checks', 'price', 'discount',
-            "price_discount", 'category', 'user_id',
+            "price_discount", 'category', 'user'
         )
         extra_kwargs = {
             'id': {
@@ -48,23 +46,9 @@ class ProductBaseSerializer(serializers.ModelSerializer):
             },
         }
 
-    def validate(self, attrs):
-        user_id = attrs.pop("user_id", None)
-
-        try:
-            if user_id is None and not user_id:
-                user = self.context["request"].user
-            else:
-                user = User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            raise serializers.ValidationError(RESOURCE_NOT_FOUND)
-
-        attrs['user'] = user
-        return super().validate(attrs)
-
 
 class ProductCreateSerializer(ProductBaseSerializer):
-    pass
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
 
 class ProductUpdateSerializer(ProductBaseSerializer):

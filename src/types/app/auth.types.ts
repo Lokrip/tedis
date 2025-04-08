@@ -8,6 +8,16 @@ export interface AuthenticatedFields {
     password: string
 }
 
+export interface LoginFields extends AuthenticatedFields {
+}
+
+export interface RegisterFields extends AuthenticatedFields {
+    first_name: string,
+    last_name: string,
+    username: string
+}
+
+
 export interface CustomJWTType extends JWT {
     accessTokenExpires: number;
     accessToken: string;
@@ -33,8 +43,8 @@ export interface ReponseUserToken {
 export type TypeAuthMethod = 'Login' | 'Register'
 
 export interface IAuthFieldsEvent {
-    errors: FieldErrors<AuthenticatedFields>
-    register: UseFormRegister<AuthenticatedFields>;
+    errors: FieldErrors<LoginFields>
+    register: UseFormRegister<RegisterFields>;
     onChangeEmail?: (event: ChangeEvent<HTMLInputElement>) => void;
     onChangePassword?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -49,3 +59,18 @@ export interface TypeAuthFields {
     Login: React.FC<IAuthFieldsEvent>,
     Register: React.FC<IAuthFieldsEvent>,
 }
+
+
+export type AuthFormData = {
+    email: string
+    password: string
+}
+
+export type LoginFormData = AuthFormData;
+export type RegisterFormData = AuthFormData & {
+    first_name: string,
+    last_name: string,
+    username: string
+}
+
+export type LoginRegisterFormData = LoginFormData | RegisterFormData;

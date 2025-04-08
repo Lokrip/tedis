@@ -7,6 +7,7 @@ from server.core.utils.code import generate_and_save_slug
 from server.models.abstract.abstract_created_at import DateCreatedModel
 from server.models.abstract.abstract_title import ModelTitle
 
+
 class Banner(ModelTitle, DateCreatedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -24,7 +25,6 @@ class Banner(ModelTitle, DateCreatedModel):
             generate_and_save_slug(self)
         else:
             return super().save(*args, **kwargs)
-
 
     class Meta:
         indexes = [

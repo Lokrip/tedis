@@ -5,6 +5,7 @@ from django.utils.text import slugify
 
 from server.models import GenerateCodeConfirmationEmail
 
+
 def generate_unique_slug(model, **kwargs):
     while True:
         temp_slug = "{base_slug}-{id}-{uuid}".format(

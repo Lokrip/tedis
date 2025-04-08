@@ -49,7 +49,7 @@ async function getProductsPaginationData<T>({
 async function getProductData(param: string | number) {
     "use server"
     try {
-        let url = `/api/v1/products/${param}/`
+        const url = `/api/v1/products/${param}/`
         const data = await axios.get<IProductDetails>(url)
         return data;
     } catch(error) {

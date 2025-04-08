@@ -20,7 +20,7 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                     placeholder="First Name..."
                     Icon={UserRound}
                 />
-                {/* {errors.email && <p className="error">{errors.first_name.message}</p>} */}
+                {errors.first_name && <p className="error">{errors.first_name.message}</p>}
             </div>
             <div className={styles.field}>
                 <Field

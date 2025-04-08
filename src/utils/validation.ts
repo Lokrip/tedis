@@ -28,3 +28,13 @@ export const authenticationSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8).max(110),
 });
+
+
+export const loginSchema = authenticationSchema.extend({});
+
+export const registerSchema = authenticationSchema.extend({
+    username: z.string().min(3).max(50),
+    last_name: z.string().min(3).max(50),
+    first_name: z.string().min(3).max(50),
+})
+

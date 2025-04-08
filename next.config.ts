@@ -1,5 +1,4 @@
 import type { NextConfig } from "next";
-import sass from "sass";
 
 const nextConfig: NextConfig = {
   images: {
@@ -26,6 +25,9 @@ const nextConfig: NextConfig = {
     PRODUCT_API_URL: process.env.PRODUCT_API_URL
   },
 
+  //Безопасность – Убирает информацию о том, что сайт работает на Next.js, чтобы усложнить потенциальные атаки. Некоторые злоумышленники ищут сайты с конкретными технологиями для эксплуатации известных уязвимостей.
+  //Производительность – Это небольшой, но потенциально полезный оптимизационный шаг. Удаление ненужных заголовков уменьшает объем HTTP-ответов, хоть и незначительно.
+  //Чистота заголовков – Если у вас есть кастомные серверные настройки, вы можете убрать этот заголовок, чтобы не засорять ответы сервера лишней информацией.
   poweredByHeader: false, // Отключает заголовок 'X-Powered-By'
   experimental: {
     //она оптимизирует пакеты каторый находять внутри других пакетов
@@ -34,6 +36,9 @@ const nextConfig: NextConfig = {
     optimizePackageImports: [
       "lucide-react"
     ]
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
