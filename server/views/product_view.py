@@ -7,12 +7,13 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from server.models import Product
 from server.exception import DATA_DELETION_FAILED
 from server.mixins import ProductMixin
+from server.permissions.product_permissions import IsSubscriberOrOwnerEditOrReadOnly
 
 
 class ProductViewSet(ViewSet):
     lookup_field = "slug"
     mixin = ProductMixin(Product)
-    # permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
+    permission_classes = [IsSubscriberOrOwnerEditOrReadOnly]
     authentication_classes = [JWTAuthentication]
 
     def list(self, request):
@@ -36,18 +37,6 @@ class ProductViewSet(ViewSet):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request):
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print(request.data, request.data.get("id"))
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
-        print("_______________________________________________________________")
         try:
             serializer = self.mixin.createProduct(request=request)
         except ValueError as EXCEPTION:

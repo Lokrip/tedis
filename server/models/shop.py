@@ -1,5 +1,3 @@
-import uuid
-
 from django.db import models
 from django.conf import settings
 from django.utils.translation import gettext_lazy as _
@@ -154,10 +152,13 @@ class Product(DateCreatedModel, DateUpdatedModel, ModelTitle):
     def save(self, *args, save_modal=True, **kwargs):
         if not self.slug:
             generate_and_save_slug(self)
+            if save_modal:
+                set_price_discount.delay(self.id)
         else:
-            return super().save(*args, **kwargs)
-        # if save_modal:
-        #     set_price_discount.delay(self.id)
+            data = super().save(*args, **kwargs)
+            if save_modal:
+                set_price_discount.delay(self.id)
+            return data
 
     class Meta:
         indexes = [
@@ -198,6 +199,7 @@ class ProductImage(DateCreatedModel, DateUpdatedModel):
     class Meta:
         verbose_name = _('Product Image')
         verbose_name_plural = _('Product Images')
+
 
 class PopularSearch(models.Model):
     query = models.CharField(max_length=255, unique=True)

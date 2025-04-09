@@ -6,7 +6,6 @@ from server.models import (
     ProductImage
 )
 from server.serializers.category_serializers import CategorySerializer
-from server.exception import RESOURCE_NOT_FOUND
 
 User = get_user_model()
 
@@ -51,9 +50,30 @@ class ProductCreateSerializer(ProductBaseSerializer):
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
 
-class ProductUpdateSerializer(ProductBaseSerializer):
-    def validate(self, attrs):
-        return super().validate(attrs)
+class ProductUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = (
+            'id', 'slug', 'title', 'metaTitle', 'summary',
+            'accessibility', 'condition', 'warehouse',
+            'promotional', 'checks', 'price', 'discount',
+            "price_discount", 'category'
+        )
+        extra_kwargs = {
+            'id': {
+                'read_only': True
+            },
+            'slug': {
+                "read_only": True
+            },
+        }
+
+    def update(self, instance, validated_data):
+        if not validated_data.get("user_id"):
+            validated_data["user_id"] = instance.user.pk
+        if not validated_data.get("slug"):
+            validated_data["slug"] = instance.slug
+        return super().update(instance, validated_data)
 
 
 class ProductListSerializer(ProductFieldsAllSerializer):

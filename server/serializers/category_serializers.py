@@ -4,15 +4,18 @@ from server.models import Category
 
 from .utils_serializers import RecursiveSerializer
 
+
 class FilterParentCategorySerializer(serializers.ListSerializer):
     def to_representation(self, data):
         data = data.filter(parent=None)
         return super().to_representation(data)
 
+
 class CategorySerializerFieldsAllSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = "__all__"
+
 
 class CategorySerializer(serializers.ModelSerializer):
     children = RecursiveSerializer(many=True)
@@ -22,6 +25,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ("id", "title", "icon", "metaTitle",
                   "slug", "children")
+
 
 class CategoryBaseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,6 +46,7 @@ class CategoryBaseSerializer(serializers.ModelSerializer):
                 "read_only": True
             }
         }
+
 
 class CategoryCreateSerializer(CategoryBaseSerializer):
     pass

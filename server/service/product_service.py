@@ -69,10 +69,6 @@ class ProductService(PerformBase):
         slug = self.get_slug(kwargs)
         data = self.get_data(request=request)
         product = self.get_object_or_error(Product, slug=slug)
-        if not data.get("user_id"):
-            data["user_id"] = product.user.pk
-        if not data.get("slug"):
-            data["slug"] = product.slug
         serializer = ProductUpdateSerializer(instance=product, data=data)
         serializer.is_valid(raise_exception=True)
         self.perform_update(instance=serializer)
