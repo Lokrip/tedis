@@ -9,9 +9,7 @@ import productReduser from './shop/ProductSlice';
 import utilsReducer from './utils/UtilsSlice';
 import menuReducer from "./header/MenuSlice";
 import scrollsReducer from "./utils/ScrollsSlice";
-
-import { bannerApi } from '../services/banner/BannerService'
-import { searchParamApi } from '../services/header/SearchService';
+import { serviceApi } from '../services/service';
 
 
 const headerInitialReducers = ({
@@ -19,7 +17,6 @@ const headerInitialReducers = ({
     searchReduser,
     navigationNavbarReduser,
     menuReducer,
-    [searchParamApi.reducerPath]: searchParamApi.reducer
 })
 
 const utilsInitialReducers = ({
@@ -30,7 +27,6 @@ const utilsInitialReducers = ({
 const shopInitialReducers = ({
     bannerReduser,
     productReduser,
-    [bannerApi.reducerPath]: bannerApi.reducer,
 })
 
 const accountInitialReducers = ({
@@ -41,7 +37,8 @@ const rootReducer = combineReducers({
     ...headerInitialReducers,
     ...shopInitialReducers,
     ...accountInitialReducers,
-    ...utilsInitialReducers
+    ...utilsInitialReducers,
+    [serviceApi.reducerPath]: serviceApi.reducer
 })
 
 

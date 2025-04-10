@@ -4,10 +4,14 @@ import styles from './field.module.scss';
 import { KeyRound, Mail, UserRound } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
 import { IAuthFieldsEvent } from '@/types/app/auth.types';
+import SelectField from '@/widgets/ui/form/fields/SelectField';
+import { countryApi } from '@/redux/services/country/CountryService';
+import MenuItem from './MenuItem';
 
 type RegisterFieldProps = IAuthFieldsEvent
 
 const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
+    const {data, isLoading, isSuccess, isError} = countryApi.useFetchAllCountryQuery()
     return (
         <>
         <div className={styles.fieldNames}>
@@ -33,6 +37,19 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                 />
                 {/* {errors.password && <p className="error">{errors.last_name.message}</p>} */}
             </div>
+        </div>
+        <div className={styles.placeOfResidence}>
+            {!data || isLoading ? (
+                <h1>Loading...</h1>
+            ) : (
+                <SelectField label="Страны" name="country">
+                    {data.map(country => (
+                        <MenuItem key={country.code} value={country.name}>
+                            {country.name}
+                        </MenuItem>
+                    ))}
+                </SelectField>
+            )}
         </div>
         <div className={styles.field}>
             <Field

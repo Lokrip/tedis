@@ -1,7 +1,7 @@
 import { PaginationError } from "@/types/app/enum/pagination.enum";
 import { ProductError } from "@/types/app/enum/product.enum";
 import { IProduct } from "@/types/app/models/IProduct.type";
-import { ProductId, ProductState } from "@/types/app/state/shop/pagination";
+import { ProductId, ProductState } from "@/types/app/state/shop/products";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 //использование такой структуры состояние имеет несолько причин

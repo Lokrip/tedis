@@ -1,14 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit'
 
-import { bannerApi } from './services/banner/BannerService'
 import rootReducer from './reducers/reducer'
+import { serviceApi } from './services/service'
 
 
 export const setupStore = () => {
     return configureStore({
         reducer: rootReducer,
         middleware: (getDefaultMiddleware) =>
-            getDefaultMiddleware().concat(bannerApi.middleware)
+            getDefaultMiddleware().concat(serviceApi.middleware)
 
     })
 }

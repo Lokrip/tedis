@@ -43,8 +43,8 @@ export interface ReponseUserToken {
 export type TypeAuthMethod = 'Login' | 'Register'
 
 export interface IAuthFieldsEvent {
-    errors: FieldErrors<LoginFields>
-    register: UseFormRegister<RegisterFields>;
+    errors: FieldErrors<RegisterFields & LoginFields>
+    register: UseFormRegister<RegisterFields & LoginFields>;
     onChangeEmail?: (event: ChangeEvent<HTMLInputElement>) => void;
     onChangePassword?: (event: ChangeEvent<HTMLInputElement>) => void;
 }

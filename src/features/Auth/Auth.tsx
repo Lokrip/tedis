@@ -9,8 +9,8 @@ import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
 import pages from "@/config/route"
 import { IAuth, LoginRegisterFormData, RegisterFormData, TypeAuthFields } from "@/types/app/auth.types"
-import LoginField from "./field/LoginField"
-import RegisterField from "./field/RegisterField"
+import LoginField from "../../widgets/ui/form/fields/LoginField"
+import RegisterField from "../../widgets/ui/form/fields/RegisterField"
 import { AuthStatus } from "@/types/app/enum/auth.enum"
 import { HeadingH } from "@/widgets/plagins/H.number"
 import { useActions, useAppSelector } from "@/utils/hooks"
@@ -101,7 +101,7 @@ export default function Auth<P extends IAuth & ClassNameType>({ type, className 
 
                     changeDispatchRequest(false);
                     modalClose()
-                    
+
                     push(callbackRoute)
                 } catch(error) {
                     savingErrors({
