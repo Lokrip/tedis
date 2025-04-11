@@ -1,12 +1,13 @@
 import {FC} from 'react';
 
-import styles from './field.module.scss';
+import styles from './registerField.module.scss';
 import { KeyRound, Mail, UserRound } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
 import { IAuthFieldsEvent } from '@/types/app/auth.types';
 import SelectField from '@/widgets/ui/form/fields/SelectField';
 import { countryApi } from '@/redux/services/country/CountryService';
 import MenuItem from './MenuItem';
+import clsx from 'clsx';
 
 type RegisterFieldProps = IAuthFieldsEvent
 
@@ -14,11 +15,10 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
     const {data, isLoading, isSuccess, isError} = countryApi.useFetchAllCountryQuery()
     return (
         <>
-        <div className={styles.fieldNames}>
+        <div className={clsx(styles.fieldNames, "flex-center")}>
             <div className={styles.field}>
                 <Field
                     isStyle={true}
-                    className={styles.labelField}
                     // {...register("first_name")}
                     type="text"
                     placeholder="First Name..."
@@ -29,7 +29,6 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
             <div className={styles.field}>
                 <Field
                     isStyle={true}
-                    className={styles.labelField}
                     // {...register("last_name")}
                     type="text"
                     placeholder="Last Name..."
@@ -38,18 +37,20 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                 {/* {errors.password && <p className="error">{errors.last_name.message}</p>} */}
             </div>
         </div>
-        <div className={styles.placeOfResidence}>
-            {!data || isLoading ? (
-                <h1>Loading...</h1>
-            ) : (
-                <SelectField label="Страны" name="country">
-                    {data.map(country => (
-                        <MenuItem key={country.code} value={country.name}>
-                            {country.name}
-                        </MenuItem>
-                    ))}
-                </SelectField>
-            )}
+        <div className={clsx(styles.placeOfResidence, "flex-center")}>
+            <div className={styles.field}>
+                {!data || isLoading ? (
+                    <h1>Loading...</h1>
+                ) : (
+                    <SelectField label="Страны" name="country">
+                        {data.map(country => (
+                            <MenuItem key={country.code} value={country.name}>
+                                {country.name}
+                            </MenuItem>
+                        ))}
+                    </SelectField>
+                )}
+            </div>
         </div>
         <div className={styles.field}>
             <Field

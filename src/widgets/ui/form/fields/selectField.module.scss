@@ -1,4 +1,15 @@
-.selectField {
-    background-color: rgb(158, 76, 76);
+@use '../../../../app/styles/color' as color;
 
+.selectField {
+    color: color.$primary-40-new;
+    height: 36px;
+    border-radius: 4px;
+    font-weight: normal;
+    height: 36px;
+    line-height: 20px;
+    border: 2 solid color.$primary-80;
+    padding: 0 8px;
+    padding-right: 20px;
+
+    vertical-align: top;
 }

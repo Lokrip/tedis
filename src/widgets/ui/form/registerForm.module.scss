@@ -1,5 +1,9 @@
 @use "../../../app/styles/color" as *;
 
+.authForm {
+    width: 450px;
+}
+
 .loginText {
     margin: 5px 0px 0px 5px;
     color: $neutral-40-default;

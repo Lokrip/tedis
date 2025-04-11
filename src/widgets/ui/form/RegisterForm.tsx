@@ -11,7 +11,7 @@ type RegisterFormProps = object;
 
 const RegisterForm: FC<RegisterFormProps> = () => {
     return (
-        <AuthForm>
+        <AuthForm className={styles.authForm}>
             {/* Suspense в React — это компонент, который позволяет отображать запасной UI
              (например, спиннеры или лоадеры), пока данные или другие ресурсы не будут загружены.
              Он используется в сочетании с динамическим импортом или асинхронными запросами, чтобы
