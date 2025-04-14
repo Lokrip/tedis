@@ -6,6 +6,7 @@ from server.models import (
     ProductImage
 )
 from server.serializers.category_serializers import CategorySerializer
+from server.fields import MainImageURLField
 
 User = get_user_model()
 
@@ -78,12 +79,37 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
 
 class ProductListSerializer(ProductFieldsAllSerializer):
     image = serializers.SerializerMethodField()
+    main_image_url = MainImageURLField(source="images")
 
     def get_image(self, obj):
-        images = ProductImage.objects.filter(product=obj, is_main=True)
+        images = obj.images.filter(is_main=True)
         if images.exists():
             return images.first().get_image()
         return None
+
+    # def to_representation(self, instance):
+    #     representation = super().to_representation(instance)
+
+    #     representation['media'] = {
+    #         'image': representation.pop('image', None),
+    #         'main_image_url': representation.pop('main_image_url', None),
+    #     }
+
+    #     representation['product_status'] = {
+    #         'accessibility': representation.pop('accessibility', None),
+    #         'condition': representation.pop('condition', None),
+    #         'warehouse': representation.pop('warehouse', None),
+    #         'promotional': representation.pop('promotional', None),
+    #         'checks': representation.pop('checks', None),
+    #     }
+
+    #     representation['prices'] = {
+    #         'price': representation.pop('price', None),
+    #         'discount': representation.pop('discount', None),
+    #         'price_discount': representation.pop('price_discount', None)
+    #     }
+
+    #     return representation
 
 
 class ProductDetailSerializer(ProductFieldsAllSerializer):

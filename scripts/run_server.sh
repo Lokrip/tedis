@@ -7,6 +7,14 @@ log() {
 
 log "Запуск сервера..."
 
+sleep 5
+echo "PostgreSQL доступен! Запускаем приложение..."
+
+make makemigrations
+make migrate
+
+sh ./scripts/load_fixtures.sh
+
 make run-server
 
 log "Настройка приложения успешно завершена!"

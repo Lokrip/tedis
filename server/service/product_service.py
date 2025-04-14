@@ -32,7 +32,8 @@ class ProductService(PerformBase):
         ).select_related(
             "category"
         ).prefetch_related(
-            "user"
+            "user",
+            "images"
         )
         if category_slug:
             queryset = queryset.filter(category__slug=category_slug)
@@ -46,7 +47,13 @@ class ProductService(PerformBase):
             request,
             view=view
         ) or queryset
-        serializer = ProductListSerializer(paginated_product, many=True)
+        serializer = ProductListSerializer(
+            paginated_product,
+            many=True,
+            context={
+                "request": request
+            }
+        )
         return serializer, paginator
 
     def get_product_detail(self, **kwargs):

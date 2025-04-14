@@ -1,0 +1,31 @@
+[
+{
+  "model": "server.customers",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$4mT0xOFLKCODrIC5sCge4B$3XC2lXmt9CAeDjtpyLYbBpqNo8CTXy5xnwRaJmLJoXc=",
+    "last_login": "2025-04-13T15:45:01.716Z",
+    "is_superuser": true,
+    "username": "slava",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2025-04-13T15:44:22.099Z",
+    "email": "admin@gmail.com",
+    "bio": "",
+    "first_name": "",
+    "last_name": "",
+    "city": "",
+    "zip_code": "",
+    "street": "",
+    "location": null,
+    "house_number": 0,
+    "image": "",
+    "phone": null,
+    "role": "user",
+    "is_author": false,
+    "is_subscriber": false,
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

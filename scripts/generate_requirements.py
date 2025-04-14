@@ -28,12 +28,14 @@ def extract_dependencies(pyproject_file, output_file):
         for dep in dependencies:
             f.write(dep + '\n')
 
-extract_dependencies(
-    'pyproject.toml',
-    'requirements/dev.txt'
-)
 
-extract_dependencies(
-    'pyproject.toml',
-    'requirements/prod.txt'
-)
+if __name__ == "__main__":
+    extract_dependencies(
+        'pyproject.toml',
+        'requirements/dev.txt'
+    )
+
+    extract_dependencies(
+        'pyproject.toml',
+        'requirements/prod.txt'
+    )
