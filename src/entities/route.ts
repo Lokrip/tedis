@@ -1,5 +1,5 @@
-import { AccountRoute } from "./routes/accountRoutes";
-import { ProductRoute } from "./routes/productRoutes";
+import { AccountRoute } from "../entities/routes/accountRoutes";
+import { ProductRoute } from "../entities/routes/productRoutes";
 
 class Route extends AccountRoute {
     public home: string = "/"

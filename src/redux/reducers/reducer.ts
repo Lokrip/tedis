@@ -4,7 +4,8 @@ import headerReduser from './header/HeaderSlice';
 import searchReduser from './header/SearchSlice';
 import navigationNavbarReduser from './header/NavigationNavbarSlice';
 import bannerReduser from './shop/BannerSlice';
-import signInReduser from './account/signInSlice';
+import signInReduser from './account/SignInSlice';
+import signUpReduser from './account/SignUpSlice';
 import productReduser from './shop/ProductSlice';
 import utilsReducer from './utils/UtilsSlice';
 import menuReducer from "./header/MenuSlice";
@@ -30,7 +31,8 @@ const shopInitialReducers = ({
 })
 
 const accountInitialReducers = ({
-    signInReduser
+    signInReduser,
+    signUpReduser
 })
 
 const rootReducer = combineReducers({

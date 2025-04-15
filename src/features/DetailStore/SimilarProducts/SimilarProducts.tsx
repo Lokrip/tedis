@@ -3,7 +3,7 @@ import ProductList from '@/features/ProductList/ProductList';
 import { ProductError } from "@/types/app/enum/product.enum";
 import { IPaginationProduct, IProduct } from '@/types/app/models/IProduct.type';
 import { IProductDetails } from "@/types/app/models/IProductDetails.type";
-import { getSimilarPaginationProducts } from "@/utils/service/api/product.api";
+import { getSimilarPaginationProducts } from "@/entities/service/api/product.api";
 import { HeadingH } from "@/widgets/plagins/H.number";
 import {FC} from 'react';
 

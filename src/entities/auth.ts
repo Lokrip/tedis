@@ -1,9 +1,9 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import { NextAuthOptions } from "next-auth";
 import { AuthenticatedFields, CustomJWTType, JWTUser, ReponseUserToken } from "../types/app/auth.types";
-import pages from "../config/route";
 
-import { requestTokenAuthorize, refreshAccessToken } from "../utils/service/api/token.api";
+import { requestTokenAuthorize, refreshAccessToken } from "./service/api/token.api";
+import pages from "./route";
 
 export const authOptions: NextAuthOptions = {
     providers: [
@@ -44,7 +44,7 @@ export const authOptions: NextAuthOptions = {
         })
     ],
     pages: {
-        signIn: pages.account.login
+        signIn: pages.account.login,
     },
     session: {strategy: "jwt"},
 

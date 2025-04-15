@@ -5,7 +5,7 @@ import styles from "./registerForm.module.scss"
 import Auth from '@/features/Auth/Auth';
 import AuthForm from './AuthForm';
 import Link from 'next/link';
-import pages from '@/config/route';
+import pages from '@/entities/route';
 
 type RegisterFormProps = object;
 

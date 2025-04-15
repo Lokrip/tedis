@@ -13,7 +13,7 @@ import styles from './aside.module.scss';
 import { catalogParamApi } from '@/redux/services/shop/CatalogService';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import pages from '@/config/route';
+import pages from '@/entities/route';
 import SkeletonCategoryCard from '@/widgets/ui/elements/skeleton/SkeletonCategoryCard';
 
 interface AsideProps {

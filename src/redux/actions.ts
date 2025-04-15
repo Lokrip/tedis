@@ -1,4 +1,4 @@
-import { SignInSlice } from "./reducers/account/signInSlice";
+import { SignInSlice } from "./reducers/account/SignInSlice";
 import { BannerSlice } from "./reducers/shop/BannerSlice";
 import { HeaderSlice } from "./reducers/header/HeaderSlice";
 import { NavigationNavbarSlice } from "./reducers/header/NavigationNavbarSlice";
@@ -7,6 +7,7 @@ import { ProductSlice } from "./reducers/shop/ProductSlice";
 import { UtilsSlice } from "./reducers/utils/UtilsSlice";
 import { MenuSlice } from "./reducers/header/MenuSlice";
 import { ScrollsSlice } from "./reducers/utils/ScrollsSlice";
+import { SignUpSlice } from "./reducers/account/SignUpSlice";
 
 const headerAction = {
     ...HeaderSlice.actions,
@@ -24,6 +25,7 @@ const shopAction = {
 }
 const accountAction = {
     ...SignInSlice.actions,
+    ...SignUpSlice.actions
 }
 
 const rootActions = {

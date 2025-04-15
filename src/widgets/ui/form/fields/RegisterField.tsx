@@ -1,15 +1,15 @@
 import {FC} from 'react';
 
-import styles from './registerField.module.scss';
+import styles from './auth.module.scss';
 import { KeyRound, Mail, UserRound } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
-import { IAuthFieldsEvent } from '@/types/app/auth.types';
+import { IAuthFieldsEvent, RegisterFields } from '@/types/app/auth.types';
 import SelectField from '@/widgets/ui/form/fields/SelectField';
 import { countryApi } from '@/redux/services/country/CountryService';
 import MenuItem from './MenuItem';
 import clsx from 'clsx';
 
-type RegisterFieldProps = IAuthFieldsEvent
+type RegisterFieldProps = IAuthFieldsEvent<RegisterFields>
 
 const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
     const {data, isLoading, isSuccess, isError} = countryApi.useFetchAllCountryQuery()
@@ -19,26 +19,39 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
             <div className={styles.field}>
                 <Field
                     isStyle={true}
-                    // {...register("first_name")}
+                    {...register("first_name")}
                     type="text"
                     placeholder="First Name..."
                     Icon={UserRound}
+                    isError={!!errors.first_name}
+                    error_message={errors.first_name && errors.first_name.message}
                 />
-                {errors.first_name && <p className="error">{errors.first_name.message}</p>}
             </div>
             <div className={styles.field}>
                 <Field
                     isStyle={true}
-                    // {...register("last_name")}
+                    {...register("last_name")}
                     type="text"
                     placeholder="Last Name..."
                     Icon={UserRound}
+                    isError={!!errors.last_name}
+                    error_message={errors.last_name && errors.last_name.message}
                 />
-                {/* {errors.password && <p className="error">{errors.last_name.message}</p>} */}
             </div>
         </div>
         <div className={clsx(styles.placeOfResidence, "flex-center")}>
             <div className={styles.field}>
+                <Field
+                    isStyle={true}
+                    {...register("username")}
+                    type="text"
+                    placeholder="Username..."
+                    Icon={Mail}
+                    isError={!!errors.username}
+                    error_message={errors.username && errors.username.message}
+                />
+            </div>
+            {/* <div className={styles.field}>
                 {!data || isLoading ? (
                     <h1>Loading...</h1>
                 ) : (
@@ -50,29 +63,29 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                         ))}
                     </SelectField>
                 )}
-            </div>
+            </div> */}
         </div>
         <div className={styles.field}>
             <Field
                 isStyle={true}
-                className={styles.labelField}
                 {...register("email")}
                 type="text"
                 placeholder="Email..."
                 Icon={Mail}
+                isError={!!errors.email}
+                error_message={errors.email && errors.email.message}
             />
-            {errors.email && <p className="error">{errors.email.message}</p>}
         </div>
         <div className={styles.field}>
             <Field
                 isStyle={true}
-                className={styles.labelField}
                 {...register("password")}
                 type="password"
                 placeholder="Password..."
                 Icon={KeyRound}
+                isError={!!errors.password}
+                error_message={errors.password && errors.password.message}
             />
-            {errors.password && <p className="error">{errors.password.message}</p>}
         </div></>
     );
 };

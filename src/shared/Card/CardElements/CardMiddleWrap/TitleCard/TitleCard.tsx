@@ -5,8 +5,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { IParamPrimaryType } from '@/types/react.type';
 import { HeadingH } from '@/widgets/plagins/H.number';
-import pages from '@/config/route';
-
+import pages from '@/entities/route';
 
 interface TitleCard extends IParamPrimaryType {
     param: string | number

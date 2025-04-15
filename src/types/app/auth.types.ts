@@ -1,7 +1,7 @@
 import { User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { ChangeEvent, FormEvent } from "react";
-import { FieldErrors, UseFormRegister } from "react-hook-form";
+import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 
 export interface AuthenticatedFields {
     email: string;
@@ -42,9 +42,9 @@ export interface ReponseUserToken {
 
 export type TypeAuthMethod = 'Login' | 'Register'
 
-export interface IAuthFieldsEvent {
-    errors: FieldErrors<RegisterFields & LoginFields>
-    register: UseFormRegister<RegisterFields & LoginFields>;
+export interface IAuthFieldsEvent<T extends FieldValues> {
+    errors: FieldErrors<T>
+    register: UseFormRegister<T>;
     onChangeEmail?: (event: ChangeEvent<HTMLInputElement>) => void;
     onChangePassword?: (event: ChangeEvent<HTMLInputElement>) => void;
 }
@@ -56,8 +56,8 @@ export interface IAuth {
 
 
 export interface TypeAuthFields {
-    Login: React.FC<IAuthFieldsEvent>,
-    Register: React.FC<IAuthFieldsEvent>,
+    Login: React.FC<IAuthFieldsEvent<LoginFields>>,
+    Register: React.FC<IAuthFieldsEvent<RegisterFields>>,
 }
 
 

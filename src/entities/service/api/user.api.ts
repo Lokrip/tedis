@@ -1,4 +1,4 @@
-import { axios } from "@/config/axios";
+import { axios } from "@/entities/axios";
 import { RegisterFormData } from "@/types/app/auth.types";
 
 export async function createUser(body: RegisterFormData) {

@@ -6,8 +6,8 @@ import ImageR from "../../ui/assets/image/Image"
 
 import styles from './logo.module.scss'
 import Link from "next/link"
-import pages from "@/config/route"
 import { usePathname } from "next/navigation"
+import pages from "@/entities/route"
 
 
 export const Logo: FC<ClassNameType> = ({className}) => {

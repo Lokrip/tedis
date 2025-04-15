@@ -6,7 +6,7 @@ import styles from "./loginForm.module.scss";
 import authStyles from "./authForm.module.scss";
 import ButtonSet from '../elements/button/ButtonSet';
 import AuthForm from './AuthForm';
-import pages from '@/config/route';
+import pages from '@/entities/route';
 
 type LoginFormProps = object;
 

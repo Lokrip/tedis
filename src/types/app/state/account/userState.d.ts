@@ -21,13 +21,13 @@ interface AuthTypeFields {
 interface UserTypeFields {
     fistName: string;
     lastName: string;
-    phone: string;
 }
+
+type UserState = AuthTypeFields & UserStatusType & UserTypeFields;
 
 
 interface SignUpTypeFields extends AuthTypeFields, UserTypeFields, UserStatusType {
-    password2: string;
-    username: string;
+    username?: string;
 }
 
 interface SignInTypeFields extends AuthTypeFields, UserStatusType {

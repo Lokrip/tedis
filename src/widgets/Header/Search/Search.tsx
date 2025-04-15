@@ -1,14 +1,14 @@
 "use client"
 import Form from "../../ui/form/Form";
 import styles from "./search.module.scss"
-import { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, FormEvent, useCallback, useEffect, useRef } from "react";
 
 import { useRouter } from 'next/navigation'
 import SearchMenu from "./SearchMenu";
 import SearchSystem from "./SearchSystem";
-import pages from "@/config/route";
 import { searchParamApi } from "@/redux/services/header/SearchService";
 import { useActions, useAppSelector, useDebounce } from "@/utils/hooks";
+import pages from "@/entities/route";
 
 
 

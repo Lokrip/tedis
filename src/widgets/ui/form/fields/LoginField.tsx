@@ -1,11 +1,11 @@
 import {FC} from 'react';
 
-import styles from './loginField.module.scss';
+import styles from './auth.module.scss';
 import { KeyRound, Mail } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
-import { IAuthFieldsEvent } from '@/types/app/auth.types';
+import { IAuthFieldsEvent, LoginFields } from '@/types/app/auth.types';
 
-type LoginFieldProps = IAuthFieldsEvent
+type LoginFieldProps = IAuthFieldsEvent<LoginFields>
 
 const LoginField: FC<LoginFieldProps> = ({register, errors}) => {
     return (
