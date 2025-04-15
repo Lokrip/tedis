@@ -64,6 +64,7 @@ poetry.lock
 
 #python
 venv/
+fixtures_loaded.flag
 
 # debug
 npm-debug.log*
@@ -79,3 +80,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
