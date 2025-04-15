@@ -29,6 +29,8 @@ RUN apt-get update && apt-get install -y postgresql-client build-essential libpq
 RUN apt update && apt install -y iproute2
 RUN apt update && apt install -y net-tools
 
+RUN apt-get update && apt-get install -y netcat-openbsd
+
 EXPOSE 8000
 
 RUN adduser --disabled-password tedis-user
