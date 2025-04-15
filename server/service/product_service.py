@@ -1,4 +1,9 @@
-from server.models import Product
+from django.db.models import Prefetch
+
+from server.models import (
+    Product,
+    ProductImage
+)
 from server.pagination import ProductResultsSetPagination
 from server.serializers.product_serializers import (
     ProductListSerializer,
@@ -33,7 +38,15 @@ class ProductService(PerformBase):
             "category"
         ).prefetch_related(
             "user",
-            "images"
+            Prefetch(
+                "images",
+                queryset=ProductImage.objects.all()
+            ),
+            Prefetch(
+                "images",
+                queryset=ProductImage.objects.filter(is_main=True),
+                to_attr="main_images"
+            )
         )
         if category_slug:
             queryset = queryset.filter(category__slug=category_slug)

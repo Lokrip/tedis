@@ -19,12 +19,11 @@ class TypeField(Field):
 
 
 class MainImageURLField(CharField):
-    def to_representation(self, images):
-        images = images.filter(is_main=True)
+    def to_representation(self, main_images):
         request = self.context.get('request')
-        if images.exists() and request:
+        if main_images and request:
             return build_absolute_uri_to_media(
                 request=request,
-                media=images.first().get_image()
+                media=main_images[0].get_image()
             )
         return None

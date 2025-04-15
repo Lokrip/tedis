@@ -14,7 +14,7 @@ User = get_user_model()
 class ProductImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductImage
-        fields = ("id", "image", "product")
+        fields = ("id", "image")
         extra_kwargs = {
             'id': {
                 'read_only': True
@@ -78,14 +78,8 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
 
 
 class ProductListSerializer(ProductFieldsAllSerializer):
-    image = serializers.SerializerMethodField()
-    main_image_url = MainImageURLField(source="images")
+    image = MainImageURLField(source="main_images")
 
-    def get_image(self, obj):
-        images = obj.images.filter(is_main=True)
-        if images.exists():
-            return images.first().get_image()
-        return None
 
     # def to_representation(self, instance):
     #     representation = super().to_representation(instance)
