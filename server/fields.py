@@ -28,8 +28,3 @@ class MainImageURLField(CharField):
                 media=images.first().get_image()
             )
         return None
-
-
-class MainImagesURLField(CharField):
-    def to_representation(self, images):
-        pass

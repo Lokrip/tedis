@@ -3,13 +3,11 @@ from django.urls import (
     include
 )
 
-from rest_framework.routers import DefaultRouter
-
 from server.views.banner_view import BannerViewSet
+from server.router import router
 
-router = DefaultRouter()
 router.register(r"banners", BannerViewSet, basename="banner")
 
 banner_urlpatterns = [
-    path("api/v1/", include(router.urls))
+    path("", include(router.urls))
 ]

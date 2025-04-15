@@ -47,6 +47,7 @@ class CustomAttributeException(AttributeError):
     def __init__(self, message):
         super().__init__(message)
 
+
 class DataNotFoundException(Exception):
     def __init__(self, message):
         super().__init__(message)

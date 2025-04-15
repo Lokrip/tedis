@@ -1,5 +1,4 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenVerifyView
 
 from server.views.auth_view import (
@@ -7,17 +6,17 @@ from server.views.auth_view import (
     CustomTokenRefreshView,
     RegisterViewSet
 )
+from server.router import router
 
-router = DefaultRouter()
 router.register(r"auth", RegisterViewSet, basename="auth")
 
 auth_urlpatterns = [
-    path('api/v1/drf-auth/', include('rest_framework.urls')),
+    path('drf-auth/', include('rest_framework.urls')),
+    path('', include(router.urls)),
+]
 
-    path('api/v1/', include(router.urls)),
-
+jwt_urlpatterns = [
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh'),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
-
 ]

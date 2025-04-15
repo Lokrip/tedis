@@ -6,6 +6,7 @@ from rest_framework import status
 from server.models import PopularSearch
 from server.serializers.search_serializers import PopularSearchSerializer
 
+
 class SearchViewSet(ViewSet):
     @action(detail=False, methods=["get"])
     def suggestions(self, request):
