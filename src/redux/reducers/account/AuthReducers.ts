@@ -1,27 +1,24 @@
-import { AuthStatus } from "@/types/app/enum/auth.enum";
-import { PayloadAction, SliceCaseReducers, ValidateSliceCaseReducers } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit"
+import { AuthStatus } from "@/types/app/enum/auth.enum"
 
-const authReducersActionType: ValidateSliceCaseReducers<UserState, SliceCaseReducers<UserState>> = {
-    savingErrors(state, action: PayloadAction<UserStatusErrorType>) {
-        if(action.payload.isError) {
-            state.isSuccess = false;
-            state.isError = action.payload.isError
-            state.errorMessage = action.payload.errorMessage
-            state.result = AuthStatus.NotAuthenticated
-        }
-    },
-
-    saveEmailInFields(state, action: PayloadAction<string>) {
-        state.email = action.payload;
-    },
-
-    savePasswordInFields(state, action: PayloadAction<string>) {
-        state.password = action.payload;
-    },
-
-    changeDispatchRequest(state, action: PayloadAction<boolean>) {
-        state.isDispatchRequest = action.payload
-    },
+export const savingSucess = (resultStatus: AuthStatus) => (state: AuthState) => {
+    state.isSuccess = true;
+    state.result = resultStatus;
 }
 
-export default authReducersActionType;
+export const savingErrors = (state: AuthState, action: PayloadAction<UserStatusErrorType>) => {
+    if (action.payload.isError) {
+        state.isSuccess = false;
+        state.isError = action.payload.isError;
+        state.errorMessage = action.payload.errorMessage;
+        state.result = AuthStatus.NotAuthenticated;
+    }
+};
+
+export const saveEmailInFields = (state: AuthState, action: PayloadAction<string>) => {
+    state.email = action.payload;
+};
+
+export const savePasswordInFields = (state: AuthState, action: PayloadAction<string>) => {
+    state.password = action.payload;
+};

@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, Suspense} from 'react';
 
 import styles from './auth.module.scss';
 import { RegisterFields, RegisterFormData } from '@/types/app/auth.types';
@@ -19,35 +19,9 @@ interface RegisterAuthProps {
 }
 
 const RegisterAuth: FC<ClassNameType & RegisterAuthProps> = ({className, defaultValues}) => {
-
-    //исправь actions раздили AuthReducers верно на отдельный slice
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     const { push } = useRouter()
-    const { isDispatchRequest, isSuccess, result } = useAppSelector((state) => state.signInReduser)
-    const {savingErrors, modalClose, changeDispatchRequest} = useActions()
+    const { isSuccess, result } = useAppSelector((state) => state.signInReduser)
+    const {savingErrors, modalClose} = useActions()
     const searchParam = useSearchParams()
     const callbackRoute = searchParam.get("callback") || pages.home
     //Partial<T> — это встроенный дженерик тип в TypeScript, который делает все свойства типа T необязательными.
@@ -72,12 +46,12 @@ const RegisterAuth: FC<ClassNameType & RegisterAuthProps> = ({className, default
                 <HeadingH level={1} content={"Login"} />
             </div>
             <div className="fields">
-                <RegisterField errors={errors} register={register}/>
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <RegisterField errors={errors} register={register}/>
+                </Suspense>
             </div>
-            <ButtonSet disabled={isDispatchRequest} className={styles.authButton} buttonType="primary" type="submit">
-                {isDispatchRequest
-                ? (<p>Loading...</p>)
-                : ('Войти')}
+            <ButtonSet className={styles.authButton} buttonType="primary" type="submit">
+                Зарегистрироваться
             </ButtonSet>
         </Form>
     )

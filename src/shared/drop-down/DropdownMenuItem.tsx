@@ -1,12 +1,7 @@
 import {FC} from 'react';
 
 import styles from './dropdownMenuItem.module.scss';
-import { LucideIcon } from 'lucide-react';
-
-interface DropdownMenuItemProps {
-    Icon: LucideIcon;
-    content: string;
-}
+import { DropdownMenuItemProps } from './dropdownMenuItem.type';
 
 const DropdownMenuItem: FC<DropdownMenuItemProps> = ({Icon, content}) => {
     return (

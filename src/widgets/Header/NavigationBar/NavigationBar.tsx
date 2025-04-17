@@ -11,7 +11,7 @@ import clsx from 'clsx';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import { usePathname } from 'next/navigation';
 import { useActions, useAppSelector } from '@/utils/hooks';
-import DropdownMenu from '../Menu/DropdownMenu';
+import DropdownMenu from '../../../shared/drop-down/DropdownMenu';
 
 const NavigationBar: FC = () => {
     const [navigations, setNavigation] = useState([

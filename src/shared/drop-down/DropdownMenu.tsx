@@ -4,8 +4,6 @@ import styles from './dropdownMenu.module.scss';
 import DropdownMenuItem from './DropdownMenuItem';
 import { Settings } from 'lucide-react';
 
-interface DropdownMenuProps {}
-
 const DropdownMenu: FC<DropdownMenuProps> = () => {
     return (
         <div className={styles.dropdownMenu}>

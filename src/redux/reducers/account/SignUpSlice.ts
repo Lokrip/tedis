@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
-import authReducersActionType from "./AuthReducers"
 import { AuthStatus } from "@/types/app/enum/auth.enum";
+import { saveEmailInFields, savePasswordInFields, savingErrors, savingSucess } from "./AuthReducers";
 
 const initialState: SignUpTypeFields = {
     email: "",
@@ -9,7 +9,6 @@ const initialState: SignUpTypeFields = {
     errorMessage: null,
     isSuccess: false,
     result: null,
-    isDispatchRequest: false,
     fistName: "",
     lastName: ""
 }
@@ -19,11 +18,10 @@ export const SignUpSlice = createSlice({
     name: "signUp",
     initialState,
     reducers: {
-        savingSuccess(state) {
-            state.isSuccess = true;
-            state.result = AuthStatus.RegistrationSuccessful;
-        },
-        ...authReducersActionType
+        savingSuccess: savingSucess(AuthStatus.RegistrationSuccessful),
+        savingErrors,
+        saveEmailInFields,
+        savePasswordInFields
     }
 })
 

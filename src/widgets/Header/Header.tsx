@@ -1,12 +1,12 @@
 import { Container } from "../module/Container/Container";
 import { FC, PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
-import { Logo } from "./Logo/Logo";
+import { Logo } from "./ui/logo/Logo";
 
 import styles from './header.module.scss'
 
-import MenuH from "./Menu/Catalogue/Menu";
-import Search from "./Search/Search";
+import MenuH from "./ui/catalogue/Menu";
+import Search from "../../features/Search/Search";
 import NavigationBar from "./NavigationBar/NavigationBar";
 
 export const HeaderMain: FC<PropsWithChildren> = ({children}) => {

@@ -18,8 +18,8 @@ import pages from '@/entities/route';
 
 const LoginAuth: FC<ClassNameType & {defaultValues: LoginFields}> = ({className, defaultValues}) => {
     const { push } = useRouter()
-    const { isDispatchRequest, isSuccess, result } = useAppSelector((state) => state.signInReduser)
-    const {savingErrors, modalClose, changeDispatchRequest} = useActions()
+    const { isSuccess, result } = useAppSelector((state) => state.signInReduser)
+    const {savingErrors, modalClose} = useActions()
     const searchParam = useSearchParams()
     const callbackRoute = searchParam.get("callback") || pages.home
     //Partial<T> — это встроенный дженерик тип в TypeScript, который делает все свойства типа T необязательными.
@@ -30,11 +30,7 @@ const LoginAuth: FC<ClassNameType & {defaultValues: LoginFields}> = ({className,
     const onSubmit = async (data: LoginFormData) => {
         const { email, password } = data;
         if(email && password) {
-            if(!isDispatchRequest
-                && !isSuccess
-                && result !== AuthStatus.Authenticated
-            ) {
-                changeDispatchRequest(true);
+            if(!isSuccess && result !== AuthStatus.Authenticated) {
                 const result = await signIn("credentials", {
                     redirect: false,
                     email: email,
@@ -46,7 +42,6 @@ const LoginAuth: FC<ClassNameType & {defaultValues: LoginFields}> = ({className,
                         errorMessage: result.error
                     })
                 } else {
-                    changeDispatchRequest(false);
                     modalClose()
                     push(callbackRoute)
                 }
@@ -66,10 +61,8 @@ const LoginAuth: FC<ClassNameType & {defaultValues: LoginFields}> = ({className,
             <div className="fields">
                 <LoginField errors={errors} register={register}/>
             </div>
-            <ButtonSet disabled={isDispatchRequest} className={styles.authButton} buttonType="primary" type="submit">
-                {isDispatchRequest
-                ? (<p>Loading...</p>)
-                : ('Войти')}
+            <ButtonSet className={styles.authButton} buttonType="primary" type="submit">
+                Войти
             </ButtonSet>
         </Form>
     )

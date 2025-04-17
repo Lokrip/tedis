@@ -5,7 +5,7 @@ import path from "path"
 async function getHeaderData() {
     try {
         // Путь к файлу headerMenu.json
-        const filePath =  path.join(process.cwd(), "src", "core", "data", "headerMenu.json");
+        const filePath =  path.join(process.cwd(), "src", "entities", "data", "headerMenu.json");
 
         // Чтение файла
         const fileContents = await fs.readFile(filePath, "utf-8");

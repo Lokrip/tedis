@@ -1,6 +1,7 @@
 import {FC} from 'react';
 
 import styles from './auth.module.scss';
+import registerStyles from './auth.module.scss';
 import { KeyRound, Mail, UserRound } from 'lucide-react';
 import Field from '@/widgets/ui/form/fields/Field';
 import { IAuthFieldsEvent, RegisterFields } from '@/types/app/auth.types';
@@ -8,13 +9,15 @@ import SelectField from '@/widgets/ui/form/fields/SelectField';
 import { countryApi } from '@/redux/services/country/CountryService';
 import MenuItem from './MenuItem';
 import clsx from 'clsx';
+import { ICountry } from '@/types/app/models/ICountry.type';
+import SkeletonField from '../../elements/skeleton/SkeletonField';
 
 type RegisterFieldProps = IAuthFieldsEvent<RegisterFields>
 
-const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
-    const {data, isLoading, isSuccess, isError} = countryApi.useFetchAllCountryQuery()
-    return (
-        <>
+const Fields: FC<RegisterFieldProps & {
+    data: ICountry[]
+}> = ({register, errors, data}) => {
+    return <>
         <div className={clsx(styles.fieldNames, "flex-center")}>
             <div className={styles.field}>
                 <Field
@@ -39,7 +42,7 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                 />
             </div>
         </div>
-        <div className={clsx(styles.placeOfResidence, "flex-center")}>
+        <div className={clsx(registerStyles.placeOfResidence, "flex-center")}>
             <div className={styles.field}>
                 <Field
                     isStyle={true}
@@ -51,19 +54,15 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                     error_message={errors.username && errors.username.message}
                 />
             </div>
-            {/* <div className={styles.field}>
-                {!data || isLoading ? (
-                    <h1>Loading...</h1>
-                ) : (
-                    <SelectField label="Страны" name="country">
-                        {data.map(country => (
-                            <MenuItem key={country.code} value={country.name}>
-                                {country.name}
-                            </MenuItem>
-                        ))}
-                    </SelectField>
-                )}
-            </div> */}
+            <div className={styles.field}>
+                <SelectField label="Страны" name="country">
+                    {data.map(country => (
+                        <MenuItem key={country.code} value={country.name}>
+                            {country.name}
+                        </MenuItem>
+                    ))}
+                </SelectField>
+            </div>
         </div>
         <div className={styles.field}>
             <Field
@@ -86,7 +85,37 @@ const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
                 isError={!!errors.password}
                 error_message={errors.password && errors.password.message}
             />
-        </div></>
+        </div>
+    </>
+}
+
+const SkeletonFields: FC = () => {
+    return <>
+        <div className={clsx(styles.fieldNames, "flex-center")}>
+            <div className={styles.field}><SkeletonField/></div>
+            <div className={styles.field}><SkeletonField/></div>
+        </div>
+        <div className={clsx(registerStyles.placeOfResidence, "flex-center")}>
+            <div className={styles.field}><SkeletonField/></div>
+            <div className={styles.field}><SkeletonField/></div>
+        </div>
+        <div className={styles.field}><SkeletonField/></div>
+        <div className={styles.field}><SkeletonField/></div>
+    </>
+}
+
+const RegisterField: FC<RegisterFieldProps> = ({register, errors}) => {
+    const { data, isLoading, isError } = countryApi.useFetchAllCountryQuery()
+
+    if( isLoading ) return <SkeletonFields />;
+    if (isError || !data) return <h1>Ошибка загрузки стран</h1>;
+
+    return (
+        <Fields
+            register={register}
+            errors={errors}
+            data={data}
+        />
     );
 };
 

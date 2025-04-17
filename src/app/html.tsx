@@ -1,6 +1,6 @@
 import "./globals.scss";
 import { ClassNameType } from "@/types/react.type";
-import Providers from "@/core/providers/Providers";
+import Providers from "./Providers";
 
 
 export default function MainHtml({

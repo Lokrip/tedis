@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import {Roboto} from "next/font/google";
 import Layout from "../../widgets/Layouts/Layout";
-import MainHtml from "../html";
+import MainHtml from "../Html";
 import ModalLayout from "@/widgets/Layouts/ModalLayout";
 
 const geistSans = Roboto({

@@ -1,5 +1,5 @@
 "use client"
-import Form from "../../ui/form/Form";
+import Form from "../../widgets/ui/form/Form";
 import styles from "./search.module.scss"
 import { ChangeEvent, FormEvent, useCallback, useEffect, useRef } from "react";
 
