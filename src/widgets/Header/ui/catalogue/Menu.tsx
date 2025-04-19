@@ -3,7 +3,7 @@
 import {PropsWithChildren } from "react"
 
 import { Menu } from 'lucide-react';
-import Aside from "../../../aside/Aside"
+import Aside from "../../../Aside/Aside"
 import ButtonSet from "@/widgets/ui/elements/button/ButtonSet"
 import { useActions, useAppSelector } from "@/utils/hooks";
 

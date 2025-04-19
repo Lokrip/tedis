@@ -1,18 +1,15 @@
-import pages from "@/entities/route";
 import { catalogParamApi } from "@/redux/services/shop/CatalogService";
 import { getIconComponent } from "@/utils/utils";
 import { HeadingH } from "@/widgets/plagins/H.number";
 import SkeletonCategoryCard from "@/widgets/ui/elements/skeleton/SkeletonCategoryCard";
-import { Item } from "@/widgets/ui/list/item/Item";
 import clsx from "clsx";
-import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
-import { BannersListProps } from "./banner-type";
-import styles from "./_style/banner-list.module.scss"
+import { CategoriesListProps } from "./categories-list-type";
+import styles from "./_style/categories-list.module.scss"
 import { List } from "@/widgets/ui/list/List";
-import Link from "next/link";
+import { CategoriesItem } from "./_ui/categories-item";
 
-export function BannersList({isOpen, classActive}: BannersListProps) {
+export function CategoriesList({isOpen, classActive}: CategoriesListProps) {
     const [detailCategoryState, setDetailCategoryState] = useState({
         children: [],
         title: null,
@@ -78,19 +75,11 @@ export function BannersList({isOpen, classActive}: BannersListProps) {
                 mapItems={(item) => {
                     const IconComponent = getIconComponent(item.icon);
                     return (
-                        <>
-                        <Link
-                            onMouseEnter={() => handlerMouseEnter(item)}
-                            href={pages.product.productByCategoryFilter(item.slug)}
-                            className={clsx(styles.menuListCard, styles.menuListCardHeader)}
-                        >
-                            <Item className={styles.menuItems}>
-                                <IconComponent />
-                                {item.title}
-                            </Item>
-                            <ArrowRight className={styles.rightIcon} />
-                        </Link>
-                        </>
+                        <CategoriesItem
+                            banner={item}
+                            handlerMouseEnter={handlerMouseEnter}
+                            Icon={IconComponent}
+                        />
                     )
                 }}
             />
@@ -107,18 +96,10 @@ export function BannersList({isOpen, classActive}: BannersListProps) {
                         mapItems={(item) => {
                             const IconComponent = getIconComponent(item.icon);
                             return (
-                                <>
-                                <Link
-                                    href={pages.product.productByCategoryFilter(item.slug)}
-                                    className={clsx(styles.menuListCard, styles.menuListCardHeader)}
-                                >
-                                    <Item className={styles.menuItems}>
-                                        <IconComponent />
-                                        {item.title}
-                                    </Item>
-                                    <ArrowRight className={styles.rightIcon} />
-                                </Link>
-                                </>
+                                <CategoriesItem
+                                    banner={item}
+                                    Icon={IconComponent}
+                                />
                             )
                         }}
                     />

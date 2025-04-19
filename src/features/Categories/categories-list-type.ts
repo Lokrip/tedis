@@ -1,4 +1,4 @@
-export interface BannersListProps {
+export interface CategoriesListProps {
     isOpen: boolean;
     classActive: string;
 }

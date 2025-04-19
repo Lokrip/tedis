@@ -60,49 +60,4 @@
             padding-block: 10px;
         }
     }
-    .menuListHeader:first-child {
-        overflow: auto;
-        padding-inline: 10px;
-    }
-
-    .menuListCard {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        width: 300px;
-        font-size: 16px;
-        padding-inline: 15px;
-        padding-block: 15px;
-        background-color: color.$primary-100-new;
-        margin-block: 10px;
-        border-radius: 5px;
-        color: color.$neutral-20-default;
-        cursor: pointer;
-
-        .menuItems {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        &:hover {
-            background-color: color.$primary-95-new;
-
-            .rightIcon {
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-
-        .rightIcon {
-            transition: visibility 0.1s ease-out, opacity 0.1s ease-out;
-            opacity: 0;
-            visibility: hidden;
-        }
-        svg {
-            color: color.$neutral-80-default;
-        }
-    }
-
 }
