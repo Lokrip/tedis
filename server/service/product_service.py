@@ -12,14 +12,15 @@ from server.serializers.product_serializers import (
     ProductUpdateSerializer
 )
 from server.core.utils.perform import PerformBase
+from server.filters import ProductFilter
 
 
-def product_filters(search_query, queryset):
-    if not search_query:
-        raise ValueError("query params must")
-    if search_query is not None:
-        queryset = queryset.filter(title__icontains=search_query)
-    return queryset
+def product_filters(request=None, queryset=None, query_params=None):
+    filter_result = ProductFilter(
+        query_params,
+        queryset=queryset
+    )
+    return filter_result.qs
 
 
 class ProductService(PerformBase):
@@ -30,8 +31,6 @@ class ProductService(PerformBase):
         if view is None:
             raise ValueError("view not found!")
         query_params = self.get_query_params(request=request)
-        search_query = query_params.get("q", None)
-        category_slug = query_params.get("category", None)
         queryset = Product.objects.order_by(
             "-created_at"
         ).select_related(
@@ -48,12 +47,13 @@ class ProductService(PerformBase):
                 to_attr="main_images"
             )
         )
-        if category_slug:
-            queryset = queryset.filter(category__slug=category_slug)
+        queryset = product_filters(
+            request=request,
+            queryset=queryset,
+            query_params=query_params
+        )
         if not queryset.exists():
             return ProductListSerializer([], many=True), None
-        if search_query is not None:
-            queryset = product_filters(search_query=search_query, queryset=queryset)
         paginator = ProductResultsSetPagination()
         paginated_product = paginator.paginate_queryset(
             queryset,
