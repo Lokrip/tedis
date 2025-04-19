@@ -35,11 +35,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "django_countries",
 
+    'django_cleanup.apps.CleanupConfig',
+    "django_countries",
 
     "rest_framework",
     "rest_framework_simplejwt",
+    "django_filters",
     "corsheaders",
     "debug_toolbar",
     "mptt",
