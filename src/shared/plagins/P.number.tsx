@@ -1,17 +1,11 @@
-import {FC, PropsWithChildren} from 'react';
-
+import {FC} from 'react';
 import styles from './text.module.scss';
-import { ClassNameType } from '../../types/react.type';
-
-interface PTextProps extends PropsWithChildren, ClassNameType {
-    as?: 'p' | 'span';
-    maxLength?: number;
-}
+import { PTextProps } from './_p-type';
 
 const TextPl: FC<PTextProps> = ({
     as: Component = "p",
     maxLength,
-    children, 
+    children,
 }) => {
     const renderText = () => {
         if(typeof children === 'string' && maxLength && children.length > maxLength) {

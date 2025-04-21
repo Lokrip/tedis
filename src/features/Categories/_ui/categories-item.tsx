@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Item } from "@/widgets/ui/list/item/Item";
+import { Item } from "@/shared/list/item/Item";
 import { ArrowRight } from "lucide-react";
 import clsx from "clsx";
 import pages from "@/entities/route";

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 
-import Price from '@/shared/Card/CardElements/CardMiddleWrap/Price/Price';
+import Price from '@/widgets/Card/CardElements/CardMiddleWrap/Price/Price';
 import PriceBadgeVeryGood from '@/widgets/ui/elements/badge/priceBadge/PriceBadgeVeryGood';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import { IProductDetails } from '@/types/app/models/IProductDetails.type';

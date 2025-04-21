@@ -1,12 +1,12 @@
 import { catalogParamApi } from "@/redux/services/shop/CatalogService";
 import { getIconComponent } from "@/utils/utils";
-import { HeadingH } from "@/widgets/plagins/H.number";
+import { HeadingH } from "@/shared/plagins/H.number";
 import SkeletonCategoryCard from "@/widgets/ui/elements/skeleton/SkeletonCategoryCard";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 import { CategoriesListProps } from "./categories-list-type";
 import styles from "./_style/categories-list.module.scss"
-import { List } from "@/widgets/ui/list/List";
+import { List } from "@/shared/list/List";
 import { CategoriesItem } from "./_ui/categories-item";
 
 export function CategoriesList({isOpen, classActive}: CategoriesListProps) {

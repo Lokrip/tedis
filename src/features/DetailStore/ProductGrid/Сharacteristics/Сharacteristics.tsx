@@ -1,12 +1,13 @@
 import {FC} from 'react';
 
 import styles from './characteristics.module.scss';
-import { HeadingH } from '@/widgets/plagins/H.number';
-import RatingCard from '@/shared/Card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
-import Price from '@/shared/Card/CardElements/CardMiddleWrap/Price/Price';
-import { List } from '@/widgets/ui/list/List';
-import { Item } from '@/widgets/ui/list/item/Item';
+import { HeadingH } from '@/shared/plagins/H.number';
+import RatingCard from '@/widgets/Card/CardElements/CardMiddleWrap/RatingCard/RatingCard';
+import Price from '@/widgets/Card/CardElements/CardMiddleWrap/Price/Price';
+import { List } from '@/shared/list/List';
+import { Item } from '@/shared/list/item/Item';
 import { IProductDetails } from '@/types/app/models/IProductDetails.type';
+import TextPl from '@/shared/plagins/P.number';
 
 
 interface СharacteristicsProps {
@@ -58,10 +59,20 @@ const Сharacteristics: FC<СharacteristicsProps> = ({product}) => {
                     mapItems={(item) => (
                         <Item className='product__char-container'>
                             <div className="product__char-label">
-                                <span>{item.label}</span>
+                                <TextPl
+                                    as="span"
+                                    maxLength={30}
+                                >
+                                    {item.label}
+                                </TextPl>
                             </div>
                             <div className="product__char-data">
-                                <span>{item.data}</span>
+                                <TextPl
+                                    as="span"
+                                    maxLength={60}
+                                >
+                                    {item.data}
+                                </TextPl>
                             </div>
                         </Item>
                     )}

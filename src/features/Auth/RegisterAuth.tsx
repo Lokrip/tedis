@@ -3,7 +3,7 @@ import {FC, Suspense} from 'react';
 import styles from './auth.module.scss';
 import { RegisterFields, RegisterFormData } from '@/types/app/auth.types';
 import { ClassNameType } from '@/types/react.type';
-import { HeadingH } from '@/widgets/plagins/H.number';
+import { HeadingH } from '@/shared/plagins/H.number';
 import Form from '@/widgets/ui/form/Form';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import RegisterField from '@/widgets/ui/form/fields/RegisterField';

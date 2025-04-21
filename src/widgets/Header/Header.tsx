@@ -1,4 +1,4 @@
-import { Container } from "../module/Container/Container";
+import { Container } from "../../shared/Container/Container";
 import { FC, PropsWithChildren } from "react";
 import { Navbar } from "./Navbar";
 import { Logo } from "./ui/logo/Logo";
@@ -7,7 +7,7 @@ import styles from './header.module.scss'
 
 import MenuH from "./ui/catalogue/Menu";
 import Search from "../../features/Search/Search";
-import NavigationBar from "./NavigationBar/NavigationBar";
+import NavigationBar from "./ui/navigationBar/NavigationBar";
 
 export const HeaderMain: FC<PropsWithChildren> = ({children}) => {
     return (

@@ -1,5 +1,5 @@
 interface PaginationState<ID, IModel> {
-    entitiesData: Record<ID, IModel>;
+    entitiesData: Record<ID, IModel | undefined>;
     ids: ID[],
     currentPage: number,
     selectedDataId: ID | null;

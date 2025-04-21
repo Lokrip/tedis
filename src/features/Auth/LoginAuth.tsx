@@ -1,7 +1,7 @@
 import {FC} from 'react';
 
 import styles from './auth.module.scss';
-import { HeadingH } from '@/widgets/plagins/H.number';
+import { HeadingH } from '@/shared/plagins/H.number';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useActions, useAppSelector } from '@/utils/hooks';
 import { useForm } from 'react-hook-form';

@@ -1,5 +1,5 @@
-import { ClassNameType } from "../../../../types/react.type";
-import { correctClass } from "../../../../utils/utils";
+import { ClassNameType } from "../../../types/react.type";
+import { correctClass } from "../../../utils/utils";
 import { DOMAttributes, FC, PropsWithChildren } from "react";
 
 interface ItemProps extends PropsWithChildren, ClassNameType, DOMAttributes<HTMLElement> {}

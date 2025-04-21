@@ -12,7 +12,7 @@ import dynamic from 'next/dynamic';
 import SkeletonSingleProductCard from '@/widgets/ui/elements/skeleton/SkeletonSingleProductCard';
 import { useActions, useAppSelector } from '@/utils/hooks';
 
-const PCard = dynamic(() => import('@/shared/Card/PrimaryCard/PrimaryCard'), {
+const PCard = dynamic(() => import('@/widgets/Card/PrimaryCard/PrimaryCard'), {
     loading: () => (
         <SkeletonSingleProductCard />
     )

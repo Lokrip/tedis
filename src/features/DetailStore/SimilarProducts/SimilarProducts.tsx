@@ -4,7 +4,7 @@ import { ProductError } from "@/types/app/enum/product.enum";
 import { IPaginationProduct, IProduct } from '@/types/app/models/IProduct.type';
 import { IProductDetails } from "@/types/app/models/IProductDetails.type";
 import { getSimilarPaginationProducts } from "@/entities/service/api/product.api";
-import { HeadingH } from "@/widgets/plagins/H.number";
+import { HeadingH } from "@/shared/plagins/H.number";
 import {FC} from 'react';
 
 interface SimilarProductsProps {

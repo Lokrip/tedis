@@ -1,6 +1,6 @@
 import { PropsWithChildren } from "react";
 import { Main } from "../Main/Main";
-import { HeadingH } from "../plagins/H.number";
+import { HeadingH } from "../../shared/plagins/H.number";
 import { Header } from "../Header/Header";
 
 export default async function Layout<P extends PropsWithChildren>({children}: P) {

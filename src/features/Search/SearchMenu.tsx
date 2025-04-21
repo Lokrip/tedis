@@ -1,8 +1,8 @@
 import {ElementType, FC, useEffect} from 'react';
 
 import styles from './searchMenu.module.scss';
-import { List } from '@/widgets/ui/list/List';
-import { Item } from '@/widgets/ui/list/item/Item';
+import { List } from '@/shared/list/List';
+import { Item } from '@/shared/list/item/Item';
 import { getIconComponent, truncate_string } from '@/utils/utils';
 import { searchParamApi } from '@/redux/services/header/SearchService';
 import { ISearchParam } from '@/types/app/models/ISearchParam.type';

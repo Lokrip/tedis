@@ -4,9 +4,9 @@ import {FC} from 'react';
 
 import styles from './imageContainerProduct.module.scss';
 import clsx from 'clsx';
-import { Item } from '@/widgets/ui/list/item/Item';
+import { Item } from '@/shared/list/item/Item';
 import ImageR from '@/widgets/ui/assets/image/Image';
-import { List } from '@/widgets/ui/list/List';
+import { List } from '@/shared/list/List';
 import { IProductDetails } from '@/types/app/models/IProductDetails.type';
 
 interface ImageContainerProductProps {

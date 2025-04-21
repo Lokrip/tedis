@@ -5,8 +5,8 @@ import styles from "./price.module.scss"
 import { CircleDollarSign } from 'lucide-react';
 
 import clsx from 'clsx';
-import { HeadingH } from '@/widgets/plagins/H.number';
-import TextPl from '@/widgets/plagins/P.number';
+import { HeadingH } from '@/shared/plagins/H.number';
+import TextPl from '@/shared/plagins/P.number';
 
 interface PriceProps {
     price: number | string;

@@ -4,7 +4,7 @@ import styles from './titleCard.module.scss';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { IParamPrimaryType } from '@/types/react.type';
-import { HeadingH } from '@/widgets/plagins/H.number';
+import { HeadingH } from '@/shared/plagins/H.number';
 import pages from '@/entities/route';
 
 interface TitleCard extends IParamPrimaryType {

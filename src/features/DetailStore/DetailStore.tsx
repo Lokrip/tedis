@@ -3,7 +3,7 @@ import {FC} from 'react';
 import Breadcrumbs from './Breadcrumbs/Breadcrumbs';
 import { MainDetailStore } from './MainDetailStore/MainDetailStore';
 import ProductGrid from './ProductGrid/ProductGrid';
-import { Container } from '@/widgets/module/Container/Container';
+import { Container } from '@/shared/Container/Container';
 import { IParamPrimaryType } from '@/types/react.type';
 import { getProductData } from '@/entities/service/api/product.api';
 import SimilarProducts from './SimilarProducts/SimilarProducts';

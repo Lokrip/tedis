@@ -3,15 +3,15 @@ import {FC, useEffect, useState} from 'react';
 
 import Link from "next/link";
 import styles from './navigationBar.module.scss';
-import { List } from '../../ui/list/List';
-import { Item } from '../../ui/list/item/Item';
-import { getIconComponent } from '../../../utils/utils';
+import { List } from '../../../../shared/list/List';
+import { Item } from '../../../../shared/list/item/Item';
+import { getIconComponent } from '../../../../utils/utils';
 import { useSession } from "next-auth/react";
 import clsx from 'clsx';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import { usePathname } from 'next/navigation';
 import { useActions, useAppSelector } from '@/utils/hooks';
-import DropdownMenu from '../../../shared/drop-down/DropdownMenu';
+import DropdownMenu from '../../../../shared/drop-down/DropdownMenu';
 
 const NavigationBar: FC = () => {
     const [navigations, setNavigation] = useState([

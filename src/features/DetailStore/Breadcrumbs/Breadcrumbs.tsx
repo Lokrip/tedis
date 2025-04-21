@@ -4,8 +4,8 @@ import { ArrowLeft, ArrowRight } from 'lucide-react';
 
 import styles from './breadcrumbs.module.scss';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
-import { List } from '@/widgets/ui/list/List';
-import { Item } from '@/widgets/ui/list/item/Item';
+import { List } from '@/shared/list/List';
+import { Item } from '@/shared/list/item/Item';
 import clsx from 'clsx';
 
 type BreadcrumbsProps = object

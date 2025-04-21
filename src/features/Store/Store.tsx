@@ -1,4 +1,4 @@
-import { Container } from "@/widgets/module/Container/Container";
+import { Container } from "@/shared/Container/Container";
 import { MainStore } from "./MainStore/MainStore"
 import Banner from "./Banner/Banner"
 import ContentWrapper from "./ContentWrapper/ContentWrapper"

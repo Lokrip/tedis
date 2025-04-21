@@ -3,7 +3,7 @@ import styles from './contentWrapper.module.scss';
 import { IPaginationProduct } from '@/types/app/models/IProduct.type';
 import { getProductsData, getProductsPaginationData } from '@/entities/service/api/product.api';
 import { ProductError } from '@/types/app/enum/product.enum';
-import { HeadingH } from '@/widgets/plagins/H.number';
+import { HeadingH } from '@/shared/plagins/H.number';
 import ProductList from '@/features/ProductList/ProductList';
 
 interface ContentWrapperProps {
