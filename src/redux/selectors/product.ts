@@ -1,4 +1,4 @@
-import { RootState } from "../store";
+import { RootState } from "../redux";
 import { createAppSelector } from "../utils";
 
 export const selectedProducts = createAppSelector(

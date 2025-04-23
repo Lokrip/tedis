@@ -2,12 +2,15 @@
 import { PropsWithChildren } from "react";
 import { Provider } from 'react-redux'
 import { SessionProvider } from "next-auth/react";
-import { setupStore } from "@/redux/store";
+import { createAppStore } from "@/redux/store";
+import { useRouter } from "next/navigation";
 
-const store = setupStore();
 
 export default function Providers<
 P extends PropsWithChildren>({ children }: P) {
+    const router = useRouter();
+    const store = createAppStore(router);
+
     return (
         <SessionProvider>
             <Provider store={store}>

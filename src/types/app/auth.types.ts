@@ -12,9 +12,10 @@ export interface LoginFields extends AuthenticatedFields {
 }
 
 export interface RegisterFields extends AuthenticatedFields {
-    first_name: string,
-    last_name: string,
-    username: string
+    first_name: string;
+    last_name: string;
+    username: string;
+    location: string;
 }
 
 
@@ -68,9 +69,10 @@ export type AuthFormData = {
 
 export type LoginFormData = AuthFormData;
 export type RegisterFormData = AuthFormData & {
-    first_name: string,
-    last_name: string,
-    username: string
+    first_name: string;
+    last_name: string;
+    username: string;
+    location: string;
 }
 
 export type LoginRegisterFormData = LoginFormData | RegisterFormData;

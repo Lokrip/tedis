@@ -1,5 +1,5 @@
 import rootActions from "@/redux/actions";
-import { AppDispatch, RootState } from "@/redux/store";
+import { AppDispatch, RootState } from "@/redux/redux";
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { useCallback, useMemo, useRef } from "react";
 import {

@@ -4,7 +4,7 @@ import {Fragment, ReactNode, useEffect, useRef} from 'react';
 import styles from './paginationInfiniteScrolling.module.scss';
 import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type';
 import { IModelPrimary } from '@/types/app/models/IModelPrimary.type';
-import { RootState } from '@/redux/store';
+import { RootState } from '@/redux/redux';
 import SkeletonSingleProductCard from '@/widgets/ui/elements/skeleton/SkeletonSingleProductCard';
 import { useAppSelector } from '@/utils/hooks';
 

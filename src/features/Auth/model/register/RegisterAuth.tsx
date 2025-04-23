@@ -1,6 +1,6 @@
 import {FC, Suspense} from 'react';
 
-import styles from './auth.module.scss';
+import styles from '../../auth.module.scss';
 import { RegisterFields, RegisterFormData } from '@/types/app/auth.types';
 import { ClassNameType } from '@/types/react.type';
 import { HeadingH } from '@/shared/plagins/H.number';
@@ -8,11 +8,11 @@ import Form from '@/widgets/ui/form/Form';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import RegisterField from '@/widgets/ui/form/fields/RegisterField';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registerSchema } from '@/entities/validation';
 import { useActions, useAppSelector } from '@/utils/hooks';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import pages from '@/entities/route';
+import { registerSchema } from './ui/register-zod';
 
 interface RegisterAuthProps {
     defaultValues: RegisterFields

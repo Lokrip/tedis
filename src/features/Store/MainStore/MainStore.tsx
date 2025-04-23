@@ -5,7 +5,7 @@ import { FC, PropsWithChildren } from "react";
 import styles from '../store.module.scss'
 import clsx from "clsx";
 
-const MainBannerComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+const MainBannerComponets: FC<PropsWithChildren<ClassNameType>> = ({className, children, ...props}) => {
     const classNameValid = correctClass(clsx(styles.mainPageBanner, 'banner'), className!)
 
     return (
@@ -15,7 +15,7 @@ const MainBannerComponets: FC<PropsWithChildren & ClassNameType> = ({className, 
     )
 }
 
-const MainContentWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+const MainContentWrapperComponets: FC<PropsWithChildren<ClassNameType>> = ({className, children, ...props}) => {
     const classNameValid = correctClass('main-page-content-wrapper', className!)
 
     return (
@@ -25,7 +25,7 @@ const MainContentWrapperComponets: FC<PropsWithChildren & ClassNameType> = ({cla
     )
 }
 
-const MainStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+const MainStoreComponets: FC<PropsWithChildren<ClassNameType>> = ({children, className}) => {
     const classNameValid = correctClass(styles.mainStore, className!)
 
     return (

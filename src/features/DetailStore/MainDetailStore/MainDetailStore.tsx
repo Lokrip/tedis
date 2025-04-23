@@ -5,7 +5,7 @@ import { attachSubComponents, correctClass } from "@/utils/utils";
 import { ClassNameType } from "@/types/react.type";
 
 
-const BreadcrumbsComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+const BreadcrumbsComponets: FC<PropsWithChildren<ClassNameType>> = ({className, children, ...props}) => {
     const classNameValid = correctClass("", className!)
 
     return (
@@ -15,7 +15,7 @@ const BreadcrumbsComponets: FC<PropsWithChildren & ClassNameType> = ({className,
     )
 }
 
-const ProductGridComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+const ProductGridComponets: FC<PropsWithChildren<ClassNameType>> = ({className, children, ...props}) => {
     const classNameValid = correctClass(styles.productGridContainer, className!)
 
     return (
@@ -25,7 +25,7 @@ const ProductGridComponets: FC<PropsWithChildren & ClassNameType> = ({className,
     )
 }
 
-const SimilarProductsComponets: FC<PropsWithChildren & ClassNameType> = ({className, children, ...props}) => {
+const SimilarProductsComponets: FC<PropsWithChildren<ClassNameType>> = ({className, children, ...props}) => {
     const classNameValid = correctClass(styles.similarProductsContainer, className!);
 
     return (
@@ -36,7 +36,7 @@ const SimilarProductsComponets: FC<PropsWithChildren & ClassNameType> = ({classN
 }
 
 
-const MainDetailStoreComponets: FC<PropsWithChildren & ClassNameType> = ({children, className}) => {
+const MainDetailStoreComponets: FC<PropsWithChildren<ClassNameType>> = ({children, className}) => {
     const classNameValid = correctClass(styles.detailStore, className!)
 
     return (

@@ -4,7 +4,7 @@ import styles from './authForm.module.scss';
 import { ClassNameType } from '@/types/react.type';
 import { correctClass } from '@/utils/utils';
 
-type AuthFormProps = PropsWithChildren & ClassNameType
+type AuthFormProps = PropsWithChildren<ClassNameType>
 
 const AuthForm: FC<AuthFormProps> = ({children, className}) => {
     const classNameValid = correctClass(styles.authForm, className!);

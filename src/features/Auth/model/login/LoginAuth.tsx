@@ -1,11 +1,10 @@
 import {FC} from 'react';
 
-import styles from './auth.module.scss';
+import styles from '../../auth.module.scss';
 import { HeadingH } from '@/shared/plagins/H.number';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useActions, useAppSelector } from '@/utils/hooks';
 import { useForm } from 'react-hook-form';
-import { loginSchema } from '@/entities/validation';
 import { LoginFields, LoginFormData } from '@/types/app/auth.types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { AuthStatus } from '@/types/app/enum/auth.enum';
@@ -15,6 +14,7 @@ import Form from '@/widgets/ui/form/Form';
 import LoginField from '@/widgets/ui/form/fields/LoginField';
 import ButtonSet from '@/widgets/ui/elements/button/ButtonSet';
 import pages from '@/entities/route';
+import { loginSchema } from './ui/login-zod';
 
 const LoginAuth: FC<ClassNameType & {defaultValues: LoginFields}> = ({className, defaultValues}) => {
     const { push } = useRouter()

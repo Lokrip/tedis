@@ -8,7 +8,7 @@ interface ListProps extends ClassNameType {
     mapItems: (item: any, index?: number) => ReactNode;
 }
 
-const ListContainer = forwardRef<HTMLUListElement, PropsWithChildren & ClassNameType>(
+const ListContainer = forwardRef<HTMLUListElement, PropsWithChildren<ClassNameType>>(
     ({ children, className }, ref) => {
         const classNameValid = correctClass("container-list", className || "");
 

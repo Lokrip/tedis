@@ -55,7 +55,10 @@ const Fields: FC<RegisterFieldProps & {
                 />
             </div>
             <div className={styles.field}>
-                <SelectField label="Страны" name="country">
+                <SelectField
+                    label="Страны"
+                    {...register("location")}
+                >
                     {data.map(country => (
                         <MenuItem key={country.code} value={country.name}>
                             {country.name}

@@ -5,7 +5,7 @@ import { correctClass } from "../../../../../utils/utils";
 
 import styles from "./button.module.scss"
 
-const PrimaryButton: FC<PropsWithChildren & ClassNameType> = ({children, className, ...props}) => {
+const PrimaryButton: FC<PropsWithChildren<ClassNameType>> = ({children, className, ...props}) => {
     const classNameValid = correctClass(styles.button, className!)
 
     return (

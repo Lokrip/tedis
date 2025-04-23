@@ -6,7 +6,7 @@ import PaginationInfiniteScrolling from '@/shared/Pagination/PaginationInfiniteS
 import { IProduct } from '@/types/app/models/IProduct.type';
 import { ProductFunApiPaginationAttributes, ProductFunApiSearchAttributes } from '@/types/app/api/product.type';
 import { IPaginationResponse } from '@/types/app/models/IPaginationResponse.type';
-import { RootState } from '@/redux/store';
+import { RootState } from '@/redux/redux';
 import { selectedProducts } from '@/redux/selectors/product';
 import dynamic from 'next/dynamic';
 import SkeletonSingleProductCard from '@/widgets/ui/elements/skeleton/SkeletonSingleProductCard';
